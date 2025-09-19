@@ -5,6 +5,17 @@ spring:
   sql.init.platform: h2
 cds:
   data-source.auto-config.enabled: false
+  security:
+    authentication:
+      normalize-provider-tenant: true
+    mock:
+      enabled: true
+      users:
+        admin:
+          password: admin
+          roles:
+            -ProjectManager
+            -Administrator
 ---
 management:
   endpoint:
