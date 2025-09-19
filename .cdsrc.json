@@ -1,0 +1,10 @@
+{
+  "cdsc": {
+    "draftMessages": true
+  },
+  "requires": {
+    "db": "hana",
+    "html5-runtime": true,
+    "portal": true
+  }
+}
