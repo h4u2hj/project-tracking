@@ -1,4 +1,4 @@
-package customer.project_tracking;
+package szakdolgozat.project_tracking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

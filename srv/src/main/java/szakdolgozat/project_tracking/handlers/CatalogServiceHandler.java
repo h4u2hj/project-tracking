@@ -1,4 +1,4 @@
-package customer.project_tracking.handlers;
+package szakdolgozat.project_tracking.handlers;
 
 import java.util.stream.Stream;
 
