@@ -14,8 +14,8 @@ cds:
         admin:
           password: admin
           roles:
-            -ProjectManager
-            -Administrator
+            - ProjectManager
+            - Administrator
 ---
 management:
   endpoint:
