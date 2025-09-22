@@ -1,0 +1,7 @@
+ID,name,createdAt,createdBy,modifiedAt,modifiedBy
+22756613-bcde-463b-a379-ff65f07d072f,Application/software,2004-05-15T23:00:00.000Z,createdBy.djr45@example.net,2022-06-02T23:00:00.000Z,modifiedBy.djr45@example.net
+982297e8-bcab-45b7-bf22-50ed1225853b,General,2002-01-18T23:00:00.000Z,createdBy.l1y1@example.com,2001-06-15T23:00:00.000Z,modifiedBy.l1y1@example.org
+98229828-a91a-4569-8ca7-eb979166d975,Academic,2011-12-05T23:00:00.000Z,createdBy.l1y2@example.net,2002-06-13T23:00:00.000Z,modifiedBy.l1y2@example.com
+9822991c-72d6-423b-8004-3c7f842fe108,Technical,2001-02-20T23:00:00.000Z,createdBy.l1y3@example.net,2004-10-12T23:00:00.000Z,modifiedBy.l1y3@example.com
+982300a0-8908-4885-a0b5-ddfaed1a7f66,Work event,2008-09-02T23:00:00.000Z,createdBy.l1y4@example.org,2000-03-06T23:00:00.000Z,modifiedBy.l1y4@example.org
+9823010b-fd13-4ade-a14f-269ce0638c82,Coding,2016-04-26T23:00:00.000Z,createdBy.l1y5@example.com,2006-08-03T23:00:00.000Z,modifiedBy.l1y5@example.com
