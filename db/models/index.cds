@@ -1,4 +1,4 @@
-using from './Projects';
+using from './Project';
 using from './User';
 using from './Status';
 using from './Type';

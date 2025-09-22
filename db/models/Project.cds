@@ -10,7 +10,7 @@ using szakdolgozat.db.models.core.Type from './Type';
 using szakdolgozat.db.models.core.User from './User';
 using szakdolgozat.db.models.core.Snapshot from './Snapshot';
 
-entity Projects : cuid, managed {
+entity Project : cuid, managed {
     name               : String(100) not null;
     description        : String(500);
     link               : String(255);

@@ -5,13 +5,13 @@ using {
     managed
 } from '@sap/cds/common';
 
-using {szakdolgozat.db.models.core.Projects} from './Projects';
+using {szakdolgozat.db.models.core.Project} from './Project';
 
 @assert.unique: {nbunique: [name]}
 entity Status : cuid, managed {
             name          : String(100) not null;
             isFinalStatus : Boolean not null default false;
     virtual delete_ac     : Boolean;
-            projects      : Composition of many Projects
+            projects      : Composition of many Project
                                 on projects.status = $self;
 }
