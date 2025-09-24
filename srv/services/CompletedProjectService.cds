@@ -2,8 +2,8 @@ namespace szakdolgozat.srv.service;
 
 using {szakdolgozat.db.models.core} from '../../db/models/';
 
-@path: 'ProjectService'
-service ProjectService {
+@path: 'CompletedProjectService'
+service CompletedProjectService {
 
     entity Projects        as projection on core.Project
         actions {
@@ -27,13 +27,13 @@ service ProjectService {
 
 };
 
-annotate ProjectService.Projects with @(
+annotate CompletedProjectService.Projects with @(
     UI.SelectionVariant   : {SelectOptions: [{
         PropertyName: status.isFinalStatus,
         Ranges      : [{
             Sign  : #I,
             Option: #EQ,
-            Low   : false,
+            Low   : true,
         }]
     }]},
     UI.PresentationVariant: {RequestAtLeast: [status.isFinalStatus]}
