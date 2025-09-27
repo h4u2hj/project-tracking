@@ -4,7 +4,14 @@ using {szakdolgozat.db.models.core} from '../../db/models/';
 
 @path: 'ProjectService'
 service ProjectService {
-
+            @(restrict: [{
+        grant: [
+            'CREATE',
+            'READ',
+            'UPDATE'
+        ],
+        to   : ['ProjectManager']
+    }])
     entity Projects        as projection on core.Project
         actions {
             @(

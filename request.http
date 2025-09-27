@@ -1,0 +1,133 @@
+@server=http://localhost:8080
+@username=admin
+@password=admin
+
+
+### GET Projects
+# @name Projects_GET
+GET {{server}}/odata/v4/ProjectService/Projects
+Authorization: Basic {{username}}:{{password}}
+
+
+### Projects
+# @name Projects_POST
+POST {{server}}/odata/v4/ProjectService/Projects
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "35456899-c9f1-4d42-811d-cb5d971ae5ba",
+  "name": "NEWPROJECT",
+  "description": "description-3545689",
+  "link": "link-3545689",
+  "startDate": "2009-03-03",
+  "status": {
+    "ID": "65891038-ebb5-4ac4-a16f-22967f58a6ba"
+  },
+  "type": {
+    "ID": "982297e8-bcab-45b7-bf22-50ed1225853b"
+  },
+  "manager": {
+    "ID": "17718523-1d9a-4885-a670-21055ef5f57c"
+  },
+  "lastStatusChangeAt": "2012-02-19T23:00:00.000Z",
+  "snapshots": [
+    
+  ],
+  "createdAt": "1999-12-31T23:00:00.000Z",
+  "createdBy": "createdBy.23zvd@example.org",
+  "modifiedAt": "2008-07-01T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.23zvd@example.org"
+}
+
+
+### Projects
+# @name Projects_PATCH
+PATCH {{server}}/odata/v4/ProjectService/Projects/35456899-c9f1-4d42-811d-cb5d971ae5ba
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "35456899-c9f1-4d42-811d-cb5d971ae5ba",
+  "link": "link-3545689",
+  "status": {
+    "ID": "6589104e-0e6e-4a1d-bfbb-e497f71eaefb"
+  },
+  "lastStatusChangeAt": "2025-09-27T23:00:00.000Z",
+  "completedAt": "2025-09-27T23:00:00.000Z",
+  "snapshots": [ ]
+}
+
+
+### Projects
+# @name Projects_DELETE
+DELETE {{server}}/odata/v4/ProjectService/Projects/35456899-c9f1-4d42-811d-cb5d971ae5ba
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+
+### ProjectSnapshot
+# @name ProjectSnapshot_GET
+GET {{server}}/odata/v4/ProjectService/ProjectSnapshot
+Authorization: Basic {{username}}:{{password}}
+
+
+### ProjectSnapshot
+# @name ProjectSnapshot_POST
+POST {{server}}/odata/v4/ProjectService/ProjectSnapshot
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "18824401-8701-4c22-8fd3-2ec88757cb90",
+  "status": {
+    "ID": "17835761-d346-4b1a-be76-e9e76e62425a"
+  },
+  "project": {
+    "ID": "35456899-c9f1-4d42-811d-cb5d971ae5ba"
+  },
+  "createdAt": "2009-05-02T23:00:00.000Z",
+  "createdBy": "createdBy.b7h01@example.com",
+  "modifiedAt": "2004-07-14T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.b7h01@example.com"
+}
+
+
+### ProjectSnapshot
+# @name ProjectSnapshot_PATCH
+PATCH {{server}}/odata/v4/ProjectService/ProjectSnapshot/18824401-8701-4c22-8fd3-2ec88757cb90
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "18824401-8701-4c22-8fd3-2ec88757cb90",
+  "createdAt": "2009-05-02T23:00:00.000Z",
+  "createdBy": "createdBy.b7h01@example.com",
+  "modifiedAt": "2004-07-14T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.b7h01@example.com"
+}
+
+
+### ProjectSnapshot
+# @name ProjectSnapshot_DELETE
+DELETE {{server}}/odata/v4/ProjectService/ProjectSnapshot/18824401-8701-4c22-8fd3-2ec88757cb90
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+
+### User
+# @name User_GET
+GET {{server}}/odata/v4/ProjectService/User
+Authorization: Basic {{username}}:{{password}}
+
+
+### Type
+# @name Type_GET
+GET {{server}}/odata/v4/ProjectService/Type
+Authorization: Basic {{username}}:{{password}}
+
+
+### Status
+# @name Status_GET
+GET {{server}}/odata/v4/ProjectService/Status
+Authorization: Basic {{username}}:{{password}}
