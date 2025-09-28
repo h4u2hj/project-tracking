@@ -1,0 +1,109 @@
+@server=http://localhost:8080
+@username=admin
+@password=admin
+
+
+### Type
+# @name Type_GET
+GET {{server}}/odata/v4/TypeService/Type
+Authorization: Basic {{username}}:{{password}}
+
+
+### Type
+# @name Type_POST
+POST {{server}}/odata/v4/TypeService/Type
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "16638241-34c5-4586-8b0b-c62080bb7743",
+  "name": "name-16638241",
+  "projects": [
+    {
+      "ID": "15532398-59fb-4a65-abee-dd5f21896c72",
+      "name": "name-15532398",
+      "description": "description-15532398",
+      "link": "link-15532398",
+      "startDate": "2014-07-28",
+      "status_ID": "65891038-ebb5-4ac4-a16f-22967f58a6ba",
+      "manager": {
+        "ID": "17631011-870c-4bb4-a458-4f55c5ad85b6"
+      },
+      "lastStatusChangeAt": "2004-07-29T23:00:00.000Z",
+      "completedAt": "2009-10-24T23:00:00.000Z",
+      "createdAt": "2013-03-18T23:00:00.000Z",
+      "createdBy": "createdBy.98wvi@example.net",
+      "modifiedAt": "2010-08-27T23:00:00.000Z",
+      "modifiedBy": "modifiedBy.98wvi@example.net"
+    }
+  ],
+  "createdAt": "2005-01-22T23:00:00.000Z",
+  "createdBy": "createdBy.9wm5d@example.com",
+  "modifiedAt": "2017-06-17T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.9wm5d@example.org"
+}
+
+
+### Type
+# @name Type_PATCH
+PATCH {{server}}/odata/v4/TypeService/Type/16638241-34c5-4586-8b0b-c62080bb7743
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+{
+  "ID": "16638241-34c5-4586-8b0b-c62080bb7743",
+  "name": "name-16638241",
+  "projects": [
+    {
+      "ID": "15532398-59fb-4a65-abee-dd5f21896c72",
+      "name": "name-15532398",
+      "description": "description-15532398",
+      "link": "link-15532398",
+      "startDate": "2014-07-28",
+      "status_ID": "65891038-ebb5-4ac4-a16f-22967f58a6ba",
+      "manager": {
+        "ID": "17631011-870c-4bb4-a458-4f55c5ad85b6"
+      },
+      "lastStatusChangeAt": "2004-07-29T23:00:00.000Z",
+      "completedAt": "2009-10-24T23:00:00.000Z",
+      "createdAt": "2013-03-18T23:00:00.000Z",
+      "createdBy": "createdBy.98wvi@example.net",
+      "modifiedAt": "2010-08-27T23:00:00.000Z",
+      "modifiedBy": "modifiedBy.98wvi@example.net"
+    },
+    {
+      "ID": "15532399-12fa-4706-b6cf-a778b1d76a54",
+      "name": "name-15532399",
+      "description": "description-15532399",
+      "link": "link-15532399",
+      "startDate": "2020-06-23",
+      "status_ID": "65891038-ebb5-4ac4-a16f-22967f58a6ba",
+      "manager": {
+        "ID": "17631011-870c-4bb4-a458-4f55c5ad85b6"
+      },
+      "lastStatusChangeAt": "2015-12-27T23:00:00.000Z",
+      "completedAt": "2006-05-17T23:00:00.000Z",
+      "createdAt": "2016-11-02T23:00:00.000Z",
+      "createdBy": "createdBy.98wvj@example.net",
+      "modifiedAt": "2007-10-21T23:00:00.000Z",
+      "modifiedBy": "modifiedBy.98wvj@example.com"
+    }
+  ],
+  "createdAt": "2005-01-22T23:00:00.000Z",
+  "createdBy": "createdBy.9wm5d@example.com",
+  "modifiedAt": "2017-06-17T23:00:00.000Z",
+  "modifiedBy": "modifiedBy.9wm5d@example.org"
+}
+
+
+### Type
+# @name Type_DELETE
+DELETE {{server}}/odata/v4/TypeService/Type/16638241-34c5-4586-8b0b-c62080bb7743
+Content-Type: application/json
+Authorization: Basic {{username}}:{{password}}
+
+
+### User
+# @name User_GET
+GET {{server}}/odata/v4/TypeService/User
+Authorization: Basic {{username}}:{{password}}

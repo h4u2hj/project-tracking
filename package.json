@@ -9,5 +9,8 @@
   },
   "dependencies": {
     "@sap/cds": "^9.3.1"
-  }
+  },
+  "sapux": [
+    "app/manageprojects"
+  ]
 }
