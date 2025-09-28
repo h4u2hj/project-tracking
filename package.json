@@ -11,6 +11,9 @@
     "@sap/cds": "^9.3.1"
   },
   "sapux": [
-    "app/manageprojects"
+    "app/manageprojects",
+    "app/completedprojects",
+    "app/managestatus",
+    "app/managetype"
   ]
 }
