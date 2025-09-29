@@ -8,7 +8,8 @@ service ProjectService {
         grant: [
             'CREATE',
             'READ',
-            'UPDATE'
+            'UPDATE',
+            'changeStatus'
         ],
         to   : ['ProjectManager']
     }])

@@ -62,7 +62,8 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -94,17 +95,28 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "TypeList",
-          "target": "TypeList"
+          "target": [
+            "TypeList"
+          ]
         },
         {
           "pattern": "Type({key}):?query:",
           "name": "TypeObjectPage",
-          "target": "TypeObjectPage"
+          "target": [
+            "TypeList",
+            "TypeObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -131,7 +143,9 @@
                 }
               }
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "TypeObjectPage": {
           "type": "Component",
@@ -142,9 +156,17 @@
               "editableHeaderContent": false,
               "contextPath": "/Type"
             }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/Type({key})"
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {
