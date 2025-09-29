@@ -96,19 +96,24 @@ annotate service.Projects with @(
                 Value: description
             },
             {
-                $Type: 'UI.DataField',
-                Label: 'startDate',
-                Value: startDate,
-            },
-            {
                 $Type       : 'UI.DataField',
                 Value       : type_ID,
                 ![UI.Hidden]: {$edmJson: {$Path: 'IsActiveEntity'}}
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'link',
-                Value: link,
+                Value: status_ID
+            },
+            {
+                $Type       : 'UI.DataField',
+                Value       : manager_ID,
+                ![UI.Hidden]: {$edmJson: {$Path: 'IsActiveEntity'}}
+            },
+            {
+                $Type       : 'UI.DataFieldForAnnotation',
+                Target      : 'manager/@Communication.Contact',
+                Label       : 'Manager',
+                ![UI.Hidden]: {$edmJson: {$Not: {$Path: 'IsActiveEntity'}}}
             },
             {
                 $Type: 'UI.DataField',
@@ -117,18 +122,19 @@ annotate service.Projects with @(
             },
             {
                 $Type: 'UI.DataField',
-                Label: 'completedAt',
-                Value: completedAt,
+                Label: 'startDate',
+                Value: startDate,
             },
-        ],
+            {
+                $Type: 'UI.DataField',
+                Label: 'link',
+                Value: link,
+            }
+        ]
     },
 
 );
 
-annotate service.Projects with @(
-
-
-);
 
 annotate service.Projects with {
     status @Common.ValueList: {
