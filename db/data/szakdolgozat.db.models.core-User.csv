@@ -1,7 +1,7 @@
-ID,email,firstName,lastName,phone,companyID
-12731529-d223-4ca0-a3af-6fb694bc5f93,johnsmith@work.com,John,Smith,+36717812758,I123456
-17718523-1d9a-4885-a670-21055ef5f57c,admin@work.com,Ad,Min,+36717812723,I112233
-17718524-9d64-408a-85cf-43c3cbbe162b,michman@work.com,Michael,Manager,+3617812758,I654321
-17718525-b46d-406f-9402-cdcc08f7adb2,bigboss@work.com,Boss,Big,+3612312758,I111222
-17718526-f06d-49ab-a0a7-0f2103e02813,facility@work.com,Facility,Manager,+36317452758,I121212
-17718527-6940-4f29-91c4-7b0eddf04790,reception@work.com,Reception,Leader,+3612345678,I987654
+ID,email,firstName,lastName,phone,companyID,orgunit
+12731529-d223-4ca0-a3af-6fb694bc5f93,johnsmith@work.com,John,Smith,+36717812758,I123456,Dev Team
+17718523-1d9a-4885-a670-21055ef5f57c,admin@work.com,Ad,Min,+36717812723,I112233,IT LT
+17718524-9d64-408a-85cf-43c3cbbe162b,michman@work.com,Michael,Manager,+3617812758,I654321,Labs Mgmt
+17718525-b46d-406f-9402-cdcc08f7adb2,bigboss@work.com,Boss,Big,+3612312758,I111222,COO
+17718526-f06d-49ab-a0a7-0f2103e02813,facility@work.com,Facility,Manager,+36317452758,I121212,Fac Team
+17718527-6940-4f29-91c4-7b0eddf04790,reception@work.com,Reception,Leader,+3612345678,I987654,Rec Team
