@@ -108,14 +108,14 @@ annotate service.Projects with @(
                 $Type                : 'UI.DataField',
                 Value                : manager_ID,
                 ![@HTML5.CssDefaults]: {width: '10rem'},
-                ![UI.Hidden]         : {$edmJson: {$Path: 'IsActiveEntity'}}
+                @UI.Hidden           : {$edmJson: {$Path: 'IsActiveEntity'}}
             },
             {
                 $Type                : 'UI.DataFieldForAnnotation',
                 Target               : 'manager/@Communication.Contact',
                 Label                : 'Manager',
                 ![@HTML5.CssDefaults]: {width: '10rem'},
-                ![UI.Hidden]         : {$edmJson: {$Not: {$Path: 'IsActiveEntity'}}}
+                @UI.Hidden           : {$edmJson: {$Not: {$Path: 'IsActiveEntity'}}}
             },
             {
                 $Type: 'UI.DataField',
