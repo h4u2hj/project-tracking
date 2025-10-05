@@ -139,6 +139,32 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
+                  },
+                  "columns": {
+                    "DataField::name": {
+                      "width": "auto"
+                    },
+                    "DataField::description": {
+                      "width": "auto"
+                    },
+                    "DataField::status_ID": {
+                      "width": "auto"
+                    },
+                    "DataFieldForAnnotation::manager::Contact": {
+                      "width": "auto"
+                    },
+                    "DataField::type_ID": {
+                      "width": "auto"
+                    },
+                    "DataField::startDate": {
+                      "width": "auto"
+                    },
+                    "DataField::lastStatusChangeAt": {
+                      "width": "auto"
+                    },
+                    "DataField::manager_ID": {
+                      "availability": "Hidden"
+                    }
                   }
                 }
               },

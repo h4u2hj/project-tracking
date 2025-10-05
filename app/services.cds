@@ -3,7 +3,7 @@ using from './manageprojects/annotations/annotations';
 
 using from './manageprojects/annotations/labels';
 
-using from './completedprojects/annotations';
+using from './completedprojects/annotations/annotations';
 
 using from './managestatus/annotations';
 

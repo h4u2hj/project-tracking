@@ -62,7 +62,8 @@
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
-        "sap.fe.templates": {}
+        "sap.fe.templates": {},
+        "sap.f": {}
       }
     },
     "contentDensities": {
@@ -94,17 +95,28 @@
       "css": []
     },
     "routing": {
-      "config": {},
+      "config": {
+        "flexibleColumnLayout": {
+          "defaultTwoColumnLayoutType": "TwoColumnsMidExpanded",
+          "defaultThreeColumnLayoutType": "ThreeColumnsMidExpanded"
+        },
+        "routerClass": "sap.f.routing.Router"
+      },
       "routes": [
         {
           "pattern": ":?query:",
           "name": "ProjectsList",
-          "target": "ProjectsList"
+          "target": [
+            "ProjectsList"
+          ]
         },
         {
           "pattern": "Projects({key}):?query:",
           "name": "ProjectsObjectPage",
-          "target": "ProjectsObjectPage"
+          "target": [
+            "ProjectsList",
+            "ProjectsObjectPage"
+          ]
         }
       ],
       "targets": {
@@ -127,11 +139,36 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
+                  },
+                  "columns": {
+                    "DataField::name": {
+                      "width": "auto"
+                    },
+                    "DataField::description": {
+                      "width": "auto"
+                    },
+                    "DataField::lastStatusChangeAt": {
+                      "width": "auto"
+                    },
+                    "DataField::status_ID": {
+                      "width": "auto"
+                    },
+                    "DataField::type_ID": {
+                      "width": "auto"
+                    },
+                    "DataFieldForAnnotation::manager::Contact": {
+                      "width": "auto"
+                    },
+                    "DataField::completedAt": {
+                      "width": "auto"
+                    }
                   }
                 }
               }
             }
-          }
+          },
+          "controlAggregation": "beginColumnPages",
+          "contextPattern": ""
         },
         "ProjectsObjectPage": {
           "type": "Component",
@@ -142,9 +179,17 @@
               "editableHeaderContent": false,
               "contextPath": "/Projects"
             }
-          }
+          },
+          "controlAggregation": "midColumnPages",
+          "contextPattern": "/Projects({key})"
         }
       }
+    },
+    "rootView": {
+      "viewName": "sap.fe.templates.RootContainer.view.Fcl",
+      "type": "XML",
+      "async": true,
+      "id": "appRootView"
     }
   },
   "sap.fiori": {

@@ -1,12 +1,11 @@
-using szakdolgozat.srv.service.ProjectService as service from '../../../srv/services/ProjectService';
+using szakdolgozat.srv.service.CompletedProjectService as service from '../../../srv/services/CompletedProjectService';
 
 annotate service.Projects with @(
 
-    //enable the create, edit button and disable the delete button on the list report page
-    odata.draft.enabled,
-    UI.UpdateHidden                          : false,
-    Capabilities.DeleteRestrictions.Deletable: false,
-    Capabilities.UpdateRestrictions.Updatable: true,
+    //disable the create, edit button and enable the delete button on the list report page
+    UI.UpdateHidden                          : true,
+    Capabilities.DeleteRestrictions.Deletable: true,
+    Capabilities.UpdateRestrictions.Updatable: false,
 
     //List report page - Fields that are displayed by default
     UI.LineItem                              : [
@@ -33,6 +32,10 @@ annotate service.Projects with @(
         },
         {
             $Type: 'UI.DataField',
+            Value: completedAt,
+        },
+        {
+            $Type: 'UI.DataField',
             Value: startDate,
         },
         {
@@ -46,12 +49,6 @@ annotate service.Projects with @(
             $Type: 'UI.DataField',
             Label: 'lastStatusChangeAt',
             Value: lastStatusChangeAt,
-        },
-        {
-            $Type             : 'UI.DataFieldForAction',
-            Label             : 'Change Status',
-            Action            : 'szakdolgozat.srv.service.ProjectService.changeStatus',
-            InvocationGrouping: #Isolated
         }
     ],
 
@@ -122,6 +119,10 @@ annotate service.Projects with @(
             },
             {
                 $Type: 'UI.DataField',
+                Value: completedAt
+            },
+            {
+                $Type: 'UI.DataField',
                 Value: startDate,
             },
             {
@@ -149,6 +150,7 @@ annotate service.Projects with @(
         type_ID,
         manager_ID,
         status.isFinalStatus,
+        completedAt,
         startDate
     ],
 
@@ -169,6 +171,7 @@ annotate service.Projects with @(
         {Value: status_ID},
         {Value: type_ID},
         {Value: manager_ID},
+        {Value: completedAt},
         {Value: startDate}
     ]},
     UI.FieldGroup #Administrative: {Data: [
@@ -304,8 +307,8 @@ annotate service.Projects with @(
         UI.HiddenFilter: true,
     );
     completedAt        @(
-        UI.Hidden      : true,
-        UI.HiddenFilter: true,
+        UI.Hidden      : false,
+        UI.HiddenFilter: false,
     );
 } actions {
     changeStatus(newStatus
@@ -372,6 +375,10 @@ annotate service.Projects with @(
     },
     {
         Property          : 'modifiedAt',
+        AllowedExpressions: 'SingleRange'
+    },
+    {
+        Property          : 'completedAt',
         AllowedExpressions: 'SingleRange'
     }
 ]});
