@@ -13,39 +13,35 @@
               "isGroupLocked": false,
               "tiles": [
                 {
-                  "id": "manage-status",
+                  "id": "managestatuses-launch",
                   "tileType": "sap.ushell.ui.tile.StaticTile",
                   "properties": {
-                    "targetURL": "#DocumentStatuses-manage",
-                    "title": "Manage Document Statuses",
-                    "description": "Add/edit/delete statuses"
+                    "targetURL": "#managestatuses-launch",
+                    "title": "Manage Project Statuses"
                   }
                 },
                 {
-                  "id": "manage-type",
+                  "id": "managetype-launch",
                   "tileType": "sap.ushell.ui.tile.StaticTile",
                   "properties": {
-                    "targetURL": "#DocumentTypes-manage",
-                    "title": "Manage Document Types",
-                    "description": "Add/edit/delete types"
+                    "targetURL": "#managetype-launch",
+                    "title": "Manage Project Types"
                   }
                 },
                 {
-                  "id": "manage-documents",
+                  "id": "manageprojects-launch",
                   "tileType": "sap.ushell.ui.tile.StaticTile",
                   "properties": {
-                    "targetURL": "#Documents-manage",
-                    "title": "Manage Documents",
-                    "description": "Add/edit/delete documents"
+                    "targetURL": "#manageprojects-launch",
+                    "title": "Manage Projects"
                   }
                 },
                 {
-                  "id": "browse-documents",
+                  "id": "completedprojects-launch",
                   "tileType": "sap.ushell.ui.tile.StaticTile",
                   "properties": {
-                    "targetURL": "#Documents-browse",
-                    "title": "Browse Documents",
-                    "description": "Browse documents"
+                    "targetURL": "#completedprojects-launch",
+                    "title": "Browse Projects"
                   }
                 }
               ]
@@ -64,56 +60,56 @@
       "adapter": {
         "config": {
           "inbounds": {
-            "manage-status": {
-              "semanticObject": "DocumentStatuses",
-              "action": "manage",
+            "managestatuses-launch": {
+              "semanticObject": "managestatuses",
+              "action": "launch",
               "signature": {
                 "parameters": {},
                 "additionalParameters": "allowed"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",
-                "additionalInformation": "SAPUI5.Component=com.sap.internal.digitallab.doctracking.app.managestatus",
+                "additionalInformation": "SAPUI5.Component=managestatus",
                 "url": "/managestatus/webapp"
               }
             },
-            "manage-type": {
-              "semanticObject": "DocumentTypes",
-              "action": "manage",
+            "managetype-launch": {
+              "semanticObject": "DocumemanagetypentTypes",
+              "action": "launch",
               "signature": {
                 "parameters": {},
                 "additionalParameters": "allowed"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",
-                "additionalInformation": "SAPUI5.Component=com.sap.internal.digitallab.doctracking.app.managetype",
+                "additionalInformation": "SAPUI5.Component=managetype",
                 "url": "/managetype/webapp"
               }
             },
-            "manage-documents": {
-              "semanticObject": "Documents",
-              "action": "manage",
+            "manageprojects-launch": {
+              "semanticObject": "manageprojects",
+              "action": "launch",
               "signature": {
                 "parameters": {},
                 "additionalParameters": "allowed"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",
-                "additionalInformation": "SAPUI5.Component=com.sap.internal.digitallab.doctracking.app.managedocument",
-                "url": "/managedocument/webapp"
+                "additionalInformation": "SAPUI5.Component=manageprojects",
+                "url": "/manageprojects/webapp"
               }
             },
-            "brose-documents": {
-              "semanticObject": "Documents",
-              "action": "browse",
+            "completedprojects-launch": {
+              "semanticObject": "completedprojects",
+              "action": "launch",
               "signature": {
                 "parameters": {},
                 "additionalParameters": "allowed"
               },
               "resolutionResult": {
                 "applicationType": "SAPUI5",
-                "additionalInformation": "SAPUI5.Component=com.sap.internal.digitallab.doctracking.app.browsedocument",
-                "url": "/browsedocument/webapp"
+                "additionalInformation": "SAPUI5.Component=completedprojects",
+                "url": "/completedprojects/webapp"
               }
             }
           }

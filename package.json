@@ -5,7 +5,8 @@
   "license": "ISC",
   "repository": "https://github.com/h4u2hj/project-tracking.git",
   "devDependencies": {
-    "@sap/cds-dk": "^9.1.0"
+    "@sap/cds-dk": "^9.1.0",
+    "cds-launchpad-plugin": "^2.2.0"
   },
   "dependencies": {
     "@sap/cds": "^9.3.1"
@@ -15,5 +16,11 @@
     "app/completedprojects",
     "app/managestatus",
     "app/managetype"
-  ]
+  ],
+  "cds": {
+    "launchpad": {
+      "theme": "sap_horizon",
+      "version": "1.120.1"
+    }
+  }
 }

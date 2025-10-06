@@ -5,6 +5,10 @@
   "requires": {
     "db": "hana",
     "html5-runtime": true,
-    "portal": true
+    "portal": true,
+    "html5-repo": true,
+    "[production]": {
+      "auth": "xsuaa"
+    }
   }
 }

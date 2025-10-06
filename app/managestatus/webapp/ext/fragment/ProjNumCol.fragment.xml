@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+>
+    <Button
+        core:require="{ handler: 'managestatus/ext/fragment/ProjNumCol'}"
+        text="{= ${totalProjects} === '0' ? 'No Projects' : ${totalProjects} + ' projects'}"
+        press="handler.onPress"
+        icon="sap-icon://detail-view"
+        id="ProjNumCol"
+    />
+    
+</core:FragmentDefinition>

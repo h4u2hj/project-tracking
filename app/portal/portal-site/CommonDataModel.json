@@ -17,6 +17,22 @@
         },
         "payload": {
           "viz": [
+            {
+              "appId": "completedprojects",
+              "vizId": "completedprojects-launch"
+            },
+            {
+              "appId": "manageprojects",
+              "vizId": "manageprojects-launch"
+            },
+            {
+              "appId": "managestatus",
+              "vizId": "managestatuses-launch"
+            },
+            {
+              "appId": "managetype",
+              "vizId": "managetype-launch"
+            }
           ]
         }
       }
@@ -32,6 +48,26 @@
         },
         "payload": {
           "viz": [
+            {
+              "id": "project-trackingcompletedprojects-001",
+              "appId": "completedprojects",
+              "vizId": "completedprojects-launch"
+            },
+            {
+              "id": "project-trackingmanageprojects-001",
+              "appId": "manageprojects",
+              "vizId": "manageprojects-launch"
+            },
+            {
+              "id": "project-trackingmanagestatus-001",
+              "appId": "managestatus",
+              "vizId": "managestatuses-launch"
+            },
+            {
+              "id": "project-trackingmanagetype-001",
+              "appId": "managetype",
+              "vizId": "managetype-launch"
+            }
           ]
         }
       }
