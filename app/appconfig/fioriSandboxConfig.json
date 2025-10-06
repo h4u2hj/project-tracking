@@ -1,0 +1,124 @@
+{
+  "services": {
+    "LaunchPage": {
+      "adapter": {
+        "config": {
+          "catalogs": [],
+          "groups": [
+            {
+              "id": "Administration",
+              "title": "Administration",
+              "isPreset": true,
+              "isVisible": true,
+              "isGroupLocked": false,
+              "tiles": [
+                {
+                  "id": "manage-status",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "targetURL": "#DocumentStatuses-manage",
+                    "title": "Manage Document Statuses",
+                    "description": "Add/edit/delete statuses"
+                  }
+                },
+                {
+                  "id": "manage-type",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "targetURL": "#DocumentTypes-manage",
+                    "title": "Manage Document Types",
+                    "description": "Add/edit/delete types"
+                  }
+                },
+                {
+                  "id": "manage-documents",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "targetURL": "#Documents-manage",
+                    "title": "Manage Documents",
+                    "description": "Add/edit/delete documents"
+                  }
+                },
+                {
+                  "id": "browse-documents",
+                  "tileType": "sap.ushell.ui.tile.StaticTile",
+                  "properties": {
+                    "targetURL": "#Documents-browse",
+                    "title": "Browse Documents",
+                    "description": "Browse documents"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+
+    },
+    "NavTargetResolution": {
+      "config": {
+        "enableClientSideTargetResolution": true
+      }
+    },
+    "ClientSideTargetResolution": {
+      "adapter": {
+        "config": {
+          "inbounds": {
+            "manage-status": {
+              "semanticObject": "DocumentStatuses",
+              "action": "manage",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=com.sap.internal.digitallab.doctracking.app.managestatus",
+                "url": "/managestatus/webapp"
+              }
+            },
+            "manage-type": {
+              "semanticObject": "DocumentTypes",
+              "action": "manage",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=com.sap.internal.digitallab.doctracking.app.managetype",
+                "url": "/managetype/webapp"
+              }
+            },
+            "manage-documents": {
+              "semanticObject": "Documents",
+              "action": "manage",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=com.sap.internal.digitallab.doctracking.app.managedocument",
+                "url": "/managedocument/webapp"
+              }
+            },
+            "brose-documents": {
+              "semanticObject": "Documents",
+              "action": "browse",
+              "signature": {
+                "parameters": {},
+                "additionalParameters": "allowed"
+              },
+              "resolutionResult": {
+                "applicationType": "SAPUI5",
+                "additionalInformation": "SAPUI5.Component=com.sap.internal.digitallab.doctracking.app.browsedocument",
+                "url": "/browsedocument/webapp"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
