@@ -13,6 +13,7 @@ entity Status : cuid, managed {
             isFinalStatus : Boolean not null     @mandatory default false;
     virtual delete_ac     : Boolean;
     virtual totalProjects : Integer default 0;
+            header        : String = 'Project Status - ' || name;
             projects      : Composition of many Project
                                 on projects.status = $self;
 }

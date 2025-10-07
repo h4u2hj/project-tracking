@@ -40,7 +40,6 @@ annotate service.Projects with @(
             Url                 : link,
             Value               : 'Open',
             Label               : 'Link',
-            ![HTML5.CssDefaults]: {width: '3rem'}
         },
         {
             $Type: 'UI.DataField',

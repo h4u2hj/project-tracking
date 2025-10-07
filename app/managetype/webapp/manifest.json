@@ -139,6 +139,11 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
+                  },
+                  "columns": {
+                    "DataField::name": {
+                      "width": "auto"
+                    }
                   }
                 }
               },

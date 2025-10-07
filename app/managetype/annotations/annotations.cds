@@ -1,6 +1,6 @@
-using szakdolgozat.srv.service.StatusService as service from '../../../srv/services/StatusService';
+using szakdolgozat.srv.service.TypeService as service from '../../../srv/services/TypeService';
 
-annotate service.Status with @(
+annotate service.Type with @(
 
     //enable the create, edit button and delete button on the list report page
     odata.draft.enabled,
@@ -8,18 +8,11 @@ annotate service.Status with @(
     Capabilities.DeleteRestrictions.Deletable: delete_ac,
     Capabilities.UpdateRestrictions.Updatable: true,
 
-
     //List report page - Fields that are displayed by default
-    UI.LineItem                              : [
-        {
-            $Type: 'UI.DataField',
-            Value: name
-        },
-        {
-            $Type: 'UI.DataField',
-            Value: isFinalStatus
-        }
-    ],
+    UI.LineItem                              : [{
+        $Type: 'UI.DataField',
+        Value: name
+    }],
 
     //Object Page - Section Definitions
     UI.Facets                                : [
@@ -50,16 +43,10 @@ annotate service.Status with @(
     //Object Page - Project Status Properties - Field Definitions
     UI.FieldGroup #ProjectStatusProperties   : {
         $Type: 'UI.FieldGroupType',
-        Data : [
-            {
-                $Type: 'UI.DataField',
-                Value: name
-            },
-            {
-                $Type: 'UI.DataField',
-                Value: isFinalStatus
-            }
-        ]
+        Data : [{
+            $Type: 'UI.DataField',
+            Value: name
+        }]
     },
     //Object Page - Administration - Field Definitions
     UI.FieldGroup #Administration            : {
@@ -85,22 +72,12 @@ annotate service.Status with @(
     }
 );
 
-annotate service.Status with @(
+annotate service.Type with @(
 
-    //Default filters on list report page
-    UI.SelectionFields           : [isFinalStatus],
-
-    UI.FilterFacets              : [
-        {
-            Target: '@UI.FieldGroup#Basic',
-            Label : 'Basic'
-        },
-        {
-            Target: '@UI.FieldGroup#Administrative',
-            Label : 'Administrative'
-        }
-    ],
-    UI.FieldGroup #Basic         : {Data: [{Value: isFinalStatus}]},
+    UI.FilterFacets              : [{
+        Target: '@UI.FieldGroup#Administrative',
+        Label : 'Administrative'
+    }],
 
     //List report page - Defining filters for the different filter groups
     UI.FieldGroup #Administrative: {Data: [
@@ -174,8 +151,4 @@ annotate service.Status with @(
         UI.Hidden      : true,
         UI.HiddenFilter: true
     );
-    isFinalStatus @(
-        UI.Hidden      : false,
-        UI.HiddenFilter: false
-    )
 }

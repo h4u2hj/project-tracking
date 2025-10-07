@@ -8,4 +8,6 @@ using from './managestatus/annotations/annotations';
 
 using from './managestatus/annotations/labels';
 
-using from './managetype/annotations';
+using from './managetype/annotations/annotations';
+
+using from './managetype/annotations/labels';
