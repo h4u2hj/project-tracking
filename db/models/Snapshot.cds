@@ -13,6 +13,7 @@ using szakdolgozat.db.models.core.Project from './Project';
     createdAt
 ]}
 entity Snapshot : cuid, managed {
-    project : Association to one Project not null @mandatory @assert.target;
-    status  : Association to one Status not null @Core.Immutable @mandatory @assert.target;
+    project    : Association to one Project not null  @mandatory       @assert.target;
+    status     : Association to one Status not null   @Core.Immutable  @mandatory  @assert.target;
+    statusName : String = status.name;
 }

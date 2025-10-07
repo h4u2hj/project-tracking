@@ -8,7 +8,7 @@
         press="handler.onPress"
         enabled="{= ${totalProjects} === '0' ? false : true }"
         icon="sap-icon://detail-view"
-        id="ProjNumCol"
+        id="idProjNumButton"
     />
     
 </core:FragmentDefinition>

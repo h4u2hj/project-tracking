@@ -87,17 +87,17 @@ annotate service.Type with @(
         {Value: modifiedBy}
     ]}
 ) {
-    name          @(
+    name                    @(
         UI.Hidden      : false,
         UI.HiddenFilter: false
     );
 
-    createdAt     @(
+    createdAt               @(
         UI.Hidden      : false,
         UI.HiddenFilter: false
     );
 
-    createdBy     @(
+    createdBy               @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
@@ -115,11 +115,11 @@ annotate service.Type with @(
             TextArrangement         : #TextOnly,
         }
     );
-    modifiedAt    @(
+    modifiedAt              @(
         UI.Hidden      : false,
         UI.HiddenFilter: false
     );
-    modifiedBy    @(
+    modifiedBy              @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
@@ -138,16 +138,25 @@ annotate service.Type with @(
         }
     );
 
-    delete_ac     @(
+    delete_ac               @(
         UI.Hidden      : true,
         UI.HiddenFilter: true
     );
-    totalProjects @(
+    totalFinishedProjects   @(
         UI.Hidden      : true,
         UI.HiddenFilter: true,
         Measures.Unit  : 'projects'
     );
-    ID            @(
+    totalInProgressProjects @(
+        UI.Hidden      : true,
+        UI.HiddenFilter: true,
+        Measures.Unit  : 'projects'
+    );
+    ID                      @(
+        UI.Hidden      : true,
+        UI.HiddenFilter: true
+    );
+    header                  @(
         UI.Hidden      : true,
         UI.HiddenFilter: true
     );

@@ -177,5 +177,9 @@ annotate service.Status with @(
     isFinalStatus @(
         UI.Hidden      : false,
         UI.HiddenFilter: false
-    )
+    );
+    header        @(
+        UI.Hidden      : true,
+        UI.HiddenFilter: true
+    );
 }

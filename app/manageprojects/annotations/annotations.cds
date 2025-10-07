@@ -36,10 +36,10 @@ annotate service.Projects with @(
             Value: startDate,
         },
         {
-            $Type               : 'UI.DataFieldWithUrl',
-            Url                 : link,
-            Value               : 'Open',
-            Label               : 'Link',
+            $Type: 'UI.DataFieldWithUrl',
+            Url  : link,
+            Value: 'Open',
+            Label: 'Link',
         },
         {
             $Type: 'UI.DataField',
@@ -51,6 +51,20 @@ annotate service.Projects with @(
             Label             : 'Change Status',
             Action            : 'szakdolgozat.srv.service.ProjectService.changeStatus',
             InvocationGrouping: #Isolated
+        },
+        {
+            $Type         : 'UI.DataFieldForIntentBasedNavigation',
+            SemanticObject: 'managestatuses',
+            Action        : 'launch',
+            Label         : 'Manage Statuses',
+            Inline        : false
+        },
+        {
+            $Type         : 'UI.DataFieldForIntentBasedNavigation',
+            SemanticObject: 'managetype',
+            Action        : 'launch',
+            Label         : 'Manage Types',
+            Inline        : false
         }
     ],
 
@@ -67,6 +81,12 @@ annotate service.Projects with @(
             ID    : 'ProjectHistory',
             Label : 'Project History',
             Target: 'snapshots/@UI.LineItem',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : 'Administration',
+            ID    : 'Administration',
+            Target: '@UI.FieldGroup#Administration'
         }
     ],
 
@@ -126,6 +146,28 @@ annotate service.Projects with @(
             {
                 $Type: 'UI.DataField',
                 Value: link,
+            }
+        ]
+    },
+    //Object Page - Administration - Field Definitions
+    UI.FieldGroup #Administration            : {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: createdAt
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: createdBy
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: modifiedAt
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: modifiedBy
             }
         ]
     },
@@ -335,7 +377,7 @@ annotate service.ProjectSnapshot with @(
     UI.LineItem : [
         {
             $Type                : 'UI.DataField',
-            Value                : status_ID,
+            Value                : statusName,
             ![@HTML5.CssDefaults]: {width: '20rem'}
         },
         {
@@ -343,6 +385,11 @@ annotate service.ProjectSnapshot with @(
             Value                : createdAt,
             ![@HTML5.CssDefaults]: {width: '20rem'}
         },
+        {
+            $Type                : 'UI.DataField',
+            Value                : createdBy,
+            ![@HTML5.CssDefaults]: {width: '20rem'}
+        }
     ],
     Capabilities: {
         InsertRestrictions.Insertable: false,
@@ -352,7 +399,7 @@ annotate service.ProjectSnapshot with @(
     ID         @UI.Hidden: true;
     status     @UI.Hidden: false  @UI.HiddenFilter: true;
     project    @UI.Hidden: true   @UI.HiddenFilter: true;
-    createdBy  @UI.Hidden: true;
+    createdBy  @UI.Hidden: false;
     modifiedBy @UI.Hidden: true;
     modifiedAt @UI.Hidden: true;
 };
