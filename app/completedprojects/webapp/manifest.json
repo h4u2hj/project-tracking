@@ -164,7 +164,8 @@
                     }
                   }
                 }
-              }
+              },
+              "initialLoad": "Enabled"
             }
           },
           "controlAggregation": "beginColumnPages",

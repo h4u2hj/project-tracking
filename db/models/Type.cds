@@ -9,9 +9,12 @@ using {szakdolgozat.db.models.core.Project} from './Project';
 
 @assert.unique: {nbunique: [name]}
 entity Type : cuid, managed {
-            name      : String(100) not null;
-    virtual delete_ac : Boolean;
-            projects  : Composition of many Project
-                            on projects.type = $self;
+            name                    : String(100) not null @mandatory;
+    virtual delete_ac               : Boolean;
+    virtual totalFinishedProjects   : Integer default 0;
+    virtual totalInProgressProjects : Integer default 0;
+            header                  : String = 'Project Type - ' || name;
+            projects                : Composition of many Project
+                                          on projects.type = $self;
 
 }

@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+>
+    <Button
+        core:require="{ handler: 'managetype/ext/fragment/FinishedProjButton'}"
+        text="{= ${totalFinishedProjects} === '0' ? 'No finished Projects' : ${totalFinishedProjects} + ' finished projects'}"
+        press="handler.onPress"
+        enabled="{= ${totalFinishedProjects} === '0' ? false : true }"
+        icon="sap-icon://sys-enter"
+        id="idFinishedProjButton"
+    />
+</core:FragmentDefinition>

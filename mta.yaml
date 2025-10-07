@@ -27,6 +27,7 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: project-tracking-db
+      - name: project-tracking-auth
   - name: project-tracking-srv
     type: java
     path: gen/srv
@@ -61,6 +62,7 @@ modules:
           forwardAuthToken: true
       - name: project-tracking-html5-runtime
       - name: project-tracking-portal
+      - name: project-tracking-auth
     provides:
       - name: app-api
         properties:
@@ -78,8 +80,22 @@ modules:
     build-parameters:
       build-result: resources
       requires:
-
-
+        - name: projecttrackingcompletedprojects
+          artifacts:
+            - completedprojects.zip
+          target-path: resources
+        - name: projecttrackingmanageprojects
+          artifacts:
+            - manageprojects.zip
+          target-path: resources
+        - name: projecttrackingmanagestatus
+          artifacts:
+            - managestatus.zip
+          target-path: resources
+        - name: projecttrackingmanagetype
+          artifacts:
+            - managetype.zip
+          target-path: resources
   - name: project-tracking-portal-deployer
     type: com.sap.application.content
     path: app/portal
@@ -96,6 +112,51 @@ modules:
       - name: project-tracking-app-deployer
     deployed-after:
       - project-tracking-app-deployer
+
+  - name: projecttrackingcompletedprojects
+    type: html5
+    path: app/completedprojects
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: projecttrackingmanageprojects
+    type: html5
+    path: app/manageprojects
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: projecttrackingmanagestatus
+    type: html5
+    path: app/managestatus
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: projecttrackingmanagetype
+    type: html5
+    path: app/managetype
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
 resources:
   - name: project-tracking-db
     type: com.sap.xs.hdi-container
@@ -118,3 +179,26 @@ resources:
     parameters:
       service: portal
       service-plan: standard
+  - name: project-tracking-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: project-tracking-${org}-${space}
+        tenant-mode: dedicated
+        role-collections:
+          - name: 'ProjectManager (project-tracking ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.ProjectManager'
+          - name: 'Administrator (project-tracking ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Administrator'
+        oauth2-configuration:
+          redirect-uris:
+            - https://*~{app-api/app-uri}/**
+    requires:
+      - name: app-api

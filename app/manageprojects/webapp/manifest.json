@@ -164,11 +164,14 @@
                     },
                     "DataField::manager_ID": {
                       "availability": "Hidden"
+                    },
+                    "DataFieldWithUrl::Open": {
+                      "width": "auto"
                     }
                   }
                 }
               },
-              "initialLoad": "Auto"
+              "initialLoad": "Enabled"
             }
           },
           "controlAggregation": "beginColumnPages",

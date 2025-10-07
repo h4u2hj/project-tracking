@@ -139,6 +139,29 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
+                  },
+                  "columns": {
+                    "DataField::name": {
+                      "width": "auto"
+                    },
+                    "InProgressProjButton": {
+                      "header": "In-progress projects",
+                      "width": "auto",
+                      "position": {
+                        "anchor": "DataField::name",
+                        "placement": "After"
+                      },
+                      "template": "managetype.ext.fragment.InProgressProjButton"
+                    },
+                    "FinishedProjButton": {
+                      "header": "Finished Projects",
+                      "width": "auto",
+                      "position": {
+                        "anchor": "InProgressProjButton",
+                        "placement": "After"
+                      },
+                      "template": "managetype.ext.fragment.FinishedProjButton"
+                    }
                   }
                 }
               },

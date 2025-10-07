@@ -1,4 +1,4 @@
-using szakdolgozat.srv.service.ProjectService as service from '../../../srv/services/ProjectService';
+using szakdolgozat.srv.service.CompletedProjectService as service from '../../../srv/services/CompletedProjectService';
 
 annotate service.Projects with {
     completedAt        @title: 'Completed On';

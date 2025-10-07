@@ -1,11 +1,17 @@
 {
   "welcomeFile": "/cp.portal",
+  "authenticationMethod": "route",
   "routes": [
     {
       "source": "^/(.*)$",
       "target": "$1",
       "destination": "srv-api",
       "csrfProtection": true
+    },
+    {
+      "source": "^(.*)",
+      "target": "$1",
+      "service": "html5-apps-repo-rt"
     }
   ]
 }

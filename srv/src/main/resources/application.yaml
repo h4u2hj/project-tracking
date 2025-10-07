@@ -3,8 +3,10 @@
 spring:
   config.activate.on-profile: default
   sql.init.platform: h2
+  sql.init.schema-locations: classpath:schema-h2.sql
 cds:
   data-source.auto-config.enabled: false
+  odata-v4.endpoint.path: "/odata/v4"
   security:
     authentication:
       normalize-provider-tenant: true
@@ -21,16 +23,12 @@ management:
   endpoint:
     health:
       show-components: always
-      probes:
-        enabled: true
+      probes.enabled: true
   endpoints:
     web:
       exposure:
         include: health
   health:
-    defaults:
-      enabled: false
-    ping:
-      enabled: true
-    db:
-      enabled: true
+    defaults.enabled: false
+    ping.enabled: true
+    db.enabled: true

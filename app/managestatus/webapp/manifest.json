@@ -25,6 +25,7 @@
         }
       }
     },
+    "ach": "INT-DLH-PH",
     "crossNavigation": {
       "inbounds": {
         "managestatuses-launch": {
@@ -42,8 +43,8 @@
   "sap.ui": {
     "technology": "UI5",
     "icons": {
-      "icon": "",
-      "favIcon": "",
+      "icon": "sap-icon://order-status",
+      "favIcon": "sap-icon://order-status",
       "phone": "",
       "phone@2": "",
       "tablet": "",
@@ -139,6 +140,28 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
+                  },
+                  "columns": {
+                    "ProjNumCol": {
+                      "key": "ProjNumCol",
+                      "header": "Number of Projects",
+                      "width": "auto",
+                      "properties": [
+                        "totalProjects"
+                      ],
+                      "position": {
+                        "anchor": "DataField::isFinalStatus",
+                        "placement": "After"
+                      },
+                      "template": "managestatus.ext.fragment.ProjNumCol",
+                      "availability": "Default"
+                    },
+                    "DataField::name": {
+                      "width": "auto"
+                    },
+                    "DataField::isFinalStatus": {
+                      "width": "auto"
+                    }
                   }
                 }
               },

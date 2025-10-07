@@ -1,0 +1,13 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+>
+    <Button
+        core:require="{ handler: 'managetype/ext/fragment/InProgressProjButton'}"
+        text="{= ${totalInProgressProjects} === '0' ? 'No in-progress Projects' : ${totalInProgressProjects} + ' in-progress projects'}"
+        press="handler.onPress"
+        enabled="{= ${totalInProgressProjects} === '0' ? false : true }"
+        icon="sap-icon://in-progress"
+        id="idInProgressProjButton"
+    />
+</core:FragmentDefinition>	
