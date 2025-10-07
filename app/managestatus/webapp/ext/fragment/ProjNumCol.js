@@ -9,7 +9,7 @@ sap.ui.define([
 
     return {
         /**
-         * Generated event handler.
+         * Project count button event handler
          *
          * @param oEvent the event object provided by the event provider.
          */
@@ -48,7 +48,7 @@ sap.ui.define([
                             }
                         });
                     }).catch(function (error) {
-                        console.error("Error getting CrossApplicationNavigation service");
+                        console.error("Error getting CrossApplicationNavigation service", error);
                     });
                 }
                 else {

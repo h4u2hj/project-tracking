@@ -9,8 +9,8 @@ using {szakdolgozat.db.models.core.Project} from './Project';
 
 @assert.unique: {nbunique: [name]}
 entity Status : cuid, managed {
-            name          : String(100) not null;
-            isFinalStatus : Boolean not null default false;
+            name          : String(100) not null @mandatory;
+            isFinalStatus : Boolean not null     @mandatory default false;
     virtual delete_ac     : Boolean;
     virtual totalProjects : Integer default 0;
             projects      : Composition of many Project

@@ -208,7 +208,7 @@ annotate service.Projects with @(
         }
     );
     modifiedAt         @(
-        UI.Hidden      : true,
+        UI.Hidden      : false,
         UI.HiddenFilter: false
     );
     modifiedBy         @(
