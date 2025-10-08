@@ -18,6 +18,33 @@ cds:
           roles:
             - ProjectManager
             - Administrator
+
+---
+spring:
+  config.activate.on-profile: test
+  sql.init.platform: h2
+  sql.init.schema-locations: classpath:schema-h2.sql
+cds:
+  data-source.auto-config.enabled: false
+  data-source:
+    csv:
+      paths:
+      - db/data
+      - db/data/**
+      - ../db/data/**
+  odata-v4.endpoint.path: "/odata/v4"
+  security:
+    authentication:
+      normalize-provider-tenant: true
+    mock:
+      enabled: true
+      users:
+        admin:
+          password: admin
+          roles:
+            - ProjectManager
+            - Administrator
+
 ---
 management:
   endpoint:

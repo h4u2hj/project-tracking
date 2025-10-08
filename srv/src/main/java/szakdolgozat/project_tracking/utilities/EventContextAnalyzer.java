@@ -1,5 +1,10 @@
 package szakdolgozat.project_tracking.utilities;
 
+import java.util.Map;
+import java.util.function.Function;
+
+import org.springframework.stereotype.Component;
+
 import com.sap.cds.ql.cqn.AnalysisResult;
 import com.sap.cds.ql.cqn.CqnAnalyzer;
 import com.sap.cds.ql.cqn.CqnStructuredTypeRef;
@@ -8,12 +13,6 @@ import com.sap.cds.services.EventContext;
 import com.sap.cds.services.cds.CdsDeleteEventContext;
 import com.sap.cds.services.cds.CdsReadEventContext;
 import com.sap.cds.services.draft.DraftCancelEventContext;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.StreamSupport;
 
 @Component
 public class EventContextAnalyzer {
@@ -59,21 +58,6 @@ public class EventContextAnalyzer {
     public <T extends EventContext> Map<String, Object> targetKeys(T eventContext, Function<T, ? extends CqnStructuredTypeRef> getCqnRef) {
         return analyze(eventContext, getCqnRef).targetKeys();
     }
-
-    /**
-     * For multi-level CQN queries this returns Maps with key-value pairs for each level of the query
-     * e.g. /SpecificationVersion(a=A,b=B)/propertyInstanceAssignments(a=A,c=C)/propertyInstance/attributePropertyRows would return [ {a:A, b:B}, {a:A, c:C}, {}, {} ]
-     *
-     * @param eventContext The event context to analyze
-     * @param getCqnRef    Lambda to create a CqnStructuredTypeRef from the context. This is a parameter because there's no common ancestor that would enforce the .getCqn() method that is present on EventContext implementations
-     * @param <T>          Type of the event context
-     * @return Segments corresponding to the levels of the CQN
-     */
-//    public <T extends EventContext> List<SegmentAnalysisResult> segments(T eventContext, Function<T, ? extends CqnStructuredTypeRef> getCqnRef) {
-//        return StreamSupport.stream(analyze(eventContext, getCqnRef).spliterator(), false)
-//                .map(SegmentAnalysisResult::fromResolvedSegment)
-//                .toList();
-//    }
 
     /**
      * Get the target values for a Delete event

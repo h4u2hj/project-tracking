@@ -4,6 +4,8 @@ using from './manageprojects/annotations/labels';
 
 using from './completedprojects/annotations/annotations';
 
+using from './completedprojects/annotations/labels';
+
 using from './managestatus/annotations/annotations';
 
 using from './managestatus/annotations/labels';
