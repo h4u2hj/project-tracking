@@ -7,14 +7,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import szakdolgozat.project_tracking.repository.StatusRepository;
 
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class StatusRepositoryIntegrationTest {
+class StatusRepoPersistenceIntegrationTest {
 
     private static final String ACTUAL_STATUS_ID = "65891071-3d68-42ff-981b-988f6a2bc33b";
 

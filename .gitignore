@@ -12,7 +12,7 @@ default-env.json
 .flattened-pom.xml
 .classpath
 .project
-.settings
+.settings.*
 
 **/node/
 **/node_modules/

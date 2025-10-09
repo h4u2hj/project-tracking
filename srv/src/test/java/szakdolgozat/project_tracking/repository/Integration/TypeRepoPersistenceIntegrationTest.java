@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class TypeRepositoryIntegrationTest {
+public class TypeRepoPersistenceIntegrationTest {
     private static final String ACTUAL_TYPE_ID = "9823010b-fd13-4ade-a14f-269ce0638c82";
 
     @Autowired
