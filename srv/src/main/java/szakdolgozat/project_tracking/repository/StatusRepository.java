@@ -1,15 +1,15 @@
 package szakdolgozat.project_tracking.repository;
 
 import cds.gen.szakdolgozat.db.models.core.Status_;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
+import cds.gen.szakdolgozat.srv.service.projectservice.Projects_;
 import com.sap.cds.Result;
 import com.sap.cds.ql.Select;
 import com.sap.cds.ql.cqn.CqnSelect;
 import com.sap.cds.services.persistence.PersistenceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import cds.gen.szakdolgozat.srv.service.projectservice.Projects_;
+import java.util.Map;
 
 @Component
 public class StatusRepository {
@@ -36,5 +36,12 @@ public class StatusRepository {
     public Result selectProjectsByStatusId(String statusId) {
         CqnSelect select = Select.from(Projects_.class).where(x -> x.status_ID().eq(statusId));
         return db.run(select);
+    }
+
+    public Boolean getFinalStatusByStatusId(String statusId) {
+        CqnSelect select = Select.from(Status_.class).columns("isFinalStatus").where(x -> x.ID().eq(statusId));
+        Result result = db.run(select);
+        String finalState = result.single(Map.class).get("isFinalStatus").toString();
+        return Boolean.parseBoolean(finalState);
     }
 }

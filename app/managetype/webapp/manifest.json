@@ -160,7 +160,8 @@
                         "anchor": "InProgressProjButton",
                         "placement": "After"
                       },
-                      "template": "managetype.ext.fragment.FinishedProjButton"
+                      "template": "managetype.ext.fragment.FinishedProjButton",
+                      "availability": "Default"
                     }
                   }
                 }

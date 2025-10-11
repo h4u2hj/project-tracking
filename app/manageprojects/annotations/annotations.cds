@@ -290,6 +290,7 @@ annotate service.Projects with @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
+            FieldControl : statusFieldAvailability,
             ValueListWithFixedValues: true,
             ValueList               : {
                 Label         : 'Project Status',

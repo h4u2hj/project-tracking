@@ -20,7 +20,7 @@ sap.ui.define([
             var projectCount = obj.totalFinishedProjects;
 
             if (projectCount === 0) {
-                MessageBox.alert("There is no project with this status");
+                MessageBox.alert("There is no project with this type");
                 return;
             }
 

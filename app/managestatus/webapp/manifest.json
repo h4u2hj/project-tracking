@@ -146,9 +146,6 @@
                       "key": "ProjNumCol",
                       "header": "Number of Projects",
                       "width": "auto",
-                      "properties": [
-                        "totalProjects"
-                      ],
                       "position": {
                         "anchor": "DataField::isFinalStatus",
                         "placement": "After"

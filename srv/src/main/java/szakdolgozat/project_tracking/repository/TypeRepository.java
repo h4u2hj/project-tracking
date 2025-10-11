@@ -20,8 +20,18 @@ public class TypeRepository {
         return db.run(select);
     }
 
-    public Result selectProjectsByTypeId(String id) {
-        CqnSelect select = Select.from(Projects_.class).where(x -> x.type_ID().eq(id));
+    public Result selectFinishedProjectsByTypeId(String id) {
+        CqnSelect select = Select.from(Projects_.class).where(x -> x.type_ID().eq(id).and(x.status().isFinalStatus().eq(true)));
+        return db.run(select);
+    }
+
+    public Result selectWorkingProjectsByTypeId(String id) {
+        CqnSelect select = Select.from(Projects_.class).where(x -> x.type_ID().eq(id).and(x.status().isFinalStatus().eq(false)));
+        return db.run(select);
+    }
+
+    public Result selectProjectsByTypeId(String typeId) {
+        CqnSelect select = Select.from(Projects_.class).where(x -> x.type_ID().eq(typeId));
         return db.run(select);
     }
 }

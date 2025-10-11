@@ -4,9 +4,9 @@
 >
     <Button
         core:require="{ handler: 'managetype/ext/fragment/InProgressProjButton'}"
-        text="{= ${totalInProgressProjects} === '0' ? 'No in-progress Projects' : ${totalInProgressProjects} + ' in-progress projects'}"
+        text="{= ${totalInProgressProjects} === '0' ? 'No in-progress projects' : (${totalInProgressProjects} === '1' ? '1 in-progress project' : ${totalInProgressProjects} + ' in-progress projects')}"
         press="handler.onPress"
-        enabled="{= ${totalInProgressProjects} === '0' ? false : true }"
+        enabled="{= ${totalInProgressProjects} === '0' ? 'false' : 'true' }"
         icon="sap-icon://in-progress"
         id="idInProgressProjButton"
     />

@@ -4,9 +4,9 @@
 >
     <Button
         core:require="{ handler: 'managestatus/ext/fragment/ProjNumCol'}"
-        text="{= ${totalProjects} === '0' ? 'No Projects' : ${totalProjects} + ' projects'}"
+        text="{= ${totalProjects} === '0' ? 'No Projects' : (${totalProjects} === '1' ? '1 project' : ${totalProjects} + ' projects')}"
         press="handler.onPress"
-        enabled="{= ${totalProjects} === '0' ? false : true }"
+        enabled="{= ${totalProjects} === '0' ? 'false' : 'true' }"
         icon="sap-icon://detail-view"
         id="idProjNumButton"
     />
