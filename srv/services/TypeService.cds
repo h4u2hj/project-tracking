@@ -16,7 +16,11 @@ service TypeService {
             'ProjectManager'
         ]
     }])
-    entity Type as projection on core.Type;
+    entity Type as
+        projection on core.Type
+        excluding {
+            projects
+        };
 
     @readonly
     entity User as projection on core.User;

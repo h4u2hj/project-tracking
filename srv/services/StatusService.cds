@@ -16,7 +16,11 @@ service StatusService {
             'ProjectManager'
         ]
     }])
-    entity Status as projection on core.Status;
+    entity Status as
+        projection on core.Status
+        excluding {
+            projects
+        };
 
     @readonly
     entity User   as projection on core.User;
