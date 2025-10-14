@@ -18,3 +18,8 @@ builder:
         archiveName: managetype
         additionalFiles:
           - xs-app.json
+    - name: webide-extension-task-updateManifestJson
+      afterTask: replaceVersion
+      configuration:
+        appFolder: webapp
+        destDir: dist

@@ -1,0 +1,14 @@
+specVersion: "2.5"
+metadata:
+  name: com.sap.internal.digitallab.doctracking.app.browsedocument
+type: application
+server:
+  customMiddleware:
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        services:
+          - urlPath: '/odata/v4/DocTypeService'
+            metadataPath: '../../srv/src/main/resources/edmx/odata/v4/com.sap.internal.digitallab.doctracking.service.DocTypeService.xml'
+            mockdataPath: './webapp/localService/data'
+            generateMockData: false
