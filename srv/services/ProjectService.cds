@@ -16,8 +16,8 @@ service ProjectService {
     entity Projects        as projection on core.Project
         actions {
             @(
-                cds.odata.bindingparameter.name: '_it',
-                Common.SideEffects             : {TargetEntities: ['_it']}
+                cds.odata.bindingparameter.name: 'in',
+                Common.SideEffects             : {TargetEntities: ['in']}
             )
             action changeStatus(newStatus: UUID, changeDate: Timestamp) returns Projects;
         };

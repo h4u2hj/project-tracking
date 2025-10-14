@@ -393,12 +393,13 @@ annotate service.ProjectSnapshot with @(
         DeleteRestrictions.Deletable : false
     }
 ) {
-    ID         @UI.Hidden: true;
-    status     @UI.Hidden: false  @UI.HiddenFilter: true;
-    project    @UI.Hidden: true   @UI.HiddenFilter: true;
-    createdBy  @UI.Hidden: false;
-    modifiedBy @UI.Hidden: true;
-    modifiedAt @UI.Hidden: true;
+    ID          @UI.Hidden: true;
+    status      @UI.Hidden: true  @UI.HiddenFilter: true;
+    project     @UI.Hidden: true   @UI.HiddenFilter: true;
+    statusName  @UI.Hidden: false  @UI.HiddenFilter: true  @Common.FieldControl: project.statusFieldAvailability;
+    createdBy   @UI.Hidden: false;
+    modifiedBy  @UI.Hidden: true;
+    modifiedAt  @UI.Hidden: true;
 };
 
 

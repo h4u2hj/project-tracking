@@ -7,7 +7,8 @@ service CompletedProjectService {
             @(restrict: [{
         grant: [
             'READ',
-            'DELETE'
+            'DELETE',
+            'changeStatus'
         ],
         to   : ['ProjectManager']
     }])

@@ -29,8 +29,8 @@ annotate service.User with {
 }
 
 annotate service.ProjectSnapshot with {
-    createdAt  @title: 'Created On';
-    createdBy  @title: 'Created By';
+    createdAt  @title: 'Status Changed On';
+    createdBy  @title: 'Changed By';
     status     @title: 'Status';
     statusName @title: 'Status';
 }

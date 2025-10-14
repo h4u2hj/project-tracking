@@ -1,9 +1,10 @@
 package szakdolgozat.project_tracking.handlers;
 
-import cds.gen.szakdolgozat.srv.service.projectservice.ProjectService_;
+
+import cds.gen.szakdolgozat.srv.service.completedprojectservice.CompletedProjectService_;
+import cds.gen.szakdolgozat.srv.service.completedprojectservice.Projects_;
 import cds.gen.szakdolgozat.srv.service.projectservice.Projects;
 import cds.gen.szakdolgozat.srv.service.projectservice.ProjectsChangeStatusContext;
-import cds.gen.szakdolgozat.srv.service.projectservice.Projects_;
 import com.sap.cds.ResultBuilder;
 import com.sap.cds.services.cds.CdsReadEventContext;
 import com.sap.cds.services.cds.CqnService;
@@ -20,15 +21,15 @@ import szakdolgozat.project_tracking.utilities.ProjectNotFoundException;
 import java.util.List;
 
 @Component
-@ServiceName(ProjectService_.CDS_NAME)
-public class ProjectServiceHandler implements EventHandler {
+@ServiceName(CompletedProjectService_.CDS_NAME)
+public class CompletedProjectServiceHandler implements EventHandler {
 
     private final ProjectManager projectManager;
     @Autowired
     Messages messages;
 
     @Autowired
-    public ProjectServiceHandler(ProjectManager projectManager) {
+    public CompletedProjectServiceHandler(ProjectManager projectManager) {
         this.projectManager = projectManager;
     }
 
