@@ -41,7 +41,7 @@ annotate service.Status with @(
     UI.HeaderInfo                            : {
         Title         : {
             $Type: 'UI.DataField',
-            Value: header
+            Value: name
         },
         TypeName      : 'Project Status',
         TypeNamePlural: 'Project Statuses'

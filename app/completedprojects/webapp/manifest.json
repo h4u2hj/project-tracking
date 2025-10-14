@@ -74,7 +74,10 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "completedprojects.i18n.i18n"
+          "bundleName": "completedprojects.i18n.i18n",
+          "supportedLocales": [
+            "en"
+          ]
         }
       },
       "": {
@@ -127,6 +130,7 @@
           "options": {
             "settings": {
               "contextPath": "/Projects",
+              "enhanceI18n": "i18n/i18n.properties",
               "variantManagement": "Page",
               "navigation": {
                 "Projects": {
@@ -178,7 +182,8 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Projects"
+              "contextPath": "/Projects",
+              "enhanceI18n": "i18n/i18n.properties"
             }
           },
           "controlAggregation": "midColumnPages",

@@ -127,6 +127,7 @@
           "options": {
             "settings": {
               "contextPath": "/Type",
+              "enhanceI18n": "i18n/i18n.properties",
               "variantManagement": "Page",
               "navigation": {
                 "Type": {
@@ -138,7 +139,8 @@
               "controlConfiguration": {
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "selectionMode": "Multi"
                   },
                   "columns": {
                     "DataField::name": {
@@ -179,7 +181,8 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Type"
+              "contextPath": "/Type",
+              "enhanceI18n": "i18n/i18n.properties"
             }
           },
           "controlAggregation": "midColumnPages",

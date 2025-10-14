@@ -154,7 +154,8 @@
                       "availability": "Default"
                     },
                     "DataField::name": {
-                      "width": "auto"
+                      "width": "auto",
+                      "availability": "Default"
                     },
                     "DataField::isFinalStatus": {
                       "width": "auto"
@@ -175,7 +176,8 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/Status"
+              "contextPath": "/Status",
+              "enhanceI18n": "i18n/i18n.properties"
             }
           },
           "controlAggregation": "midColumnPages",

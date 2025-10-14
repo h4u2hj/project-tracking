@@ -1,6 +1,6 @@
 specVersion: "2.5"
 metadata:
-  name: com.sap.internal.digitallab.doctracking.app.browsedocument
+  name: managetype
 type: application
 server:
   customMiddleware:
@@ -8,7 +8,7 @@ server:
       beforeMiddleware: csp
       configuration:
         services:
-          - urlPath: '/odata/v4/DocTypeService'
-            metadataPath: '../../srv/src/main/resources/edmx/odata/v4/com.sap.internal.digitallab.doctracking.service.DocTypeService.xml'
+          - urlPath: '/odata/v4/TypeService'
+            metadataPath: '../../srv/src/main/resources/edmx/odata/v4/szakdolgozat.srv.service.TypeService.xml'
             mockdataPath: './webapp/localService/data'
             generateMockData: false
