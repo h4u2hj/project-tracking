@@ -290,7 +290,7 @@ annotate service.Projects with @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
-            FieldControl : statusFieldAvailability,
+            FieldControl            : statusFieldAvailability,
             ValueListWithFixedValues: true,
             ValueList               : {
                 Label         : 'Project Status',
@@ -350,7 +350,10 @@ annotate service.Projects with @(
         UI.HiddenFilter: true,
     );
 } actions {
-    changeStatus(newStatus
+    changeStatus(
+    @(Common.SideEffects: {TargetEntities: ['/ProjectService.EntityContainer/Projects']})
+
+    newStatus
                                @Common: {
         FieldControl            : #Mandatory,
         ValueListWithFixedValues: true,
@@ -397,12 +400,13 @@ annotate service.ProjectSnapshot with @(
         DeleteRestrictions.Deletable : false
     }
 ) {
-    ID         @UI.Hidden: true;
-    status     @UI.Hidden: false  @UI.HiddenFilter: true;
-    project    @UI.Hidden: true   @UI.HiddenFilter: true;
-    createdBy  @UI.Hidden: false;
-    modifiedBy @UI.Hidden: true;
-    modifiedAt @UI.Hidden: true;
+    ID          @UI.Hidden: true;
+    status      @UI.Hidden: true   @UI.HiddenFilter: true;
+    project     @UI.Hidden: true   @UI.HiddenFilter: true;
+    statusName  @UI.Hidden: false  @UI.HiddenFilter: true  @Common.FieldControl: project.statusFieldAvailability;
+    createdBy   @UI.Hidden: false;
+    modifiedBy  @UI.Hidden: true;
+    modifiedAt  @UI.Hidden: true;
 };
 
 
