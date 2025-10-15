@@ -1,11 +1,35 @@
 sap.ui.define([
-    "sap/ushell/Container",
-    "sap/m/MessageToast",
+    "sap/base/Log",
     "sap/m/MessageBox"
-], function (Container,
-    MessageToast,
-    MessageBox) {
+], function (Log, MessageBox) {
     'use strict';
+
+    var MODULE_ID = "managetype.ext.fragment.FinishedProjButton";
+
+    var getCrossAppNavigation = function () {
+        if (sap.ushell && sap.ushell.Container && sap.ushell.Container.getServiceAsync) {
+            return sap.ushell.Container.getServiceAsync("CrossApplicationNavigation");
+        }
+
+        return new Promise(function (resolve, reject) {
+            sap.ui.require(
+                ["sap/ushell/Container"],
+                function (Container) {
+                    if (Container && Container.getServiceAsync) {
+                        Container.getServiceAsync("CrossApplicationNavigation").then(resolve, reject);
+                    } else {
+                        reject(new Error("CrossApplicationNavigation service not available"));
+                    }
+                },
+                reject
+            );
+        });
+    };
+
+    var showNavigationError = function (error) {
+        Log.error("Failed to trigger cross-app navigation", error, MODULE_ID);
+        MessageBox.error("We could not open the related project list. Please try again later.");
+    };
 
     return {
         /**
@@ -15,41 +39,41 @@ sap.ui.define([
          */
         onPress: function (oEvent) {
             var context = oEvent.getSource().getBindingContext();
-            var obj = context.getObject();
+            if (!context) {
+                return;
+            }
+
+            var obj = context.getObject() || {};
             var sID = obj.ID;
             var projectCount = obj.totalFinishedProjects;
 
-            if (projectCount === 0) {
+            if (!sID) {
+                Log.warning("Type ID missing from binding context", null, MODULE_ID);
+                return;
+            }
+
+            if (!projectCount) {
                 MessageBox.alert("There is no project with this type");
                 return;
             }
 
-            var crossAppNavigatonPromise = Container.getServiceAsync("CrossApplicationNavigation").then(function (oService) {
-
-                return oService.hrefForExternalAsync({
-                    target: { semanticObject: "completedprojects", action: "launch" },
-                    params: { "status.isFinalStatus": "true", type_ID: sID }
-                });
-
-            });
-            crossAppNavigatonPromise.then(function (sUrl) {
-                if (sUrl) {
-                    Container.getServiceAsync("CrossApplicationNavigation").then(function (oCrossAppNavigator) {
-                        oCrossAppNavigator.toExternal({
+            getCrossAppNavigation()
+                .then(function (oCrossAppNav) {
+                    return oCrossAppNav.hrefForExternalAsync({
+                        target: { semanticObject: "completedprojects", action: "launch" },
+                        params: { "status.isFinalStatus": "true", type_ID: sID }
+                    }).then(function (sUrl) {
+                        if (!sUrl) {
+                            throw new Error("Cross-app hash could not be determined");
+                        }
+                        oCrossAppNav.toExternal({
                             target: {
                                 shellHash: sUrl
                             }
                         });
-                    }).catch(function (error) {
-                        console.error("Error getting CrossApplicationNavigation service", error);
                     });
-                }
-                else {
-                    console.error("Unable to generate url");
-                }
-            }).catch(function (error) {
-                console.error("Error: ", error);
-            });
+                })
+                .catch(showNavigationError);
         }
     };
 });

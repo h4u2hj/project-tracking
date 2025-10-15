@@ -4,9 +4,8 @@
 >
     <Button
         core:require="{ handler: 'managetype/ext/fragment/FinishedProjButton'}"
-        text="{= ${totalFinishedProjects} === '0' ? 'No finished projects' : (${totalFinishedProjects} === '1' ? '1 finished project' : ${totalFinishedProjects} + ' finished projects')}"
+        text="{= (Number(${totalFinishedProjects}) === 0) ? 'No finished projects' : (Number(${totalFinishedProjects}) === 1 ? '1 finished project' : Number(${totalFinishedProjects}) + ' finished projects')}"
         press="handler.onPress"
-        enabled="{= ${totalFinishedProjects} === '0' ? false : true }"
         icon="sap-icon://sys-enter"
         id="idFinishedProjButton"
     />
