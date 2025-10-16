@@ -41,7 +41,7 @@ annotate service.Status with @(
     UI.HeaderInfo                            : {
         Title         : {
             $Type: 'UI.DataField',
-            Value: name
+            Value: header
         },
         TypeName      : 'Project Status',
         TypeNamePlural: 'Project Statuses'
@@ -179,7 +179,7 @@ annotate service.Status with @(
         UI.HiddenFilter: false
     );
     header        @(
-        UI.Hidden      : true,
+        UI.Hidden      : false,
         UI.HiddenFilter: true
     );
 }

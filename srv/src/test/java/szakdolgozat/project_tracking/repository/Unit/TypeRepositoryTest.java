@@ -1,7 +1,9 @@
 package szakdolgozat.project_tracking.repository.Unit;
 
 import cds.gen.szakdolgozat.db.models.core.Type;
+import cds.gen.szakdolgozat.srv.service.projectservice.Projects_;
 import com.sap.cds.Result;
+import com.sap.cds.ql.Select;
 import com.sap.cds.ql.cqn.CqnSelect;
 import com.sap.cds.services.persistence.PersistenceService;
 import org.junit.jupiter.api.Test;
@@ -75,6 +77,117 @@ class TypeRepositoryTest {
 
         assertNotNull(actualResult);
         assertNull(actualResult.single());
+        verify(db, times(1)).run(any(CqnSelect.class));
+    }
+
+    /**
+     * Ensures the finished project query filters by type and final status.
+     */
+    @Test
+    void testSelectFinishedProjectsByTypeId_CallsDbRunWithCorrectSelect() {
+        String typeId = "type-finished";
+        Result mockResult = mock(Result.class);
+        when(db.run(any(CqnSelect.class))).thenReturn(mockResult);
+
+        Result result = typeRepository.selectFinishedProjectsByTypeId(typeId);
+
+        ArgumentCaptor<CqnSelect> captor = ArgumentCaptor.forClass(CqnSelect.class);
+        verify(db).run(captor.capture());
+        CqnSelect select = captor.getValue();
+        CqnSelect expected = Select.from(Projects_.class)
+                .where(x -> x.type_ID().eq(typeId).and(x.status().isFinalStatus().eq(true)));
+
+        assertNotNull(select);
+        assertSame(mockResult, result);
+        assertEquals(expected.toString(), select.toString());
+    }
+
+    /**
+     * Ensures the finished project lookup returns the persistence result untouched.
+     */
+    @Test
+    void testSelectFinishedProjectsByTypeId_ReturnsResultFromDb() {
+        String typeId = "type-finished-2";
+        Result expectedResult = mock(Result.class);
+        when(db.run(any(CqnSelect.class))).thenReturn(expectedResult);
+
+        Result actualResult = typeRepository.selectFinishedProjectsByTypeId(typeId);
+
+        assertSame(expectedResult, actualResult);
+        verify(db, times(1)).run(any(CqnSelect.class));
+    }
+
+    /**
+     * Ensures the in-flight project query filters by type and non-final status.
+     */
+    @Test
+    void testSelectWorkingProjectsByTypeId_CallsDbRunWithCorrectSelect() {
+        String typeId = "type-working";
+        Result mockResult = mock(Result.class);
+        when(db.run(any(CqnSelect.class))).thenReturn(mockResult);
+
+        Result result = typeRepository.selectWorkingProjectsByTypeId(typeId);
+
+        ArgumentCaptor<CqnSelect> captor = ArgumentCaptor.forClass(CqnSelect.class);
+        verify(db).run(captor.capture());
+        CqnSelect select = captor.getValue();
+        CqnSelect expected = Select.from(Projects_.class)
+                .where(x -> x.type_ID().eq(typeId).and(x.status().isFinalStatus().eq(false)));
+
+        assertNotNull(select);
+        assertSame(mockResult, result);
+        assertEquals(expected.toString(), select.toString());
+    }
+
+    /**
+     * Ensures the in-flight project lookup returns the persistence result untouched.
+     */
+    @Test
+    void testSelectWorkingProjectsByTypeId_ReturnsResultFromDb() {
+        String typeId = "type-working-2";
+        Result expectedResult = mock(Result.class);
+        when(db.run(any(CqnSelect.class))).thenReturn(expectedResult);
+
+        Result actualResult = typeRepository.selectWorkingProjectsByTypeId(typeId);
+
+        assertSame(expectedResult, actualResult);
+        verify(db, times(1)).run(any(CqnSelect.class));
+    }
+
+    /**
+     * Ensures the generic project query only filters by the referenced type.
+     */
+    @Test
+    void testSelectProjectsByTypeId_CallsDbRunWithCorrectSelect() {
+        String typeId = "type-project";
+        Result mockResult = mock(Result.class);
+        when(db.run(any(CqnSelect.class))).thenReturn(mockResult);
+
+        Result result = typeRepository.selectProjectsByTypeId(typeId);
+
+        ArgumentCaptor<CqnSelect> captor = ArgumentCaptor.forClass(CqnSelect.class);
+        verify(db).run(captor.capture());
+        CqnSelect select = captor.getValue();
+        CqnSelect expected = Select.from(Projects_.class)
+                .where(x -> x.type_ID().eq(typeId));
+
+        assertNotNull(select);
+        assertSame(mockResult, result);
+        assertEquals(expected.toString(), select.toString());
+    }
+
+    /**
+     * Ensures the generic project lookup returns the persistence result untouched.
+     */
+    @Test
+    void testSelectProjectsByTypeId_ReturnsResultFromDb() {
+        String typeId = "type-project-2";
+        Result expectedResult = mock(Result.class);
+        when(db.run(any(CqnSelect.class))).thenReturn(expectedResult);
+
+        Result actualResult = typeRepository.selectProjectsByTypeId(typeId);
+
+        assertSame(expectedResult, actualResult);
         verify(db, times(1)).run(any(CqnSelect.class));
     }
 }

@@ -1,6 +1,8 @@
 package szakdolgozat.project_tracking.repository.Unit;
 
+import cds.gen.szakdolgozat.db.models.core.Project;
 import cds.gen.szakdolgozat.db.models.core.Status;
+import cds.gen.szakdolgozat.srv.service.projectservice.Projects_;
 import com.sap.cds.Result;
 import com.sap.cds.ql.cqn.CqnSelect;
 import com.sap.cds.services.persistence.PersistenceService;
@@ -13,7 +15,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import szakdolgozat.project_tracking.repository.StatusRepository;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -84,5 +89,74 @@ class StatusRepositoryTest {
         assertNotNull(actualResult);
         assertNull(actualResult.single());
         verify(db, times(1)).run(any(CqnSelect.class));
+    }
+
+    /**
+     * Checks that project selection delegates to the persistence service with a projects query.
+     */
+    @Test
+    void testSelectProjectsByStatusId_CallsDbRunWithProjectsSelect() {
+        String statusId = "status-project";
+        Result mockResult = mock(Result.class);
+        when(db.run(any(CqnSelect.class))).thenReturn(mockResult);
+
+        Result actualResult = statusRepository.selectProjectsByStatusId(statusId);
+
+        ArgumentCaptor<CqnSelect> captor = ArgumentCaptor.forClass(CqnSelect.class);
+        verify(db).run(captor.capture());
+        CqnSelect select = captor.getValue();
+
+        assertNotNull(select);
+        assertTrue(select.ref().toString().contains(Project.class.getSimpleName()));
+        assertSame(mockResult, actualResult);
+    }
+
+    /**
+     * Ensures selectProjectsByStatusId returns the persistence layer Result.
+     */
+    @Test
+    void testSelectProjectsByStatusId_ReturnsResultFromDb() {
+        String statusId = "status-project-return";
+        Result expectedResult = mock(Result.class);
+        when(db.run(any(CqnSelect.class))).thenReturn(expectedResult);
+
+        Result actualResult = statusRepository.selectProjectsByStatusId(statusId);
+
+        assertSame(expectedResult, actualResult);
+        verify(db, times(1)).run(any(CqnSelect.class));
+    }
+
+    /**
+     * Validates final status retrieval parses the SAP CAP boolean flag correctly.
+     */
+    @Test
+    void testGetFinalStatusByStatusId_ReturnsTrueWhenFlagSet() {
+        String statusId = "final-status";
+        Result mockResult = mock(Result.class);
+        when(mockResult.single(Map.class)).thenReturn(Map.of("isFinalStatus", "true"));
+        when(db.run(any(CqnSelect.class))).thenReturn(mockResult);
+
+        Boolean finalStatus = statusRepository.getFinalStatusByStatusId(statusId);
+
+        assertTrue(finalStatus);
+        verify(db, times(1)).run(any(CqnSelect.class));
+        verify(mockResult, times(1)).single(Map.class);
+    }
+
+    /**
+     * Ensures false flags from the persistence service are translated to a boolean false.
+     */
+    @Test
+    void testGetFinalStatusByStatusId_ReturnsFalseWhenFlagUnset() {
+        String statusId = "non-final-status";
+        Result mockResult = mock(Result.class);
+        when(mockResult.single(Map.class)).thenReturn(Map.of("isFinalStatus", "false"));
+        when(db.run(any(CqnSelect.class))).thenReturn(mockResult);
+
+        Boolean finalStatus = statusRepository.getFinalStatusByStatusId(statusId);
+
+        assertFalse(finalStatus);
+        verify(db, times(1)).run(any(CqnSelect.class));
+        verify(mockResult, times(1)).single(Map.class);
     }
 }

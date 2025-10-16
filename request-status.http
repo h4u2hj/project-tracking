@@ -19,78 +19,24 @@ Authorization: Basic {{username}}:{{password}}
   "ID": "22790118-2b44-43a7-aa95-acbb6dac6095",
   "name": "name-22790118",
   "isFinalStatus": true,
-  "projects": [
-    {
-      "ID": "6999190d-eb4e-43a9-8d99-af76728ebc6e",
-      "name": "name-6999190",
-      "description": "description-6999190",
-      "link": "link-6999190",
-      "startDate": "2023-05-17",
-      "type_ID": "982297e8-bcab-45b7-bf22-50ed1225853b",
-      "manager": {
-        "ID": "68381906-5ad8-4537-b0c7-809383a3667d"
-      },
-      "lastStatusChangeAt": "2008-02-27T23:00:00.000Z",
-      "completedAt": "2007-04-22T23:00:00.000Z",
-      "createdAt": "2009-03-18T23:00:00.000Z",
-      "createdBy": "createdBy.460ly@example.net",
-      "modifiedAt": "2008-09-25T23:00:00.000Z",
-      "modifiedBy": "modifiedBy.460ly@example.net"
-    }
-  ],
   "createdAt": "2011-01-24T23:00:00.000Z",
   "createdBy": "createdBy.dkgyu@example.org",
   "modifiedAt": "2008-09-02T23:00:00.000Z",
-  "modifiedBy": "modifiedBy.dkgyu@example.net"
+  "modifiedBy": "modifiedBy.dkgyu@example.net",
+  "IsActiveEntity": true
 }
 
 
 ### Status
 # @name Status_PATCH
-PATCH {{server}}/odata/v4/StatusService/Status/22790118-2b44-43a7-aa95-acbb6dac6095
+PATCH {{server}}/odata/v4/StatusService/Status(ID=22790118-2b44-43a7-aa95-acbb6dac6095,IsActiveEntity=true)
 Content-Type: application/json
 Authorization: Basic {{username}}:{{password}}
 
 {
   "ID": "22790118-2b44-43a7-aa95-acbb6dac6095",
-  "name": "name-22790118",
+  "name": "newname",
   "isFinalStatus": true,
-  "projects": [
-    {
-      "ID": "6999190d-eb4e-43a9-8d99-af76728ebc6e",
-      "name": "name-6999190",
-      "description": "description-6999190",
-      "link": "link-6999190",
-      "startDate": "2023-05-17",
-      "type_ID": "982297e8-bcab-45b7-bf22-50ed1225853b",
-      "manager": {
-        "ID": "68381906-5ad8-4537-b0c7-809383a3667d"
-      },
-      "lastStatusChangeAt": "2008-02-27T23:00:00.000Z",
-      "completedAt": "2007-04-22T23:00:00.000Z",
-      "createdAt": "2009-03-18T23:00:00.000Z",
-      "createdBy": "createdBy.460ly@example.net",
-      "modifiedAt": "2008-09-25T23:00:00.000Z",
-      "modifiedBy": "modifiedBy.460ly@example.net"
-    },
-    {
-      "ID": "69991919-56d5-4ef5-952f-666445220f39",
-      "name": "name-6999191",
-      "description": "description-6999191",
-      "link": "link-6999191",
-      "startDate": "2000-07-09",
-      "manager": {
-        "ID": "68381906-5ad8-4537-b0c7-809383a3667d"
-      },
-      "lastStatusChangeAt": "2002-05-11T23:00:00.000Z",
-      "completedAt": "2019-05-02T23:00:00.000Z",
-      "type_ID": "982297e8-bcab-45b7-bf22-50ed1225853b",
-      "createdAt": "2001-10-19T23:00:00.000Z",
-      "createdBy": "createdBy.460lz@example.org",
-      "modifiedAt": "2010-12-10T23:00:00.000Z",
-      "modifiedBy": "modifiedBy.460lz@example.net"
-    }
-  ],
   "createdAt": "2011-01-24T23:00:00.000Z",
   "createdBy": "createdBy.dkgyu@example.org",
   "modifiedAt": "2008-09-02T23:00:00.000Z",
@@ -100,7 +46,7 @@ Authorization: Basic {{username}}:{{password}}
 
 ### Status
 # @name Status_DELETE
-DELETE {{server}}/odata/v4/StatusService/Status/22790118-2b44-43a7-aa95-acbb6dac6095
+DELETE {{server}}/odata/v4/StatusService/Status(ID=22790118-2b44-43a7-aa95-acbb6dac6095,IsActiveEntity=true)
 Content-Type: application/json
 Authorization: Basic {{username}}:{{password}}
 

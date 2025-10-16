@@ -16,89 +16,35 @@ Content-Type: application/json
 Authorization: Basic {{username}}:{{password}}
 
 {
-  "ID": "16638241-34c5-4586-8b0b-c62080bb7743",
-  "name": "name-16638241",
-  "projects": [
-    {
-      "ID": "15532398-59fb-4a65-abee-dd5f21896c72",
-      "name": "name-15532398",
-      "description": "description-15532398",
-      "link": "link-15532398",
-      "startDate": "2014-07-28",
-      "status_ID": "65891038-ebb5-4ac4-a16f-22967f58a6ba",
-      "manager": {
-        "ID": "17631011-870c-4bb4-a458-4f55c5ad85b6"
-      },
-      "lastStatusChangeAt": "2004-07-29T23:00:00.000Z",
-      "completedAt": "2009-10-24T23:00:00.000Z",
-      "createdAt": "2013-03-18T23:00:00.000Z",
-      "createdBy": "createdBy.98wvi@example.net",
-      "modifiedAt": "2010-08-27T23:00:00.000Z",
-      "modifiedBy": "modifiedBy.98wvi@example.net"
-    }
-  ],
-  "createdAt": "2005-01-22T23:00:00.000Z",
-  "createdBy": "createdBy.9wm5d@example.com",
-  "modifiedAt": "2017-06-17T23:00:00.000Z",
-  "modifiedBy": "modifiedBy.9wm5d@example.org"
+  "ID": "f3c2701d-b214-4eec-bb0e-1f4d8b41a779",
+  "name": "Consulting",
+  "createdAt": "2023-01-01T00:00:00.000Z",
+  "createdBy": "createdBy.type@example.org",
+  "modifiedAt": "2023-01-02T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.type@example.org",
+  "IsActiveEntity": true
 }
 
 
 ### Type
 # @name Type_PATCH
-PATCH {{server}}/odata/v4/TypeService/Type/16638241-34c5-4586-8b0b-c62080bb7743
+PATCH {{server}}/odata/v4/TypeService/Type(ID=f3c2701d-b214-4eec-bb0e-1f4d8b41a779,IsActiveEntity=true)
 Content-Type: application/json
 Authorization: Basic {{username}}:{{password}}
 
 {
-  "ID": "16638241-34c5-4586-8b0b-c62080bb7743",
-  "name": "name-16638241",
-  "projects": [
-    {
-      "ID": "15532398-59fb-4a65-abee-dd5f21896c72",
-      "name": "name-15532398",
-      "description": "description-15532398",
-      "link": "link-15532398",
-      "startDate": "2014-07-28",
-      "status_ID": "65891038-ebb5-4ac4-a16f-22967f58a6ba",
-      "manager": {
-        "ID": "17631011-870c-4bb4-a458-4f55c5ad85b6"
-      },
-      "lastStatusChangeAt": "2004-07-29T23:00:00.000Z",
-      "completedAt": "2009-10-24T23:00:00.000Z",
-      "createdAt": "2013-03-18T23:00:00.000Z",
-      "createdBy": "createdBy.98wvi@example.net",
-      "modifiedAt": "2010-08-27T23:00:00.000Z",
-      "modifiedBy": "modifiedBy.98wvi@example.net"
-    },
-    {
-      "ID": "15532399-12fa-4706-b6cf-a778b1d76a54",
-      "name": "name-15532399",
-      "description": "description-15532399",
-      "link": "link-15532399",
-      "startDate": "2020-06-23",
-      "status_ID": "65891038-ebb5-4ac4-a16f-22967f58a6ba",
-      "manager": {
-        "ID": "17631011-870c-4bb4-a458-4f55c5ad85b6"
-      },
-      "lastStatusChangeAt": "2015-12-27T23:00:00.000Z",
-      "completedAt": "2006-05-17T23:00:00.000Z",
-      "createdAt": "2016-11-02T23:00:00.000Z",
-      "createdBy": "createdBy.98wvj@example.net",
-      "modifiedAt": "2007-10-21T23:00:00.000Z",
-      "modifiedBy": "modifiedBy.98wvj@example.com"
-    }
-  ],
-  "createdAt": "2005-01-22T23:00:00.000Z",
-  "createdBy": "createdBy.9wm5d@example.com",
-  "modifiedAt": "2017-06-17T23:00:00.000Z",
-  "modifiedBy": "modifiedBy.9wm5d@example.org"
+  "ID": "f3c2701d-b214-4eec-bb0e-1f4d8b41a779",
+  "name": "Updated Consulting",
+  "createdAt": "2023-01-01T00:00:00.000Z",
+  "createdBy": "createdBy.type@example.org",
+  "modifiedAt": "2023-01-03T00:00:00.000Z",
+  "modifiedBy": "modifiedBy.type@example.org"
 }
 
 
 ### Type
 # @name Type_DELETE
-DELETE {{server}}/odata/v4/TypeService/Type/16638241-34c5-4586-8b0b-c62080bb7743
+DELETE {{server}}/odata/v4/TypeService/Type(ID=f3c2701d-b214-4eec-bb0e-1f4d8b41a779,IsActiveEntity=true)
 Content-Type: application/json
 Authorization: Basic {{username}}:{{password}}
 
