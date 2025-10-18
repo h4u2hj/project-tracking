@@ -1,8 +1,20 @@
 package szakdolgozat.project_tracking.service.Integration;
 
-import cds.gen.szakdolgozat.srv.service.statusservice.Status;
-import lombok.SneakyThrows;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.Instant;
+import java.util.UUID;
+
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,21 +22,21 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.Instant;
-import java.util.UUID;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import cds.gen.szakdolgozat.srv.service.statusservice.Status;
+import lombok.SneakyThrows;
 
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StatusServiceIntegrationTest {
 
     private static final Instant CREATED_AT = Instant.parse("2023-01-01T00:00:00Z");
     private static final Instant MODIFIED_AT = Instant.parse("2023-01-02T00:00:00Z");
+
+    private static String createdStatusId;
+    private static String createdStatusName;
+
     @Autowired
     MockMvc mockMvc;
 
@@ -33,7 +45,8 @@ public class StatusServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void types_are_exposed_via_odata() {
+    @Order(1)
+    void statusAreExposedViaOdata() {
         mockMvc.perform(get("/odata/v4/StatusService/Status") // call the OData endpoint
                 .with(httpBasic("admin", "admin"))) // use mock credentials
                 .andExpect(status().isOk()) // HTTP 200
@@ -46,7 +59,8 @@ public class StatusServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void status_can_be_created_via_odata() {
+    @Order(2)
+    void statusCanBeCreatedViaOdata() {
         String statusId = UUID.randomUUID().toString();
         String statusName = "Created Status";
 
@@ -54,8 +68,30 @@ public class StatusServiceIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(buildStatusJson(statusId, statusName, true))
                 .with(httpBasic("admin", "admin")))
-                .andExpect(status().isCreated()).andExpect(jsonPath("$.ID").value(statusId))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.ID").value(statusId))
                 .andExpect(jsonPath("$.name").value(statusName));
+
+        createdStatusId = statusId;
+        createdStatusName = statusName;
+    }
+
+    /**
+     * Confirms the created Status can be fetched directly via GET.
+     */
+    @SneakyThrows
+    @Test
+    @Order(3)
+    void statusCreatedCanBeRetrievedViaOdata() {
+        if (createdStatusId == null) {
+            throw new IllegalStateException("Status creation test must run before retrieval test.");
+        }
+
+        mockMvc.perform(get(statusEntityUrl(createdStatusId))
+                .with(httpBasic("admin", "admin")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.ID").value(createdStatusId))
+                .andExpect(jsonPath("$.name").value(createdStatusName));
     }
 
     /**
@@ -64,9 +100,10 @@ public class StatusServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void status_can_be_updated_via_odata() {
+    @Order(4)
+    void statusCanBeUpdatedViaOdata() {
         String statusId = UUID.randomUUID().toString();
-        createStatusSuccess(statusId, "Initial Status", false);
+        createStatus(statusId, "Initial Status", false);
 
         String updatedName = "Updated Status";
 
@@ -90,9 +127,10 @@ public class StatusServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void status_can_be_deleted_via_odata() {
+    @Order(5)
+    void statusCanBeDeletedViaOdata() {
         String statusId = UUID.randomUUID().toString();
-        createStatusSuccess(statusId, "Disposable Status", false);
+        createStatus(statusId, "Disposable Status", false);
 
         mockMvc.perform(delete(statusEntityUrl(statusId))
                 .with(httpBasic("admin", "admin")))
@@ -108,7 +146,8 @@ public class StatusServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void status_fetch_requires_valid_credentials() {
+    @Order(6)
+    void statusFetchRequiresValidCredentials() {
         mockMvc.perform(get("/odata/v4/StatusService/Status")
                 .with(httpBasic("not-admin", "wrong-password")))
                 .andExpect(status().isUnauthorized());
@@ -120,7 +159,7 @@ public class StatusServiceIntegrationTest {
      *
      */
     @SneakyThrows
-    private void createStatusSuccess(String statusId, String name, boolean finalStatus) {
+    private void createStatus(String statusId, String name, boolean finalStatus) {
         mockMvc.perform(post("/odata/v4/StatusService/Status")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(buildStatusJson(statusId, name, finalStatus))

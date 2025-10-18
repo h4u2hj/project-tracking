@@ -1,12 +1,8 @@
 package szakdolgozat.project_tracking.service;
 
-import cds.gen.szakdolgozat.srv.service.statusservice.Status;
-import cds.gen.szakdolgozat.srv.service.statusservice.StatusService;
-import cds.gen.szakdolgozat.srv.service.statusservice.StatusService_;
-import cds.gen.szakdolgozat.srv.service.statusservice.Status_;
-import com.sap.cds.Result;
-import com.sap.cds.ql.Select;
-import com.sap.cds.services.cds.CqnService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,8 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import com.sap.cds.Result;
+import com.sap.cds.ql.Select;
+
+import cds.gen.szakdolgozat.srv.service.statusservice.Status;
+import cds.gen.szakdolgozat.srv.service.statusservice.StatusService;
+import cds.gen.szakdolgozat.srv.service.statusservice.StatusService_;
+import cds.gen.szakdolgozat.srv.service.statusservice.Status_;
 
 @SpringBootTest
 @ActiveProfiles("test")

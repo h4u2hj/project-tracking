@@ -1,8 +1,20 @@
 package szakdolgozat.project_tracking.service.Integration;
 
-import cds.gen.szakdolgozat.srv.service.typeservice.Type;
-import lombok.SneakyThrows;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.Instant;
+import java.util.UUID;
+
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,21 +22,20 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.time.Instant;
-import java.util.UUID;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import cds.gen.szakdolgozat.srv.service.typeservice.Type;
+import lombok.SneakyThrows;
 
 @SpringBootTest
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TypeServiceIntegrationTest {
 
     private static final Instant CREATED_AT = Instant.parse("2023-01-01T00:00:00Z");
     private static final Instant MODIFIED_AT = Instant.parse("2023-01-02T00:00:00Z");
+
+    private static String createdTypeId;
+    private static String createdTypeName;
 
     @Autowired
     MockMvc mockMvc;
@@ -34,7 +45,8 @@ public class TypeServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void types_are_exposed_via_odata() {
+    @Order(1)
+    void typesAreExposedViaOdata() {
         mockMvc.perform(get("/odata/v4/TypeService/Type")
                 .with(httpBasic("admin", "admin")))
                 .andExpect(status().isOk())
@@ -47,7 +59,8 @@ public class TypeServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void type_can_be_created_via_odata() {
+    @Order(2)
+    void typeCanBeCreatedViaOdata() {
         String typeId = UUID.randomUUID().toString();
         String typeName = "Created Type";
 
@@ -58,6 +71,27 @@ public class TypeServiceIntegrationTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.ID").value(typeId))
                 .andExpect(jsonPath("$.name").value(typeName));
+
+        createdTypeId = typeId;
+        createdTypeName = typeName;
+    }
+
+    /**
+     * Confirms the created Type can be retrieved directly after creation.
+     */
+    @SneakyThrows
+    @Test
+    @Order(3)
+    void typeCreatedCanBeRetrievedViaOdata() {
+        if (createdTypeId == null) {
+            throw new IllegalStateException("Type creation test must run before retrieval test.");
+        }
+
+        mockMvc.perform(get(typeEntityUrl(createdTypeId))
+                .with(httpBasic("admin", "admin")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.ID").value(createdTypeId))
+                .andExpect(jsonPath("$.name").value(createdTypeName));
     }
 
     /**
@@ -66,10 +100,11 @@ public class TypeServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void type_can_be_updated_via_odata() {
+    @Order(4)
+    void typeCanBeUpdatedViaOdata() {
         String typeId = UUID.randomUUID().toString();
         String initialName = "Initial Type";
-        createTypeSuccess(typeId, initialName);
+        createType(typeId, initialName);
 
         String updatedName = "Updated Type";
         String updatedHeader = "Project Type - Updated Type";
@@ -94,9 +129,10 @@ public class TypeServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void type_can_be_deleted_via_odata() {
+    @Order(5)
+    void typeCanBeDeletedViaOdata() {
         String typeId = UUID.randomUUID().toString();
-        createTypeSuccess(typeId, "Disposable Type");
+        createType(typeId, "Disposable Type");
 
         mockMvc.perform(delete(typeEntityUrl(typeId))
                 .with(httpBasic("admin", "admin")))
@@ -112,7 +148,8 @@ public class TypeServiceIntegrationTest {
      */
     @SneakyThrows
     @Test
-    void type_fetch_requires_valid_credentials() {
+    @Order(6)
+    void typeFetchRequiresValidCredentials() {
         mockMvc.perform(get("/odata/v4/TypeService/Type")
                 .with(httpBasic("not-admin", "wrong-password")))
                 .andExpect(status().isUnauthorized());
@@ -125,7 +162,7 @@ public class TypeServiceIntegrationTest {
      * @param typeName the human readable name of the type
      */
     @SneakyThrows
-    private void createTypeSuccess(String typeId, String typeName) {
+    private void createType(String typeId, String typeName) {
         String header = "Project Type - " + typeName;
         mockMvc.perform(post("/odata/v4/TypeService/Type")
                 .contentType(MediaType.APPLICATION_JSON)

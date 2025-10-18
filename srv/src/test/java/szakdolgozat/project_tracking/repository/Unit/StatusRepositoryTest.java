@@ -1,11 +1,19 @@
 package szakdolgozat.project_tracking.repository.Unit;
 
-import cds.gen.szakdolgozat.db.models.core.Project;
-import cds.gen.szakdolgozat.db.models.core.Status;
-import cds.gen.szakdolgozat.srv.service.projectservice.Projects_;
-import com.sap.cds.Result;
-import com.sap.cds.ql.cqn.CqnSelect;
-import com.sap.cds.services.persistence.PersistenceService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -13,21 +21,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.sap.cds.Result;
+import com.sap.cds.ql.cqn.CqnSelect;
+import com.sap.cds.services.persistence.PersistenceService;
+
+import cds.gen.szakdolgozat.db.models.core.Project;
+import cds.gen.szakdolgozat.db.models.core.Status;
 import szakdolgozat.project_tracking.repository.StatusRepository;
-
-import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
