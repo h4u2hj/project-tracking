@@ -1,10 +1,10 @@
 package szakdolgozat.project_tracking.handlers;
 
+import java.util.List;
 
-import cds.gen.szakdolgozat.srv.service.completedprojectservice.CompletedProjectService_;
-import cds.gen.szakdolgozat.srv.service.completedprojectservice.Projects_;
-import cds.gen.szakdolgozat.srv.service.projectservice.Projects;
-import cds.gen.szakdolgozat.srv.service.projectservice.ProjectsChangeStatusContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.sap.cds.ResultBuilder;
 import com.sap.cds.services.cds.CdsReadEventContext;
 import com.sap.cds.services.cds.CqnService;
@@ -13,12 +13,13 @@ import com.sap.cds.services.handler.annotations.After;
 import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.messages.Messages;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import cds.gen.szakdolgozat.srv.service.completedprojectservice.CompletedProjectService_;
+import cds.gen.szakdolgozat.srv.service.completedprojectservice.Projects_;
+import cds.gen.szakdolgozat.srv.service.projectservice.Projects;
+import cds.gen.szakdolgozat.srv.service.projectservice.ProjectsChangeStatusContext;
 import szakdolgozat.project_tracking.manager.ProjectManager;
 import szakdolgozat.project_tracking.utilities.ProjectNotFoundException;
-
-import java.util.List;
 
 @Component
 @ServiceName(CompletedProjectService_.CDS_NAME)
@@ -28,11 +29,21 @@ public class CompletedProjectServiceHandler implements EventHandler {
     @Autowired
     Messages messages;
 
+    /**
+     * Creates the handler with the project manager dependency.
+     *
+     * @param projectManager manager handling project actions
+     */
     @Autowired
     public CompletedProjectServiceHandler(ProjectManager projectManager) {
         this.projectManager = projectManager;
     }
 
+    /**
+     * Handles status change requests for completed projects.
+     *
+     * @param context change status request context
+     */
     @On(entity = Projects_.CDS_NAME, event = ProjectsChangeStatusContext.CDS_NAME)
     public void onChangeStatus(ProjectsChangeStatusContext context) {
         try {
@@ -45,6 +56,12 @@ public class CompletedProjectServiceHandler implements EventHandler {
         }
     }
 
+    /**
+     * Returns projects with updated read-only flags after reads.
+     *
+     * @param context  read event context
+     * @param projects projects returned from the read operation
+     */
     @After(event = CqnService.EVENT_READ, entity = Projects_.CDS_NAME)
     public void afterRead(CdsReadEventContext context, List<Projects> projects) {
         projectManager.setStatusFieldToReadOnly(projects);

@@ -41,7 +41,8 @@ class StatusRepositoryTest {
     private StatusRepository statusRepository;
 
     /**
-     * Verifies the repository creates a select query and delegates it to the persistence service.
+     * Verifies the repository creates a select query and delegates it to the
+     * persistence service.
      */
     @Test
     void testGetStatusById_CallsDbRunWithCorrectSelect() {
@@ -61,7 +62,8 @@ class StatusRepositoryTest {
     }
 
     /**
-     * Ensures the repository returns exactly the Result instance provided by the persistence service.
+     * Ensures the repository returns exactly the Result instance provided by the
+     * persistence service.
      */
     @Test
     void testGetStatusById_ReturnsResultFromDb() {
@@ -76,7 +78,8 @@ class StatusRepositoryTest {
     }
 
     /**
-     * Returns an empty result when the persistence service does not find a status for the provided ID.
+     * Returns an empty result when the persistence service does not find a status
+     * for the provided ID.
      */
     @Test
     void testGetStatusById_WithUnknownIdReturnsEmptyResult() {
@@ -93,7 +96,8 @@ class StatusRepositoryTest {
     }
 
     /**
-     * Checks that project selection delegates to the persistence service with a projects query.
+     * Checks that project selection delegates to the persistence service with a
+     * projects query.
      */
     @Test
     void testSelectProjectsByStatusId_CallsDbRunWithProjectsSelect() {
@@ -145,7 +149,8 @@ class StatusRepositoryTest {
     }
 
     /**
-     * Ensures false flags from the persistence service are translated to a boolean false.
+     * Ensures false flags from the persistence service are translated to a boolean
+     * false.
      */
     @Test
     void testGetFinalStatusByStatusId_ReturnsFalseWhenFlagUnset() {

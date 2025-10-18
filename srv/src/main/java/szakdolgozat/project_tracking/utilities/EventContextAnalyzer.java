@@ -47,15 +47,21 @@ public class EventContextAnalyzer {
     }
 
     /**
-     * Creates a CqnAnalyzer for the given event context, analyzes the context with the created analyzer and returns the target keys.
-     * The purpose of this method is that it's much easier to mock than the underlying implementation (and of course reusability).
+     * Creates a CqnAnalyzer for the given event context, analyzes the context with
+     * the created analyzer and returns the target keys.
+     * The purpose of this method is that it's much easier to mock than the
+     * underlying implementation (and of course reusability).
      *
      * @param eventContext The event context to analyze
-     * @param getCqnRef    Lambda to create a CqnStructuredTypeRef from the context. This is a parameter because there's no common ancestor that would enforce the .getCqn() method that is present on EventContext implementations
+     * @param getCqnRef    Lambda to create a CqnStructuredTypeRef from the context.
+     *                     This is a parameter because there's no common ancestor
+     *                     that would enforce the .getCqn() method that is present
+     *                     on EventContext implementations
      * @param <T>          Type of the event context
      * @return The targetKeys Map of the analysis result
      */
-    public <T extends EventContext> Map<String, Object> targetKeys(T eventContext, Function<T, ? extends CqnStructuredTypeRef> getCqnRef) {
+    public <T extends EventContext> Map<String, Object> targetKeys(T eventContext,
+            Function<T, ? extends CqnStructuredTypeRef> getCqnRef) {
         return analyze(eventContext, getCqnRef).targetKeys();
     }
 
@@ -80,18 +86,24 @@ public class EventContextAnalyzer {
     }
 
     /**
-     * Creates a CqnAnalyzer for the given event context, analyzes the context with the created analyzer and returns the target entity.
+     * Creates a CqnAnalyzer for the given event context, analyzes the context with
+     * the created analyzer and returns the target entity.
      *
      * @param eventContext The event context to analyze
-     * @param getCqnRef Lambda to create a CqnStructuredTypeRef from the context. This is a parameter because there's no common ancestor that would enforce the .getCqn() method that is present on EventContext implementations
-     * @param <T> Type of the event context
+     * @param getCqnRef    Lambda to create a CqnStructuredTypeRef from the context.
+     *                     This is a parameter because there's no common ancestor
+     *                     that would enforce the .getCqn() method that is present
+     *                     on EventContext implementations
+     * @param <T>          Type of the event context
      * @return The target CdsEntity
      */
-    public <T extends EventContext> CdsEntity targetEntity(T eventContext, Function<T, ? extends CqnStructuredTypeRef> getCqnRef) {
+    public <T extends EventContext> CdsEntity targetEntity(T eventContext,
+            Function<T, ? extends CqnStructuredTypeRef> getCqnRef) {
         return analyze(eventContext, getCqnRef).targetEntity();
     }
 
-    private static <T extends EventContext> AnalysisResult analyze(T eventContext, Function<T, ? extends CqnStructuredTypeRef> getCqnRef) {
+    private static <T extends EventContext> AnalysisResult analyze(T eventContext,
+            Function<T, ? extends CqnStructuredTypeRef> getCqnRef) {
         return createAnalyzer(eventContext).analyze(getCqnRef.apply(eventContext));
     }
 
