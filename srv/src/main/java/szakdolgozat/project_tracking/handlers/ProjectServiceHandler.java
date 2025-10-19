@@ -34,7 +34,6 @@ public class ProjectServiceHandler implements EventHandler {
      *
      * @param projectManager manager handling project actions
      */
-    @Autowired
     public ProjectServiceHandler(ProjectManager projectManager) {
         this.projectManager = projectManager;
     }

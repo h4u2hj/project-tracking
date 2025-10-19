@@ -17,7 +17,6 @@ public class StatusManager {
      *
      * @param statusRepository repository for status data
      */
-    @Autowired
     public StatusManager(StatusRepository statusRepository) {
         this.statusRepository = statusRepository;
     }

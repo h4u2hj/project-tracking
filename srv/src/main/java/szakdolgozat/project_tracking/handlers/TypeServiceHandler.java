@@ -26,7 +26,6 @@ public class TypeServiceHandler implements EventHandler {
      *
      * @param typeManager manager handling type enrichments
      */
-    @Autowired
     public TypeServiceHandler(TypeManager typeManager) {
         this.typeManager = typeManager;
     }

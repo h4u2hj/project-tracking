@@ -34,7 +34,6 @@ public class CompletedProjectServiceHandler implements EventHandler {
      *
      * @param projectManager manager handling project actions
      */
-    @Autowired
     public CompletedProjectServiceHandler(ProjectManager projectManager) {
         this.projectManager = projectManager;
     }
@@ -57,8 +56,7 @@ public class CompletedProjectServiceHandler implements EventHandler {
     }
 
     /**
-     * Returns projects with updated read-only flags after reads.
-     *
+     * Sets status availability to read only after loading projects.
      * @param context  read event context
      * @param projects projects returned from the read operation
      */

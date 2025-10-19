@@ -17,7 +17,6 @@ public class TypeManager {
      *
      * @param typeRepository repository for type data
      */
-    @Autowired
     public TypeManager(TypeRepository typeRepository) {
         this.typeRepository = typeRepository;
     }

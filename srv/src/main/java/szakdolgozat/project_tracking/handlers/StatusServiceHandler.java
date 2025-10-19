@@ -2,7 +2,6 @@ package szakdolgozat.project_tracking.handlers;
 
 import java.util.stream.Stream;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sap.cds.services.cds.CqnService;
@@ -26,7 +25,6 @@ public class StatusServiceHandler implements EventHandler {
      *
      * @param statusManager manager handling status enrichments
      */
-    @Autowired
     public StatusServiceHandler(StatusManager statusManager) {
         this.statusManager = statusManager;
     }
