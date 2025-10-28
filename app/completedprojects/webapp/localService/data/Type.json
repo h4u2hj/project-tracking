@@ -1,0 +1,11 @@
+[
+    {
+        "ID": "71838499-dbfe-480a-bfbf-9475f76f2590",
+        "name": "TypeName",
+        "createdAt": "2020-09-02T23:00:00.000Z",
+        "createdBy": "createdBy.49z3d@example.com",
+        "modifiedAt": "2022-10-24T23:00:00.000Z",
+        "modifiedBy": "modifiedBy.49z3d@example.org",
+        "delete_ac": true
+    }
+]

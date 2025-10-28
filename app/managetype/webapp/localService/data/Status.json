@@ -1,0 +1,22 @@
+[
+    {
+        "ID": "18573860-249e-43b7-9f81-2ca6be3f7497",
+        "name": "name-final",
+        "isFinalStatus": true,
+        "createdAt": "2022-01-15T23:00:00.000Z",
+        "createdBy": "createdBy.b23ok@example.net",
+        "modifiedAt": "2021-07-05T23:00:00.000Z",
+        "modifiedBy": "modifiedBy.b23ok@example.com",
+        "delete_ac": true
+    },
+    {
+        "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
+        "name": "name-new",
+        "isFinalStatus": false,
+        "createdAt": "2022-01-15T23:00:00.000Z",
+        "createdBy": "createdBy.b23ok@example.net",
+        "modifiedAt": "2021-07-05T23:00:00.000Z",
+        "modifiedBy": "modifiedBy.b23ok@example.com",
+        "delete_ac": true
+    }
+]

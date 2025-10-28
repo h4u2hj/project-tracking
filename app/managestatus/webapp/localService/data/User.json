@@ -1,0 +1,24 @@
+[
+  {
+    "ID": "10701615-8e99-42b5-8354-ba818c7e570e",
+    "email": "email-10701615",
+    "firstName": "firstName2",
+    "lastName": "lastName2",
+    "phone": "phone-10701615",
+    "companyID": "I123",
+    "orgunit": "orgunit-10701615",
+    "displayName": "firstName2 lastName2 (I123)"
+  },
+  [
+  {
+    "ID": "0faa588c-243d-4c3f-ab04-cd05d5c6c7a3",
+    "email": "email-10701615",
+    "firstName": "firstName1",
+    "lastName": "lastName1",
+    "phone": "phone-10701615",
+    "companyID": "D107",
+    "orgunit": "orgunit-10701615",
+    "displayName": "firstName1 lastName1 (D107)"
+  }
+]
+]
