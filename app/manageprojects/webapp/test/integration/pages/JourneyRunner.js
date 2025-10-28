@@ -11,6 +11,10 @@ sap.ui.define([
 			onTheProjectsList: ProjectsList,
 			onTheProjectsObjectPage: ProjectsObjectPage
         },
+        opaConfig: {
+            autoWait: true,
+            timeout: 10
+        },
         async: true
     });
 

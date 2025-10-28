@@ -1,9 +1,6 @@
 [
     {
         "ID": "22495248-dbe6-471f-8131-034dba5f5e77",
-        "status": {
-            "ID": "18573860-249e-43b7-9f81-2ca6be3f7497"
-        },
         "status_ID": "18573860-249e-43b7-9f81-2ca6be3f7497",
         "project_ID": "53006944-d8e6-437c-b4dc-87d77a7f2058",
         "createdAt": "2011-12-05T23:00:00.000Z",
@@ -13,9 +10,6 @@
     },
     {
         "ID": "38205999-59af-4fe3-80ce-365db86b05ea",
-        "status": {
-            "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591"
-        },
         "status_ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
         "project_ID": "2822400d-bddd-4165-91fd-79bfbec69d23",
         "createdAt": "2015-11-24T23:00:00.000Z",
@@ -25,9 +19,6 @@
     },
     {
         "ID": "38206005-e58c-4aec-8743-0a51b06aa563",
-        "status": {
-            "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591"
-        },
         "status_ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
         "project_ID": "2822400d-bddd-4165-91fd-79bfbec69d23",
         "createdAt": "2008-03-02T23:00:00.000Z",
@@ -37,11 +28,9 @@
     },
     {
         "ID": "30724894-c290-4de8-aebc-59e92d973b3f",
-        "status": {
-            "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591"
-        },
         "status_ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
-        "project_ID": "36037288-b2ed-43e3-913e-1e3e8949bd9b",
+        "statusName": "name-new",
+        "project_ID": "863445a8-f94b-448d-b8b4-9de62be69f5f",
         "createdAt": "2017-02-25T23:00:00.000Z",
         "createdBy": "createdBy.iajha@example.net",
         "modifiedAt": "2019-03-18T23:00:00.000Z",

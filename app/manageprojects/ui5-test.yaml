@@ -1,0 +1,23 @@
+specVersion: "3.1"
+metadata:
+  name: manageprojects
+type: application
+server:
+  customMiddleware:
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        services:
+          - urlPath: '/odata/v4/ProjectService'
+            metadataPath: '../../srv/src/main/resources/edmx/odata/v4/szakdolgozat.srv.service.ProjectService.xml'
+            mockdataPath: './webapp/localService/data'
+            generateMockData: false
+    - name: "@ui5/middleware-code-coverage"
+      afterMiddleware: compression
+      configuration:
+        instrument:
+          produceSourceMap: true
+          coverageGlobalScope: "window.top"
+          coverageGlobalScopeFunc: false
+        excludePatterns:
+          - "test"

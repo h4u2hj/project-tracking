@@ -5,6 +5,7 @@
   "license": "ISC",
   "repository": "https://github.com/h4u2hj/project-tracking.git",
   "devDependencies": {
+    "@ljharb/tsconfig": "^0.3.2",
     "@sap/cds-dk": "^9.1.0",
     "cds-launchpad-plugin": "^2.2.0"
   },
