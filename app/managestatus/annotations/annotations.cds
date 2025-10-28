@@ -112,7 +112,7 @@ annotate service.Status with @(
 ) {
     name          @(
         UI.Hidden      : false,
-        UI.HiddenFilter: false
+        UI.HiddenFilter: true
     );
 
     createdAt     @(

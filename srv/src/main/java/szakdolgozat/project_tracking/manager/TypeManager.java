@@ -1,6 +1,5 @@
 package szakdolgozat.project_tracking.manager;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sap.cds.Result;

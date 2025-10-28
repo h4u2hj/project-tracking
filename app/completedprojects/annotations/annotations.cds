@@ -32,23 +32,22 @@ annotate service.Projects with @(
         },
         {
             $Type: 'UI.DataField',
-            Value: completedAt,
+            Value: completedAt
         },
         {
             $Type: 'UI.DataField',
-            Value: startDate,
+            Value: startDate
         },
         {
-            $Type               : 'UI.DataFieldWithUrl',
-            Url                 : link,
-            Value               : 'Open',
-            Label               : 'Link',
-            ![HTML5.CssDefaults]: {width: '3rem'}
+            $Type                : 'UI.DataFieldWithUrl',
+            Url                  : link,
+            Value                : 'Open',
+            Label                : 'Link',
+            ![@HTML5.CssDefaults]: {width: '6%'}
         },
         {
             $Type: 'UI.DataField',
-            Label: 'lastStatusChangeAt',
-            Value: lastStatusChangeAt,
+            Value: lastStatusChangeAt
         },
         {
             $Type         : 'UI.DataFieldForIntentBasedNavigation',
@@ -135,11 +134,11 @@ annotate service.Projects with @(
             },
             {
                 $Type: 'UI.DataField',
-                Value: startDate,
+                Value: startDate
             },
             {
                 $Type: 'UI.DataField',
-                Value: link,
+                Value: link
             }
         ]
     },
@@ -217,17 +216,17 @@ annotate service.Projects with @(
     ]}
 ) {
     //Project fields annotations
-    ID                 @(
+    ID                      @(
         UI.Hidden      : true,
         UI.HiddenFilter: true
     );
 
-    createdAt          @(
+    createdAt               @(
         UI.Hidden      : false,
         UI.HiddenFilter: false
     );
 
-    createdBy          @(
+    createdBy               @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
@@ -245,11 +244,11 @@ annotate service.Projects with @(
             TextArrangement         : #TextOnly,
         }
     );
-    modifiedAt         @(
+    modifiedAt              @(
         UI.Hidden      : true,
         UI.HiddenFilter: false
     );
-    modifiedBy         @(
+    modifiedBy              @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
@@ -267,23 +266,23 @@ annotate service.Projects with @(
             TextArrangement         : #TextOnly,
         }
     );
-    name               @(
+    name                    @(
         UI.Hidden      : false,
         UI.HiddenFilter: true,
     );
-    description        @(
+    description             @(
         UI.Hidden      : false,
         UI.HiddenFilter: true,
     );
-    link               @(
+    link                    @(
         UI.Hidden      : true,
         UI.HiddenFilter: true,
     );
-    startDate          @(
+    startDate               @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
     );
-    status             @(
+    status                  @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
@@ -301,7 +300,7 @@ annotate service.Projects with @(
             TextArrangement         : #TextOnly
         }
     );
-    type               @(
+    type                    @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
@@ -319,7 +318,7 @@ annotate service.Projects with @(
             TextArrangement         : #TextOnly
         }
     );
-    manager            @(
+    manager                 @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
@@ -337,11 +336,12 @@ annotate service.Projects with @(
             TextArrangement         : #TextOnly
         }
     );
-    lastStatusChangeAt @(
+    lastStatusChangeAt      @(
         UI.Hidden      : false,
         UI.HiddenFilter: true,
     );
-    completedAt        @(
+    statusFieldAvailability @(UI.Hidden: true);
+    completedAt             @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
     );
@@ -394,7 +394,7 @@ annotate service.ProjectSnapshot with @(
     }
 ) {
     ID          @UI.Hidden: true;
-    status      @UI.Hidden: true  @UI.HiddenFilter: true;
+    status      @UI.Hidden: true   @UI.HiddenFilter: true;
     project     @UI.Hidden: true   @UI.HiddenFilter: true;
     statusName  @UI.Hidden: false  @UI.HiddenFilter: true  @Common.FieldControl: project.statusFieldAvailability;
     createdBy   @UI.Hidden: false;

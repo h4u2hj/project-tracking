@@ -89,7 +89,7 @@ annotate service.Type with @(
 ) {
     name                    @(
         UI.Hidden      : false,
-        UI.HiddenFilter: false
+        UI.HiddenFilter: true
     );
 
     createdAt               @(
