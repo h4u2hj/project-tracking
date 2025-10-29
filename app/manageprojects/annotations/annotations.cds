@@ -327,7 +327,7 @@ annotate service.Projects with @(
         UI.Hidden      : false,
         UI.HiddenFilter: false,
         Common         : {
-            ValueListWithFixedValues: true,
+            ValueListWithFixedValues: false,
             ValueList               : {
                 Label         : 'Project Status',
                 CollectionPath: 'User',
