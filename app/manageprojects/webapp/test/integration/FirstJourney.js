@@ -41,11 +41,11 @@ sap.ui.define([
                 When.onTheProjectsList.onTable().iExecuteCreate();
                 Then.onTheProjectsObjectPage.iSeeThisPage();
 
-                When.onTheProjectsObjectPage.iEnterTextByLabel("status_ID", "name-new")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("type_ID", "TypeName")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("manager_ID", "firstName2 lastName2 (I123)")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("description", "newdesc")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("name", "New Name")
+                When.onTheProjectsObjectPage.iEnterTextByProperty("statusId", "name-new")
+                When.onTheProjectsObjectPage.iEnterTextByLabel("Project Name", "New Name")
+                When.onTheProjectsObjectPage.iEnterTextByLabel("Type", "TypeName")
+                When.onTheProjectsObjectPage.iEnterTextByLabel("Manager", "firstName2 lastName2 (I123)")
+                When.onTheProjectsObjectPage.iEnterTextByLabel("Description", "newdesc")
 
                 When.onTheProjectsObjectPage.iPressButtonWithText("Create")
                 Then.iSeeMessageToast("Project created.");
@@ -84,7 +84,7 @@ sap.ui.define([
 
                 When.waitFor({
                     success: function () {
-                        sap.ui.test.Opa5.getWindow().history.go(-1);
+                        sap.ui.test.Opa5.getWindow().history.back();
                     }
                 });
                 Then.onTheProjectsList.iSeeThisPage();
@@ -94,20 +94,20 @@ sap.ui.define([
                 When.onTheProjectsList.onTable().iPressRow(1);
                 Then.onTheProjectsObjectPage.iSeeThisPage();
                 When.onTheProjectsObjectPage.onHeader().iExecuteAction("Edit")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("Status", "newstatus")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("Project Name", "Updated name")
+                When.onTheProjectsObjectPage.iEnterTextByProperty("name", "Updated name")
+                When.onTheProjectsObjectPage.iEnterTextByProperty("description", "newdescription")
                 When.onTheProjectsObjectPage.iPressButtonWithText("Save")
 
-                Then.iSeeMessageToast("Object saved");
+                Then.iSeeMessageToast("Project saved.");
 
                 When.waitFor({
                     success: function () {
-                        sap.ui.test.Opa5.getWindow().history.go(-1);
+                        sap.ui.test.Opa5.getWindow().history.back();
                     }
                 });
 
                 Then.onTheProjectsList.onTable().iCheckRows({ "Project Name": "Updated name" }, 1);
-                Then.onTheProjectsList.onTable().iCheckRows({ "Status": "newstatus" }, 1);
+                Then.onTheProjectsList.onTable().iCheckRows({ "Description": "newdescription" }, 1);
             })
 
             opaTest("Teardown", function (Given, When, Then) {

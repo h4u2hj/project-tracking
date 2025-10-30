@@ -106,7 +106,8 @@ annotate service.Projects with @(
         Data : [
             {
                 $Type: 'UI.DataField',
-                Value: name
+                Value: name,
+                Label: 'Project Name'
             },
             {
                 $Type: 'UI.DataField',

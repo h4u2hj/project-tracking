@@ -15,7 +15,7 @@ sap.ui.define([
             autoWait: true,
             timeout: 10
         },
-        async: true
+        async: false
     });
 
     return runner;
