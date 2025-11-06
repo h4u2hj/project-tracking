@@ -159,6 +159,9 @@
                     },
                     "DataField::isFinalStatus": {
                       "width": "auto"
+                    },
+                    "DataField::header": {
+                      "availability": "Hidden"
                     }
                   }
                 }

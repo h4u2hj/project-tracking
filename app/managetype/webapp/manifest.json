@@ -146,6 +146,9 @@
                     "DataField::name": {
                       "width": "auto"
                     },
+                    "DataField::header": {
+                      "availability": "Hidden"
+                    },
                     "InProgressProjButton": {
                       "header": "In-progress projects",
                       "width": "auto",
