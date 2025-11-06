@@ -116,8 +116,7 @@ annotate service.Projects with @(
             {
                 $Type                : 'UI.DataField',
                 Value                : type_ID,
-                ![@HTML5.CssDefaults]: {width: '10rem'},
-                ![UI.Hidden]         : {$edmJson: {$Path: 'IsActiveEntity'}}
+                ![@HTML5.CssDefaults]: {width: '10rem'}
             },
             {
                 $Type: 'UI.DataField',
@@ -175,11 +174,11 @@ annotate service.Projects with @(
 
     //Change status button in object page
     UI.Identification                        : [{
-        $Type       : 'UI.DataFieldForAction',
-        Action      : 'szakdolgozat.srv.service.ProjectService.changeStatus',
-        Label       : 'Change Status',
-        Criticality : #Neutral,
-        ![UI.Hidden]: {$edmJson: {$Not: {$Path: 'IsActiveEntity'}}}
+        $Type      : 'UI.DataFieldForAction',
+        Action     : 'szakdolgozat.srv.service.ProjectService.changeStatus',
+        Label      : 'Change Status',
+        Criticality: #Neutral,
+        @UI.Hidden : {$edmJson: {$Not: {$Path: 'IsActiveEntity'}}}
     }]
 );
 
