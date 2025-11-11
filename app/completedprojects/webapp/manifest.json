@@ -160,6 +160,9 @@
                     "DataField::type_ID": {
                       "width": "auto"
                     },
+                    "DataField::manager_ID": {
+                      "availability": "Hidden"
+                    },
                     "DataFieldForAnnotation::manager::Contact": {
                       "width": "auto"
                     },
