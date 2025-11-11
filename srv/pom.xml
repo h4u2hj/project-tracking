@@ -12,6 +12,10 @@
 
 	<name>project-tracking</name>
 
+	<properties>
+		<spring.boot.version>3.5.7</spring.boot.version>
+	</properties>
+
 	<!-- ACTUAL DEPENDENCIES -->
 	<dependencies>
 		<!-- CDS SPRING BOOT STARTER -->
