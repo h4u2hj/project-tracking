@@ -189,7 +189,7 @@ server:
       configuration:
         service:
           urlPath: "/odata/v4/DocService/"
-          metadataPath: "../../srv/src/main/resources/edmx/odata/v4/com.sap.internal.digitallab.doctracking.service.DocService.xml"
+          metadataPath: "../../srv/src/main/resources/edmx/odata/v4/ProjectService.xml
           mockdataPath: "./webapp/localService/data"
           generateMockData: false
 ```

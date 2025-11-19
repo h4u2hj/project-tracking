@@ -6,6 +6,12 @@ spring:
   sql.init.schema-locations: classpath:schema-h2.sql
 cds:
   data-source.auto-config.enabled: false
+  data-source:
+    csv:
+      paths:
+      - db/data
+      - db/data/**
+      - ../db/data/**
   odata-v4.endpoint.path: "/odata/v4"
   security:
     authentication:

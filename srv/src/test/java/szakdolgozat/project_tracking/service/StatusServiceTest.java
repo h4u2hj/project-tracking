@@ -24,9 +24,8 @@ class StatusServiceTest {
 
     private static final String STATUS_ID = "65891071-3d68-42ff-981b-988f6a2bc33b";
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    @Qualifier(StatusService_.CDS_NAME)  // inject the generated CqnService for the StatusService
+    @Qualifier(StatusService_.CDS_NAME)
     private StatusService statusService;
 
     @Test

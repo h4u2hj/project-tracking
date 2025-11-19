@@ -1,5 +1,6 @@
 package szakdolgozat.project_tracking.service.Integration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -26,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import cds.gen.szakdolgozat.srv.service.projectservice.Projects;
 import lombok.SneakyThrows;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -36,10 +38,13 @@ class ProjectServiceIntegrationTest {
     private static final Instant CREATED_AT = Instant.parse("2025-12-31T23:00:00Z");
     private static final Instant MODIFIED_AT = Instant.parse("2025-12-01T23:00:00Z");
     private static final Instant LAST_STATUS_CHANGE_AT = Instant.parse("2025-10-19T23:00:00Z");
+    private static final Instant STATUS_CHANGE_DATE = Instant.parse("2025-11-19T23:00:00Z");
+    private static final Instant SECOND_STATUS_CHANGE_DATE = Instant.parse("2025-11-20T23:00:00Z");
     private static final String DEFAULT_STATUS_ID = "65891038-ebb5-4ac4-a16f-22967f58a6ba";
     private static final String UPDATED_STATUS_ID = "6589104e-0e6e-4a1d-bfbb-e497f71eaefb";
     private static final String DEFAULT_TYPE_ID = "982297e8-bcab-45b7-bf22-50ed1225853b";
     private static final String DEFAULT_MANAGER_ID = "17718523-1d9a-4885-a670-21055ef5f57c";
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private static String createdProjectId;
     private static String createdProjectName;
@@ -90,6 +95,61 @@ class ProjectServiceIntegrationTest {
     @Test
     @Order(3)
     @SneakyThrows
+    void projectStatusCanBeChangedViaAction() {
+        if (createdProjectId == null) {
+            throw new IllegalStateException("Project creation test must run before change status test.");
+        }
+
+        mockMvc.perform(post(projectChangeStatusUrl(createdProjectId))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(buildChangeStatusJson(UPDATED_STATUS_ID, STATUS_CHANGE_DATE))
+                .with(httpBasic("admin", "admin")))
+                .andExpect(status().isOk());
+
+        Map<String, Object> project = fetchProject(createdProjectId);
+        assertEquals(UPDATED_STATUS_ID, project.get("status_ID"));
+        assertEquals(STATUS_CHANGE_DATE, Instant.parse(project.get("lastStatusChangeAt").toString()));
+    }
+
+    /**
+     * Ensures that providing the same status id through the action does not alter
+     * the modifiedBy field.
+     */
+    @Test
+    @Order(4)
+    @SneakyThrows
+    void projectStatusActionWithSameStatusKeepsModifiedBy() {
+        if (createdProjectId == null) {
+            throw new IllegalStateException("Project creation test must run before repeated change status test.");
+        }
+
+        Map<String, Object> projectBeforeUpdate = fetchProject(createdProjectId);
+        String modifiedByBefore = projectBeforeUpdate.get("modifiedBy").toString();
+        Instant lastStatusChangeBefore = Instant.parse(projectBeforeUpdate.get("lastStatusChangeAt").toString());
+
+        mockMvc.perform(post(projectChangeStatusUrl(createdProjectId))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(buildChangeStatusJson(UPDATED_STATUS_ID, SECOND_STATUS_CHANGE_DATE))
+                .with(httpBasic("admin", "admin")))
+                .andExpect(status().isOk());
+
+        Map<String, Object> projectAfterUpdate = fetchProject(createdProjectId);
+
+        assertEquals(modifiedByBefore, projectAfterUpdate.get("modifiedBy"),
+                "ModifiedBy must remain unchanged when the same status is submitted.");
+        assertEquals(lastStatusChangeBefore, Instant.parse(projectAfterUpdate.get("lastStatusChangeAt").toString()),
+                "Last status change timestamp should remain unchanged for identical status submissions.");
+        assertEquals(UPDATED_STATUS_ID, projectAfterUpdate.get("status_ID"),
+                "Status ID should remain the already-set value when the same status is provided.");
+    }
+
+    /**
+     * Confirms the previously created project is accessible via the entity
+     * endpoint.
+     */
+    @Test
+    @Order(5)
+    @SneakyThrows
     void projectCreatedCanBeRetrievedViaOdata() {
         if (createdProjectId == null) {
             throw new IllegalStateException("Project creation test must run before retrieval test.");
@@ -106,7 +166,7 @@ class ProjectServiceIntegrationTest {
      * Validates an existing project can be updated via PATCH.
      */
     @Test
-    @Order(4)
+    @Order(6)
     @SneakyThrows
     void projectCanBeUpdatedViaOdata() {
         String projectId = UUID.randomUUID().toString();
@@ -136,7 +196,7 @@ class ProjectServiceIntegrationTest {
      * Verifies delete attempts are rejected by the Project service authorization.
      */
     @Test
-    @Order(5)
+    @Order(7)
     @SneakyThrows
     void projectDeleteIsRejectedForProjectService() {
         String projectId = UUID.randomUUID().toString();
@@ -157,7 +217,7 @@ class ProjectServiceIntegrationTest {
      * Ensures invalid credentials cannot access the Project service.
      */
     @Test
-    @Order(6)
+    @Order(8)
     @SneakyThrows
     void projectFetchRequiresValidCredentials() {
         mockMvc.perform(get("/odata/v4/ProjectService/Projects")
@@ -201,6 +261,34 @@ class ProjectServiceIntegrationTest {
         project.setModifiedBy("modifiedBy.integration@test.local");
         project.setIsActiveEntity(true);
         return project.toJson();
+    }
+
+    /**
+     * Builds the JSON payload for the change status action.
+     */
+    private String buildChangeStatusJson(String newStatusId, Instant changeDate) {
+        return "{\"newStatus\":\"" + newStatusId + "\",\"changeDate\":\"" + changeDate.toString() + "\"}";
+    }
+
+    /**
+     * Helper that composes the change status action URL.
+     */
+    private String projectChangeStatusUrl(String projectId) {
+        return projectEntityUrl(projectId) + "/szakdolgozat.srv.service.ProjectService.changeStatus";
+    }
+
+    /**
+     * Fetches the project and returns it as a key-value map.
+     */
+    @SneakyThrows
+    private Map<String, Object> fetchProject(String projectId) {
+        String content = mockMvc.perform(get(projectEntityUrl(projectId))
+                .with(httpBasic("admin", "admin")))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        return OBJECT_MAPPER.readValue(content, Map.class);
     }
 
     /**
