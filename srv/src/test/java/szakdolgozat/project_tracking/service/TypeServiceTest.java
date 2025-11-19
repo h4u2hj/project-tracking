@@ -15,38 +15,37 @@ import com.sap.cds.Result;
 import com.sap.cds.ql.Select;
 import com.sap.cds.services.impl.ContextualizedServiceException;
 
-import cds.gen.szakdolgozat.srv.service.statusservice.Status;
-import cds.gen.szakdolgozat.srv.service.statusservice.StatusService;
-import cds.gen.szakdolgozat.srv.service.statusservice.StatusService_;
-import cds.gen.szakdolgozat.srv.service.statusservice.Status_;
+import cds.gen.szakdolgozat.srv.service.typeservice.Type;
+import cds.gen.szakdolgozat.srv.service.typeservice.TypeService;
+import cds.gen.szakdolgozat.srv.service.typeservice.TypeService_;
+import cds.gen.szakdolgozat.srv.service.typeservice.Type_;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class StatusServiceTest {
+class TypeServiceTest {
 
-    private static final String STATUS_ID = "65891071-3d68-42ff-981b-988f6a2bc33b";
+    private static final String TYPE_ID = "22756613-bcde-463b-a379-ff65f07d072f";
 
     @Autowired
-    @Qualifier(StatusService_.CDS_NAME)
-    private StatusService statusService;
+    @Qualifier(TypeService_.CDS_NAME)
+    TypeService typeService;
 
     @Test
     @WithMockUser(username = "admin", authorities = { "Administrator", "ProjectManager" })
-    void testSelectStatusById() {
+    void typeCanBeReadByAuthorizedUser() {
+        Result result = typeService.run(Select.from(Type_.class).where(t -> t.ID().eq(TYPE_ID)));
 
-        Result result = statusService.run(Select.from(Status_.class).where(x -> x.ID().eq(STATUS_ID)));
+        assertNotNull(result);
 
-        assertNotNull(result, "Service should return a result");
-
-        Status status = result.single(Status.class);
-        assertEquals(STATUS_ID, status.getId());
-        assertEquals("In development", status.getName());
+        Type type = result.single(Type.class);
+        assertEquals(TYPE_ID, type.getId());
+        assertEquals("Application/software", type.getName());
     }
 
     @Test
     @WithMockUser(username = "viewer")
-    void testSelectStatusByIdUnauthorized() {
+    void typeReadRejectedForUnauthorizedUser() {
         assertThrows(ContextualizedServiceException.class,
-                () -> statusService.run(Select.from(Status_.class).where(x -> x.ID().eq(STATUS_ID))));
+                () -> typeService.run(Select.from(Type_.class).where(t -> t.ID().eq(TYPE_ID))));
     }
 }
