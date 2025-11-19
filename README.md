@@ -70,9 +70,7 @@ This is the documentation for the Project Tracking project.
                 # change the address accordingly
     ```
 
-    In BTP you can find it here:
-
-    ![API Endpoint](/docs/api_endpoint.png)
+    In BTP you can find it under API endpoint!
 
 7. Deploy
 
@@ -84,12 +82,10 @@ This is the documentation for the Project Tracking project.
 
     In BTP under Security > Role Collections
 
-    ![User Collections](/docs/user_collections.png)
-
     Create a new collection & Add necessary Roles and Users to access the deployed app
 
 
-## OPA Testing: 
+## OPA Testing:
 ### Overview - UI5 OPA testing using Odata V4 protocol
 Integration tests in SAP Fiori applications are conducted using OPA5, a tool integrated with SAPUI5 designed for one-page acceptance tests. OPA5 runs in the same browser window as the application to be tested, making it suitable for single-page web applications.
 
@@ -105,8 +101,8 @@ Ensure that the following scripts are available in your `package.json`:
 
 ```json
 "scripts": {
-"start": "ui5 serve --config ./ui5-test.yaml",
-"testOpa": "ui5 serve --config ./ui5-test.yaml --open test/integration/opaTests.qunit.html"
+  "start": "ui5 serve --config ./ui5-test.yaml",
+  "testOpa": "ui5 serve --config ./ui5-test.yaml --open test/integration/opaTests.qunit.html"
 }
 ```
 This script allows us to serve the application using the `ui5.yaml` configuration when we run `npm start`.
@@ -159,7 +155,7 @@ server:
       beforeMiddleware: compression
       configuration:
         service:
-          urlPath: "/odata/v4/DocService/"
+          urlPath: "/odata/v4/ProjectService/"
           metadataPath: "./webapp/localService/metadata.xml"
           mockdataPath: "./webapp/localService/data"
           generateMockData: false
@@ -188,8 +184,8 @@ server:
       beforeMiddleware: compression
       configuration:
         service:
-          urlPath: "/odata/v4/DocService/"
-          metadataPath: "../../srv/src/main/resources/edmx/odata/v4/ProjectService.xml
+          urlPath: "/odata/v4/ProjectService/"
+          metadataPath: "../../srv/src/main/resources/edmx/odata/v4/ProjectService.xml"
           mockdataPath: "./webapp/localService/data"
           generateMockData: false
 ```
@@ -202,10 +198,10 @@ The pros of this, is that the mockserver will use the same structure as the prod
 
 ```plaintext
 /webapp
-/localService
-metadata.xml
-/data
-users.json
+  /localService
+    metadata.xml
+  /data
+    Users.json
 ```
 
 ### Running the Application with Mock Server
