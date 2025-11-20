@@ -36,7 +36,12 @@ class TypeServiceHandlerTest {
     @Test
     void onReadType_shouldUpdateCountsAndDeleteFlag_forEachType() {
         Type first = Type.create();
+        first.setId("type-first");
+        first.setName("First");
+
         Type second = Type.create();
+        second.setId("type-second");
+        second.setName("Second");
 
         handler.onReadType(Stream.of(first, second));
 

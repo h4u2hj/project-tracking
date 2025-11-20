@@ -36,7 +36,12 @@ class StatusServiceHandlerTest {
     @Test
     void onReadStatus_shouldUpdateTotalsAndDeleteFlag_forEachStatus() {
         Status first = Status.create();
+        first.setId("status-first");
+        first.setName("First");
+
         Status second = Status.create();
+        second.setId("status-second");
+        second.setName("Second");
 
         handler.onReadStatus(Stream.of(first, second));
 
