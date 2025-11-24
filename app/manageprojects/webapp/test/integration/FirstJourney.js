@@ -41,11 +41,11 @@ sap.ui.define([
                 When.onTheProjectsList.onTable().iExecuteCreate();
                 Then.onTheProjectsObjectPage.iSeeThisPage();
 
-                When.onTheProjectsObjectPage.iEnterTextByProperty("statusId", "name-new")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("Project Name", "New Name")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("Type", "TypeName")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("Manager", "firstName2 lastName2 (I123)")
-                When.onTheProjectsObjectPage.iEnterTextByLabel("Description", "newdesc")
+                When.onTheProjectsObjectPage.iEnterTextByProperty("name", "New Name")
+                When.onTheProjectsObjectPage.iEnterTextByProperty("status_ID", "name-new")
+                When.onTheProjectsObjectPage.iEnterTextByProperty("type_ID", "TypeName")
+                When.onTheProjectsObjectPage.iEnterTextByProperty("manager_ID", "firstName2 lastName2 (I123)")
+                When.onTheProjectsObjectPage.iEnterTextByProperty("description", "newdesc")
 
                 When.onTheProjectsObjectPage.iPressButtonWithText("Create")
                 Then.iSeeMessageToast("Project created.");

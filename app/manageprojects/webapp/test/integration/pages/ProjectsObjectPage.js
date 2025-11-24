@@ -6,59 +6,57 @@ sap.ui.define([
 ], function (ObjectPage, EnterText, Press, Opa5) {
     'use strict';
 
+    var isEditable = function (oControl) {
+        return oControl.isA && (oControl.isA("sap.m.Input") || oControl.isA("sap.ui.mdc.Field"));
+    };
+
+    var matchesPath = function (oControl, sPropertyPath) {
+        var aPaths = [];
+        var collect = function (sProp) {
+            var mInfo = oControl.getBindingInfo && oControl.getBindingInfo(sProp);
+            if (!mInfo) { return; }
+            var p = mInfo.binding && mInfo.binding.getPath && mInfo.binding.getPath();
+            if (p) { aPaths.push(p); }
+            if (Array.isArray(mInfo.parts)) {
+                mInfo.parts.forEach(function (part) { if (part && part.path) { aPaths.push(part.path); } });
+            }
+        };
+        ["value", "conditions", "text", "selectedKey"].forEach(collect);
+        return aPaths.some(function (p) { return p === sPropertyPath || p.endsWith("/" + sPropertyPath); });
+    };
+
+    var enterText = function (oControl, sText) {
+        var oTarget;
+        if (oControl.getContent && typeof oControl.getContent === "function") {
+            var aContent = oControl.getContent();
+            oTarget = aContent && aContent.length ? aContent[0] : null;
+        }
+        oTarget = oTarget || oControl;
+        new EnterText({ text: sText, clearTextFirst: true }).executeOn(oTarget);
+    };
+
     var CustomPageDefinitions = {
         actions: {
-            iEnterTextByLabel: function (label, value) {
-                this.waitFor({
-                    controlType: "sap.m.Input",
-                    ancestor: {
-                        controlType: "sap.ui.layout.form.FormElement",
-                        descendant: {
-                            controlType: "sap.m.Label",
-                            properties: {
-                                text: label
-                            }
-                        }
-                    },
-                    actions: new EnterText({ text: value }),
-                    success: function (oButton) {
-                        Opa5.assert.ok(true, `Value of ${label} changed to ${value}`);
-                    },
-                    errorMessage: `Input field for text "${value}" not found`,
-                });
-            },
-            iEnterText: function (sId, sText) {
-                return this.waitFor({
-                    id: sId,
-                    actions: new EnterText({
-                        text: sText,
-                    }),
-                    errorMessage: `Input field for text "${sText}" not found`,
-                });
-            },
             iEnterTextByProperty: function (sPropertyPath, sText) {
                 return this.waitFor({
-                    controlType: "sap.m.Input",
-                    //viewId: "com.sap.epd.specification.maintainspecification::PropertiesObjectPage",
-                    //DATAFIELD_NAME_ID: "com.sap.epd.specification.maintainspecification::SpecificationVersionObjectPage--fe::FormContainer::BasicData::FormElement::DataField::name::Field-edit",
-                    bindingPath: {
-                        propertyPath: sPropertyPath
+                    matchers: function (oControl) {
+                        return isEditable(oControl) && matchesPath(oControl, sPropertyPath);
                     },
-                    actions: new EnterText({
-                        text: sText
-                    }),
-                    errorMessage: "Could not enter text value"
+                    success: function (aControls) {
+                        var oControl = aControls.find(function (c) { return c.isA && c.isA("sap.ui.mdc.Field"); }) || aControls[0];
+                        enterText(oControl, sText);
+                        Opa5.assert.ok(true, "Value of " + sPropertyPath + " changed to " + sText);
+                    },
+                    errorMessage: "Could not enter text value for property \"" + sPropertyPath + "\""
                 });
             },
 
             iPressButtonWithText(text) {
                 this.waitFor({
                     controlType: "sap.m.Button",
-                    properties: {
-                        text: text
-                    },
+                    properties: { text: text },
                     actions: new Press(),
-                    success: function (oButton) {
+                    success: function () {
                         Opa5.assert.ok(true, `${text} button pressed`);
                     },
                     errorMessage: `${text} button not found`
