@@ -5,33 +5,20 @@
         "description": "description-863445",
         "link": "link-863445",
         "startDate": "2017-03-24",
-        "status": {
-            "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591"
-        },
         "status_ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
-        "type": {
-            "ID": "71838499-dbfe-480a-bfbf-9475f76f2590"
-        },
         "type_ID": "71838499-dbfe-480a-bfbf-9475f76f2590",
-        "manager": {
-            "ID": "10701615-8e99-42b5-8354-ba818c7e570e"
-        },
         "manager_ID": "10701615-8e99-42b5-8354-ba818c7e570e",
         "lastStatusChangeAt": "2020-06-27T23:00:00.000Z",
-        "completedAt": "2003-03-12T23:00:00.000Z",
         "createdAt": "2002-03-26T23:00:00.000Z",
-        "createdBy": "createdBy.ii8l@example.net",
+        "createdBy": "email.1@example.net",
         "modifiedAt": "2022-07-29T23:00:00.000Z",
-        "modifiedBy": "modifiedBy.ii8l@example.net"
+        "modifiedBy": "email.2@example.net"
     },
     {
         "ID": "21298129-1b7b-4a8d-bf28-efb69a3a73dc",
         "name": "name2",
         "description": "description-21298129",
         "link": "link-21298129",
-        "status": {
-            "ID": "18573860-249e-43b7-9f81-2ca6be3f7497"
-        },
         "manager_ID": "10701615-8e99-42b5-8354-ba818c7e570e",
         "type_ID": "71838499-dbfe-480a-bfbf-9475f76f2590",
         "status_ID": "18573860-249e-43b7-9f81-2ca6be3f7497",
@@ -48,14 +35,11 @@
         "name": "name3",
         "description": "description-21298130",
         "link": "link-21298130",
-        "status": {
-            "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591"
-        },
         "type_ID": "71838499-dbfe-480a-bfbf-9475f76f2590",
         "status_ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
+        "manager_ID": "0faa588c-243d-4c3f-ab04-cd05d5c6c7a3",
         "startDate": "2007-05-05",
         "lastStatusChangeAt": "2003-02-24T23:00:00.000Z",
-        "completedAt": "2003-06-24T23:00:00.000Z",
         "createdAt": "2001-05-28T23:00:00.000Z",
         "createdBy": "createdBy.cohqq@example.org",
         "modifiedAt": "2007-06-27T23:00:00.000Z",
@@ -67,46 +51,11 @@
         "description": "description-2822400",
         "link": "link-2822400",
         "startDate": "2011-08-13",
-        "status": {
-            "ID": "18573860-249e-43b7-9f81-2ca6be3f7497"
-        },
         "status_ID": "18573860-249e-43b7-9f81-2ca6be3f7497",
-        "type": {
-            "ID": "71838499-dbfe-480a-bfbf-9475f76f2590"
-        },
         "type_ID": "71838499-dbfe-480a-bfbf-9475f76f2590",
-        "manager": {
-            "ID": "0faa588c-243d-4c3f-ab04-cd05d5c6c7a3"
-        },
         "manager_ID": "0faa588c-243d-4c3f-ab04-cd05d5c6c7a3",
         "lastStatusChangeAt": "2001-01-25T23:00:00.000Z",
         "completedAt": "2015-11-26T23:00:00.000Z",
-        "snapshots": [
-            {
-                "ID": "38205999-59af-4fe3-80ce-365db86b05ea",
-                "status": {
-                    "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591"
-                },
-                "status_ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
-                "project_ID": "2822400d-bddd-4165-91fd-79bfbec69d23",
-                "createdAt": "2015-11-24T23:00:00.000Z",
-                "createdBy": "createdBy.29vzr@example.com",
-                "modifiedAt": "2023-01-30T23:00:00.000Z",
-                "modifiedBy": "modifiedBy.29vzr@example.net"
-            },
-            {
-                "ID": "38206005-e58c-4aec-8743-0a51b06aa563",
-                "status": {
-                    "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591"
-                },
-                "status_ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
-                "project_ID": "2822400d-bddd-4165-91fd-79bfbec69d23",
-                "createdAt": "2008-03-02T23:00:00.000Z",
-                "createdBy": "createdBy.29vzs@example.org",
-                "modifiedAt": "2020-11-19T23:00:00.000Z",
-                "modifiedBy": "modifiedBy.29vzs@example.org"
-            }
-        ],
         "createdAt": "2006-08-15T23:00:00.000Z",
         "createdBy": "createdBy.1ohs0@example.net",
         "modifiedAt": "2003-10-11T23:00:00.000Z",
@@ -118,34 +67,11 @@
         "description": "description-3603728",
         "link": "link-3603728",
         "startDate": "2003-02-08",
-        "status": {
-            "ID": "18573860-249e-43b7-9f81-2ca6be3f7497"
-        },
         "type_ID": "71838499-dbfe-480a-bfbf-9475f76f2590",
         "status_ID": "18573860-249e-43b7-9f81-2ca6be3f7497",
-        "type": {
-            "ID": "71838499-dbfe-480a-bfbf-9475f76f2590"
-        },
-        "manager": {
-            "ID": "0faa588c-243d-4c3f-ab04-cd05d5c6c7a3"
-        },
         "manager_ID": "0faa588c-243d-4c3f-ab04-cd05d5c6c7a3",
         "lastStatusChangeAt": "2015-10-08T23:00:00.000Z",
         "completedAt": "2009-05-23T23:00:00.000Z",
-        "snapshots": [
-            {
-                "ID": "30724894-c290-4de8-aebc-59e92d973b3f",
-                "status": {
-                    "ID": "f97b678c-9408-4afe-ab0c-6e0c53119591"
-                },
-                "status_ID": "f97b678c-9408-4afe-ab0c-6e0c53119591",
-                "project_ID": "36037288-b2ed-43e3-913e-1e3e8949bd9b",
-                "createdAt": "2017-02-25T23:00:00.000Z",
-                "createdBy": "createdBy.iajha@example.net",
-                "modifiedAt": "2019-03-18T23:00:00.000Z",
-                "modifiedBy": "modifiedBy.iajha@example.com"
-            }
-        ],
         "createdAt": "2006-08-08T23:00:00.000Z",
         "createdBy": "createdBy.258nk@example.org",
         "modifiedAt": "2010-08-01T23:00:00.000Z",
@@ -157,34 +83,11 @@
         "description": "description-5300694",
         "link": "link-5300694",
         "startDate": "2003-11-27",
-        "status": {
-            "ID": "18573860-249e-43b7-9f81-2ca6be3f7497"
-        },
         "status_ID": "18573860-249e-43b7-9f81-2ca6be3f7497",
-        "type": {
-            "ID": "71838499-dbfe-480a-bfbf-9475f76f2590"
-        },
         "type_ID": "71838499-dbfe-480a-bfbf-9475f76f2590",
-        "manager": {
-            "ID": "0faa588c-243d-4c3f-ab04-cd05d5c6c7a3"
-        },
         "manager_ID": "0faa588c-243d-4c3f-ab04-cd05d5c6c7a3",
         "lastStatusChangeAt": "2023-02-17T23:00:00.000Z",
         "completedAt": "2005-06-14T23:00:00.000Z",
-        "snapshots": [
-            {
-                "ID": "22495248-dbe6-471f-8131-034dba5f5e77",
-                "status": {
-                    "ID": "18573860-249e-43b7-9f81-2ca6be3f7497"
-                },
-                "status_ID": "18573860-249e-43b7-9f81-2ca6be3f7497",
-                "project_ID": "53006944-d8e6-437c-b4dc-87d77a7f2058",
-                "createdAt": "2011-12-05T23:00:00.000Z",
-                "createdBy": "createdBy.de5g0@example.org",
-                "modifiedAt": "2018-09-15T23:00:00.000Z",
-                "modifiedBy": "modifiedBy.de5g0@example.net"
-            }
-        ],
         "createdAt": "2009-01-07T23:00:00.000Z",
         "createdBy": "createdBy.35m1i@example.net",
         "modifiedAt": "2023-02-14T23:00:00.000Z",

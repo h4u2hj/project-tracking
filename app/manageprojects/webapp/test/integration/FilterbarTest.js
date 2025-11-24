@@ -7,57 +7,56 @@ sap.ui.define([
 
     var Journey = {
         run: function () {
-            QUnit.module("Basic operations test");
+            QUnit.module("Filter fields tests");
 
             opaTest("#0: Start the application - Filter bar tests ", function (Given, When, Then) {
-                Given.iResetMockData({ ServiceUri: "/odata/v4/DocService" })
-                    .and.iResetTestData()
-                    .and.iStartMyApp();
-                Then.onTheDocumentList.iSeeThisPage();
+                Given.iResetMockData({ ServiceUri: "/odata/v4/ProjectService" });
+                Given.iResetTestData();
+                Given.iStartMyApp();
+
+                Then.onTheProjectsList.iSeeThisPage();
             });
             // @ts-ignore
             opaTest("#1: ListReport: Check List Report Page loads and has rows", function (Given, When, Then) {
-                Then.onTheDocumentList.onTable().iCheckRows();
-                When.onTheDocumentList.onFilterBar().iExecuteSearch();
+                Then.onTheProjectsList.onTable().iCheckRows();
+                When.onTheProjectsList.onFilterBar().iExecuteSearch();
             });
 
             opaTest("#2: ListReport: Check filters default state", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
                 filterBarActions.iOpenFilterAdaptation()
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "modifiedBy" }, { selected: false })
                     .and.iCheckAdaptationFilterField({ property: "modifiedAt" }, { selected: false })
                     .and.iCheckAdaptationFilterField({ property: "createdBy" }, { selected: false })
-                    .and.iCheckAdaptationFilterField({ property: "createdAt" }, { selected: true })
-                    .and.iCheckAdaptationFilterField({ property: "employee_ID" }, { selected: true })
-                    .and.iCheckAdaptationFilterField({ property: "currentProcessor_ID" }, { selected: true })
+                    .and.iCheckAdaptationFilterField({ property: "createdAt" }, { selected: false })
+                    .and.iCheckAdaptationFilterField({ property: "manager_ID" }, { selected: true })
                     .and.iCheckAdaptationFilterField({ property: "type_ID" }, { selected: true })
                     .and.iCheckAdaptationFilterField({ property: "status_ID" }, { selected: true })
-                    .and.iCheckAdaptationFilterField({ property: "effectiveDate" }, { selected: true })
-                    .and.iCheckAdaptationFilterField({ property: "status/requireProcessor" }, { selected: true })
+                    .and.iCheckAdaptationFilterField({ property: "startDate" }, { selected: true })
                     .and.iConfirmFilterAdaptation()
             })
 
             opaTest("#3: Check modifiedBy filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
-                var tableActions = When.onTheDocumentList.onTable()
-                var tableAssertions = Then.onTheDocumentList.onTable()
+                var tableActions = When.onTheProjectsList.onTable()
+                var tableAssertions = Then.onTheProjectsList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "modifiedBy" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "modifiedBy" }, { selected: true })
 
-                filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "I444444@sap.com")
+                filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "email.2@example.net")
                     .and.iExecuteSearch()
-                filterBarAssertions.iCheckFilterField({ property: "modifiedBy" }, "I444444@sap.com")
+                filterBarAssertions.iCheckFilterField({ property: "modifiedBy" }, "email.2@example.net")
 
-                tableActions.iAddAdaptationColumn("Last Changed By")
-                tableAssertions.iCheckRows({ "Last Changed By": "Sarah Williams (I444444)" }, 4)
+                tableActions.iAddAdaptationColumn("Modified By")
+                tableAssertions.iCheckRows({ "Modified By": "email.2@example.net" }, 1)
 
-                tableActions.iRemoveAdaptationColumn("Last Changed By")
+                tableActions.iRemoveAdaptationColumn("Modified By")
                 filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "", true)
                     .and.iExecuteSearch()
                 filterBarActions.iRemoveAdaptationFilterField({ property: "modifiedBy" })
@@ -65,21 +64,21 @@ sap.ui.define([
             })
 
             opaTest("#4: Check modifiedAt filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
-                var tableActions = When.onTheDocumentList.onTable()
-                var tableAssertions = Then.onTheDocumentList.onTable()
+                var tableActions = When.onTheProjectsList.onTable()
+                var tableAssertions = Then.onTheProjectsList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "modifiedAt" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "modifiedAt" }, { selected: true })
 
-                filterBarActions.iChangeFilterField({ property: "modifiedAt" }, "From Jan 1, 2031")
+                filterBarActions.iChangeFilterField({ property: "modifiedAt" }, "From Jan 1, 2022")
                     .and.iExecuteSearch()
 
                 tableActions.iAddAdaptationColumn("modifiedAt")
-                tableAssertions.iCheckRows({}, 2)
+                tableAssertions.iCheckRows({}, 1)
 
                 tableActions.iRemoveAdaptationColumn("modifiedAt")
                 filterBarActions.iChangeFilterField({ property: "modifiedAt" }, "", true)
@@ -89,22 +88,22 @@ sap.ui.define([
             })
 
             opaTest("#5: Check createdBy filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
-                var tableActions = When.onTheDocumentList.onTable()
-                var tableAssertions = Then.onTheDocumentList.onTable()
+                var tableActions = When.onTheProjectsList.onTable()
+                var tableAssertions = Then.onTheProjectsList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "createdBy" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "createdBy" }, { selected: true })
 
-                filterBarActions.iChangeFilterField({ property: "createdBy" }, "I222222@sap.com")
+                filterBarActions.iChangeFilterField({ property: "createdBy" }, "email.1@example.net")
                     .and.iExecuteSearch()
-                filterBarAssertions.iCheckFilterField({ property: "createdBy" }, "I222222@sap.com")
+                filterBarAssertions.iCheckFilterField({ property: "createdBy" }, "email.1@example.net")
 
                 tableActions.iAddAdaptationColumn("Created By")
-                tableAssertions.iCheckRows({ "Created By": "Mary Johnson (I222222)" }, 4)
+                tableAssertions.iCheckRows({ "Created By": "email.1@example.net" }, 1)
 
                 tableActions.iRemoveAdaptationColumn("Created By")
                 filterBarActions.iChangeFilterField({ property: "createdBy" }, "", true)
@@ -114,117 +113,88 @@ sap.ui.define([
             })
 
             opaTest("#6: Check createdAt filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
-                var tableActions = When.onTheDocumentList.onTable()
-                var tableAssertions = Then.onTheDocumentList.onTable()
+                var tableActions = When.onTheProjectsList.onTable()
+                var tableAssertions = Then.onTheProjectsList.onTable()
 
-                filterBarActions.iChangeFilterField({ property: "createdAt" }, "From Jan 1, 2031")
+                filterBarActions.iAddAdaptationFilterField({ property: "createdAt" })
+                filterBarAssertions.iCheckAdaptationFilterField({ property: "createdAt" }, { selected: true })
+                filterBarActions.iChangeFilterField({ property: "createdAt" }, "From Jan 1, 2002")
                     .and.iExecuteSearch()
 
-                tableAssertions.iCheckRows({}, 2)
+                tableActions.iAddAdaptationColumn("createdAt")
+                tableAssertions.iCheckRows({}, 1)
 
+                tableActions.iRemoveAdaptationColumn("createdAt")
                 filterBarActions.iChangeFilterField({ property: "createdAt" }, "", true)
                     .and.iExecuteSearch()
+                filterBarActions.iRemoveAdaptationFilterField({ property: "createdAt" })
+                filterBarAssertions.iCheckAdaptationFilterField({ property: "createdAt" }, { selected: false })
             })
 
-            opaTest("#7: Check employee filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+            opaTest("#7: Check manager filter", function (Given, When, Then) {
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
-                var tableAssertions = Then.onTheDocumentList.onTable()
+                var tableAssertions = Then.onTheProjectsList.onTable()
 
-                filterBarActions.iChangeFilterField({ property: "employee_ID" }, "John Smith (I111111)")
+                filterBarActions.iChangeFilterField({ property: "manager_ID" }, "firstName1 lastName1 (D107)")
                     .and.iExecuteSearch()
 
-                filterBarAssertions.iCheckFilterField({ property: "employee_ID" }, "John Smith (I111111)")
-                tableAssertions.iCheckRows({ "Employee": "John Smith (I111111)" }, 4)
+                filterBarAssertions.iCheckFilterField({ property: "manager_ID" }, "firstName1 lastName1 (D107)")
+                tableAssertions.iCheckRows({ "Manager": "firstName1 lastName1 (D107)" }, 1)
 
-                filterBarActions.iChangeFilterField({ property: "employee_ID" }, "", true)
+                filterBarActions.iChangeFilterField({ property: "manager_ID" }, "", true)
                     .and.iExecuteSearch()
             });
 
             opaTest("#8: Check type filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
-                var tableAssertions = Then.onTheDocumentList.onTable()
+                var tableAssertions = Then.onTheProjectsList.onTable()
 
-                filterBarActions.iChangeFilterField({ property: "type_ID" }, "Informational")
+                filterBarActions.iChangeFilterField({ property: "type_ID" }, "TypeName")
                     .and.iExecuteSearch()
 
-                filterBarAssertions.iCheckFilterField({ property: "type_ID" }, "Informational")
-                tableAssertions.iCheckRows({ "Type": "Informational" }, 2)
+                filterBarAssertions.iCheckFilterField({ property: "type_ID" }, "TypeName")
+                tableAssertions.iCheckRows({ "Type": "TypeName" }, 2)
 
                 filterBarActions.iChangeFilterField({ property: "type_ID" }, "", true)
                     .and.iExecuteSearch()
             });
 
             opaTest("#9: Check status filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
-                var tableAssertions = Then.onTheDocumentList.onTable()
+                var tableAssertions = Then.onTheProjectsList.onTable()
 
-                filterBarActions.iChangeFilterField({ property: "status_ID" }, "On Hold")
+                filterBarActions.iChangeFilterField({ property: "status_ID" }, "name-new")
                     .and.iExecuteSearch()
 
-                filterBarAssertions.iCheckFilterField({ property: "status_ID" }, "On Hold")
-                tableAssertions.iCheckRows({ "Status": "On Hold" }, 2)
+                filterBarAssertions.iCheckFilterField({ property: "status_ID" }, "name-new")
+                tableAssertions.iCheckRows({ "Status": "name-new" }, 2)
 
                 filterBarActions.iChangeFilterField({ property: "status_ID" }, "", true)
                     .and.iExecuteSearch()
             });
 
-            opaTest("#10: Check effective from filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
+            opaTest("#10: Check started on filter", function (Given, When, Then) {
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
-                var tableAssertions = Then.onTheDocumentList.onTable()
+                var tableAssertions = Then.onTheProjectsList.onTable()
 
-                filterBarActions.iChangeFilterField({ property: "effectiveDate" }, "Jun 9, 2025")
+                filterBarActions.iChangeFilterField({ property: "startDate" }, "Mar 24, 2017")
                     .and.iExecuteSearch()
 
-                //filterBarAssertions.iCheckFilterField({ property: "effectiveDate" }, "Jun 9, 2025")
+                //filterBarAssertions.iCheckFilterField({ property: "startDate" }, "Mar 24, 2017")
                 tableAssertions.iCheckRows({}, 1)
 
-                filterBarActions.iChangeFilterField({ property: "effectiveDate" }, "", true)
-                    .and.iExecuteSearch()
-            });
-
-            opaTest("11: Check processor filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
-                var tableActions = When.onTheDocumentList.onTable()
-                var tableAssertions = Then.onTheDocumentList.onTable()
-
-                filterBarAssertions.iCheckAdaptationFilterField({ property: "currentProcessor_ID" }, { selected: true })
-
-                filterBarActions.iChangeFilterField({ property: "currentProcessor_ID" }, "Ad Min (I123456)")
-                    .and.iExecuteSearch()
-
-
-                filterBarAssertions.iCheckFilterField({ property: "currentProcessor_ID" }, "Ad Min (I123456)")
-                tableAssertions.iCheckRows({ "Processor": "Ad Min (I123456)" }, 2)
-
-                filterBarActions.iChangeFilterField({ property: "currentProcessor_ID" }, "", true)
-                    .and.iExecuteSearch()
-
-            });
-
-            opaTest("#12 Check waiting for processor filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocumentList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocumentList.onFilterBar()
-
-                var tableAssertions = Then.onTheDocumentList.onTable()
-
-                filterBarActions.iChangeFilterField({ property: "status/requireProcessor" }, "Yes")
-                    .and.iExecuteSearch()
-
-                tableAssertions.iCheckRows({}, 2)
-
-                filterBarActions.iChangeFilterField({ property: "status/requireProcessor" }, "", true)
+                filterBarActions.iChangeFilterField({ property: "startDate" }, "", true)
                     .and.iExecuteSearch()
             });
 
