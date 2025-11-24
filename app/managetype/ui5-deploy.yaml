@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
-specVersion: '3.1'
+
+specVersion: "3.1"
 metadata:
   name: managetype
 type: application
@@ -9,13 +10,14 @@ resources:
 builder:
   resources:
     excludes:
-      - "/test/**"
-      - "/localService/**"
+      - /test/**
+      - /localService/**
   customTasks:
     - name: ui5-task-zipper
-      afterTask: generateVersionInfo
+      afterTask: generateCachebusterInfo
       configuration:
         archiveName: managetype
+        relativePaths: true
         additionalFiles:
           - xs-app.json
     - name: webide-extension-task-updateManifestJson

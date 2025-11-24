@@ -7,7 +7,9 @@
   "devDependencies": {
     "@ljharb/tsconfig": "^0.3.2",
     "@sap/cds-dk": "^9.1.0",
-    "cds-launchpad-plugin": "^2.2.0"
+    "cds-launchpad-plugin": "^2.2.0",
+    "rimraf": "^5.0.5",
+    "mbt": "^1.2.29"
   },
   "dependencies": {
     "@sap/cds": "^9.3.1"
@@ -23,5 +25,10 @@
       "theme": "sap_horizon",
       "version": "1.120.1"
     }
+  },
+  "scripts": {
+    "undeploy": "cf undeploy project-tracking --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
   }
 }

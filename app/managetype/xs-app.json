@@ -6,15 +6,15 @@
       "source": "^/odata/v4/(.*)$",
       "target": "/odata/v4/$1",
       "destination": "srv-api",
-      "csrfProtection": true,
-      "authenticationType": "xsuaa"
+      "authenticationType": "xsuaa",
+      "csrfProtection": true
     },
     {
-      "source": "^/?odata/(.*)$",
+      "source": "^/odata/(.*)$",
       "target": "/odata/$1",
       "destination": "srv-api",
-      "csrfProtection": true,
-      "authenticationType": "xsuaa"
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
     },
     {
       "source": "^/resources/(.*)$",
@@ -23,9 +23,16 @@
       "destination": "ui5"
     },
     {
+      "source": "^/test-resources/(.*)$",
+      "target": "/test-resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
       "source": "^(.*)$",
       "target": "$1",
-      "service": "html5-apps-repo-rt"
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
     }
   ]
 }
