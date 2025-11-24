@@ -33,3 +33,6 @@ srv/bin/*
 .vscode
 .idea
 .reloadtrigger
+
+Test Results/
+htmlReport/

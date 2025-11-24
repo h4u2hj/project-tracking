@@ -1,0 +1,143 @@
+@startuml
+skinparam classAttributeIconSize 0
+top to bottom direction
+
+package "project_tracking" {
+  class Application {
+    +{static} main(args: String[]): void
+  }
+}
+
+package "project_tracking.handlers" {
+  class CompletedProjectServiceHandler {
+    -projectManager: ProjectManager
+    ~messages: Messages
+    +CompletedProjectServiceHandler(projectManager: ProjectManager)
+    +onChangeStatus(context: ProjectsChangeStatusContext): void
+    +afterRead(context: CdsReadEventContext, projects: List<Projects>): void
+  }
+
+  class ProjectServiceHandler {
+    -projectManager: ProjectManager
+    ~messages: Messages
+    +ProjectServiceHandler(projectManager: ProjectManager)
+    +onChangeStatus(context: ProjectsChangeStatusContext): void
+    +afterRead(context: CdsReadEventContext, projects: List<Projects>): void
+  }
+
+  class StatusServiceHandler {
+    -statusManager: StatusManager
+    +StatusServiceHandler(statusManager: StatusManager)
+    +onReadStatus(statuses: Stream<Status>): void
+  }
+
+  class TypeServiceHandler {
+    -typeManager: TypeManager
+    +TypeServiceHandler(typeManager: TypeManager)
+    +onReadType(types: Stream<Type>): void
+  }
+}
+
+package "project_tracking.manager" {
+  class ProjectManager {
+    -snapshotRepository: SnapshotRepository
+    -projectRepository: ProjectRepository
+    -statusRepository: StatusRepository
+    -eventContextAnalyzer: EventContextAnalyzer
+    +ProjectManager(snapshotRepository: SnapshotRepository, projectRepository: ProjectRepository, statusRepository: StatusRepository)
+    +projectByContext(context: ProjectsChangeStatusContext): Projects
+    +changeStatus(context: ProjectsChangeStatusContext): Projects
+    -createNewSnapshot(projectId: String): void
+    +projectById(projectId: String): Projects
+    -isStatusFinal(statusId: String): boolean
+    +getProjectStatusId(projectId: String): String
+    +setStatusFieldToReadOnly(projects: List<Projects>): void
+  }
+
+  class StatusManager {
+    -statusRepository: StatusRepository
+    +StatusManager(statusRepository: StatusRepository)
+    +updateTotalProjects(status: Status): void
+    -calculateProjectByStatus(statusId: String): int
+    +updateDeleteAc(status: Status): void
+    -evaluateDeleteAc(statusId: String): boolean
+  }
+
+  class TypeManager {
+    -typeRepository: TypeRepository
+    +TypeManager(typeRepository: TypeRepository)
+    +updateTotalFinishedProjects(type: Type): void
+    -calculateFinishedProjectByType(typeId: String): int
+    +updateTotalWorkingProjects(type: Type): void
+    -calculateWorkingProjectByType(typeId: String): int
+    +updateDeleteAc(type: Type): void
+    -evaluateDeleteAc(typeId: String): boolean
+  }
+}
+
+package "project_tracking.repository" {
+  class ProjectRepository {
+    ~db: PersistenceService
+    +updateProjectStatus(projectId: String, newStatusId: String, timeOfChange: Timestamp): void
+    +setCompletedTime(projectId: String, timeOfCompletion: Timestamp): void
+    +statusIdByProjectId(projectId: String): String
+    +projectById(projectId: String): Projects
+  }
+
+  class SnapshotRepository {
+    ~db: PersistenceService
+    +createSnapshot(formerStatusId: String, projectId: String): void
+    +getSnapshotByProjectId(projectId: String): Result
+  }
+
+  class StatusRepository {
+    ~db: PersistenceService
+    +getStatusById(statusId: String): Result
+    +selectProjectsByStatusId(statusId: String): Result
+    +getFinalStatusByStatusId(statusId: String): Boolean
+  }
+
+  class TypeRepository {
+    ~db: PersistenceService
+    +getTypeById(id: String): Result
+    +selectFinishedProjectsByTypeId(id: String): Result
+    +selectWorkingProjectsByTypeId(id: String): Result
+    +selectProjectsByTypeId(typeId: String): Result
+  }
+}
+
+package "project_tracking.utilities" {
+  class EventContextAnalyzer {
+    
+  }
+
+  class ProjectNotFoundException {
+    +ProjectNotFoundException(message: String)
+    +ProjectNotFoundException(message: String, cause: Throwable)
+  }
+}
+
+Application ..> SpringApplication
+CompletedProjectServiceHandler --> ProjectManager
+CompletedProjectServiceHandler ..> Messages
+ProjectServiceHandler --> ProjectManager
+ProjectServiceHandler ..> Messages
+StatusServiceHandler --> StatusManager
+TypeServiceHandler --> TypeManager
+ProjectManager --> SnapshotRepository
+ProjectManager --> ProjectRepository
+ProjectManager --> StatusRepository
+ProjectManager --> EventContextAnalyzer
+StatusManager --> StatusRepository
+TypeManager --> TypeRepository
+SnapshotRepository ..> PersistenceService
+ProjectRepository ..> PersistenceService
+StatusRepository ..> PersistenceService
+TypeRepository ..> PersistenceService
+Exception <|-- ProjectNotFoundException
+
+StatusRepository -[hidden]down-> TypeRepository
+
+EventContextAnalyzer -[hidden]down-> ProjectNotFoundException
+
+@enduml
