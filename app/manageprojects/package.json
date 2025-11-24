@@ -9,7 +9,7 @@
   ],
   "main": "webapp/index.html",
   "devDependencies": {
-    "@sap-ux/ui5-middleware-fe-mockserver": "^2.3.17",
+    "@sap-ux/ui5-middleware-fe-mockserver": "^2.3.21",
     "@sap/ui5-builder-webide-extension": "^1.1.9",
     "@sap/ux-ui5-tooling": "1",
     "@ui5/cli": "^4.0.16",
@@ -28,7 +28,10 @@
   },
   "ui5": {
     "dependencies": [
-      "ui5-task-zipper"
+      "ui5-task-zipper",
+      "@sap/ui5-builder-webide-extension",
+      "mbt",
+      "@sap-ux/ui5-middleware-fe-mockserver"
     ]
   }
 }

@@ -1,7 +1,7 @@
 _schema-version: 3.3.0
 ID: project-tracking
 version: 1.0.0-SNAPSHOT
-description: "A simple CAP project."
+description: "Create and manage projects."
 parameters:
   enable-parallel-deployments: true
   deploy_mode: html5-repo
@@ -28,15 +28,9 @@ modules:
     requires:
       - name: project-tracking-db
       - name: project-tracking-auth
-  - name: project-tracking-srv
-    type: java
-    path: gen/srv
-    requires:
-      - name: project-tracking-db
-
   - name: project-tracking-db-deployer
     type: hdb
-    path: gen/db
+    path: db
     parameters:
       buildpack: nodejs_buildpack
     build-parameters:
@@ -63,6 +57,12 @@ modules:
       - name: project-tracking-html5-runtime
       - name: project-tracking-portal
       - name: project-tracking-auth
+      - name: project-tracking-destination-service
+        group: destinations
+        properties:
+          forwardAuthToken: false
+          name: ui5
+          url: https://ui5.sap.com
     provides:
       - name: app-api
         properties:
@@ -179,6 +179,24 @@ resources:
     parameters:
       service: portal
       service-plan: standard
+  - name: project-tracking-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: false
+        init_data:
+          subaccount:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: project-tracking-destination-service
+      service-plan: lite
   - name: project-tracking-auth
     type: org.cloudfoundry.managed-service
     parameters:
