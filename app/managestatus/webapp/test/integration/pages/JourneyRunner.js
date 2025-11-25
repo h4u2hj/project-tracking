@@ -11,6 +11,10 @@ sap.ui.define([
 			onTheStatusList: StatusList,
 			onTheStatusObjectPage: StatusObjectPage
         },
+        opaConfig: {
+            autoWait: true,
+            timeout: 10
+        },
         async: true
     });
 

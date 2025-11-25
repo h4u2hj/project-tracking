@@ -7,53 +7,52 @@ sap.ui.define([
 
     var Journey = {
         run: function () {
-            QUnit.module("Basic operations test");
+           QUnit.module("Filter fields tests");
 
             opaTest("#0: Start the application - Filter bar tests ", function (Given, When, Then) {
-                Given.iResetMockData({ ServiceUri: "/odata/v4/DocStatusService" })
+                Given.iResetMockData({ ServiceUri: "/odata/v4/StatusService" })
                     .and.iResetTestData()
                     .and.iStartMyApp();
-                Then.onTheDocStatusList.iSeeThisPage();
+                Then.onTheStatusList.iSeeThisPage();
             });
             
             opaTest("#1: ListReport: Check List Report Page loads and has rows", function (Given, When, Then) {
-                Then.onTheDocStatusList.onTable().iCheckRows();
-                When.onTheDocStatusList.onFilterBar().iExecuteSearch();
+                Then.onTheStatusList.onTable().iCheckRows();
+                When.onTheStatusList.onFilterBar().iExecuteSearch();
             });
 
             opaTest("#2: ListReport: Check filters default state", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocStatusList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocStatusList.onFilterBar()
+                var filterBarActions = When.onTheStatusList.onFilterBar()
+                var filterBarAssertions = Then.onTheStatusList.onFilterBar()
 
                 filterBarActions.iOpenFilterAdaptation()
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "modifiedBy" }, { selected: false })
                     .and.iCheckAdaptationFilterField({ property: "modifiedAt" }, { selected: false })
                     .and.iCheckAdaptationFilterField({ property: "createdBy" }, { selected: false })
                     .and.iCheckAdaptationFilterField({ property: "createdAt" }, { selected: false })
-                    .and.iCheckAdaptationFilterField({ property: "requireProcessor" }, { selected: true })
-                    .and.iCheckAdaptationFilterField({ property: "finalState" }, { selected: true })
+                    .and.iCheckAdaptationFilterField({ property: "isFinalStatus" }, { selected: true })
                     .and.iConfirmFilterAdaptation()
             })
 
             opaTest("#3: Check modifiedBy filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocStatusList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocStatusList.onFilterBar()
+                var filterBarActions = When.onTheStatusList.onFilterBar()
+                var filterBarAssertions = Then.onTheStatusList.onFilterBar()
 
-                var tableActions = When.onTheDocStatusList.onTable()
-                var tableAssertions = Then.onTheDocStatusList.onTable()
+                var tableActions = When.onTheStatusList.onTable()
+                var tableAssertions = Then.onTheStatusList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "modifiedBy" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "modifiedBy" }, { selected: true })
 
-                filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "I234567@sap.com")
+                filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "email.2@example.net")
                     .and.iExecuteSearch()
-                filterBarAssertions.iCheckFilterField({ property: "modifiedBy" }, "I234567@sap.com")
+                filterBarAssertions.iCheckFilterField({ property: "modifiedBy" }, "email.2@example.net")
 
-                tableActions.iAddAdaptationColumn("Last Changed By")
-                tableAssertions.iCheckRows({ "Last Changed By": "Facility Manager (I234567)" }, 3)
+                tableActions.iAddAdaptationColumn("Modified By")
+                tableAssertions.iCheckRows({ "Modified By": "email.2@example.net" }, 1)
 
-                tableActions.iRemoveAdaptationColumn("Last Changed By")
+                tableActions.iRemoveAdaptationColumn("Modified By")
                 filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "", true)
                     .and.iExecuteSearch()
                 filterBarActions.iRemoveAdaptationFilterField({ property: "modifiedBy" })
@@ -61,21 +60,21 @@ sap.ui.define([
             })
 
             opaTest("#4: Check modifiedAt filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocStatusList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocStatusList.onFilterBar()
+                var filterBarActions = When.onTheStatusList.onFilterBar()
+                var filterBarAssertions = Then.onTheStatusList.onFilterBar()
 
-                var tableActions = When.onTheDocStatusList.onTable()
-                var tableAssertions = Then.onTheDocStatusList.onTable()
+                var tableActions = When.onTheStatusList.onTable()
+                var tableAssertions = Then.onTheStatusList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "modifiedAt" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "modifiedAt" }, { selected: true })
 
-                filterBarActions.iChangeFilterField({ property: "modifiedAt" }, "From Jan 1, 2025")
+                filterBarActions.iChangeFilterField({ property: "modifiedAt" }, "From Jan 1, 2021")
                     .and.iExecuteSearch()
 
                 tableActions.iAddAdaptationColumn("modifiedAt")
-                tableAssertions.iCheckRows({}, 2)
+                tableAssertions.iCheckRows({}, 3)
 
                 tableActions.iRemoveAdaptationColumn("modifiedAt")
                 filterBarActions.iChangeFilterField({ property: "modifiedAt" }, "", true)
@@ -85,22 +84,22 @@ sap.ui.define([
             })
 
             opaTest("#5: Check createdBy filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocStatusList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocStatusList.onFilterBar()
+                var filterBarActions = When.onTheStatusList.onFilterBar()
+                var filterBarAssertions = Then.onTheStatusList.onFilterBar()
 
-                var tableActions = When.onTheDocStatusList.onTable()
-                var tableAssertions = Then.onTheDocStatusList.onTable()
+                var tableActions = When.onTheStatusList.onTable()
+                var tableAssertions = Then.onTheStatusList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "createdBy" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "createdBy" }, { selected: true })
 
-                filterBarActions.iChangeFilterField({ property: "createdBy" }, "I345678@sap.com")
+                filterBarActions.iChangeFilterField({ property: "createdBy" }, "email.2@example.net")
                     .and.iExecuteSearch()
-                filterBarAssertions.iCheckFilterField({ property: "createdBy" }, "I345678@sap.com")
+                filterBarAssertions.iCheckFilterField({ property: "createdBy" }, "email.2@example.net")
 
                 tableActions.iAddAdaptationColumn("Created By")
-                tableAssertions.iCheckRows({ "Created By": "Recep2 NIst2 (I345678)" }, 3)
+                tableAssertions.iCheckRows({ "Created By": "email.2@example.net" }, 2)
 
                 tableActions.iRemoveAdaptationColumn("Created By")
                 filterBarActions.iChangeFilterField({ property: "createdBy" }, "", true)
@@ -110,18 +109,18 @@ sap.ui.define([
             })
 
             opaTest("#6: Check createdAt filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocStatusList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocStatusList.onFilterBar()
+                var filterBarActions = When.onTheStatusList.onFilterBar()
+                var filterBarAssertions = Then.onTheStatusList.onFilterBar()
 
-                var tableActions = When.onTheDocStatusList.onTable()
-                var tableAssertions = Then.onTheDocStatusList.onTable()
+                var tableActions = When.onTheStatusList.onTable()
+                var tableAssertions = Then.onTheStatusList.onTable()
 
                 filterBarActions.iAddAdaptationFilterField({ property: "createdAt" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "createdAt" }, { selected: true })
 
                 tableActions.iAddAdaptationColumn("createdAt")
 
-                filterBarActions.iChangeFilterField({ property: "createdAt" }, "From Jan 1, 2025")
+                filterBarActions.iChangeFilterField({ property: "createdAt" }, "From Jan 1, 2022")
                     .and.iExecuteSearch()
 
                 tableAssertions.iCheckRows({}, 2)
@@ -135,33 +134,17 @@ sap.ui.define([
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "createdAt" }, { selected: false })
             })
 
-            opaTest("#7: Check Requires Approval filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocStatusList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocStatusList.onFilterBar()
+            opaTest("#7: Check final status filter", function (Given, When, Then) {
+                var filterBarActions = When.onTheStatusList.onFilterBar()
 
-                var tableAssertions = Then.onTheDocStatusList.onTable()
+                var tableAssertions = Then.onTheStatusList.onTable()
 
-                filterBarActions.iChangeFilterField({ property: "requireProcessor" }, "Yes")
+                filterBarActions.iChangeFilterField({ property: "isFinalStatus" }, "Yes")
                     .and.iExecuteSearch()
 
-                tableAssertions.iCheckRows({ "Requires Approval": "Yes" }, 4)
+                tableAssertions.iCheckRows({ "Final State": "Yes" }, 2)
 
-                filterBarActions.iChangeFilterField({ property: "requireProcessor" }, "", true)
-                    .and.iExecuteSearch()
-            });
-
-            opaTest("#8: Check final state filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocStatusList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocStatusList.onFilterBar()
-
-                var tableAssertions = Then.onTheDocStatusList.onTable()
-
-                filterBarActions.iChangeFilterField({ property: "finalState" }, "Yes")
-                    .and.iExecuteSearch()
-
-                tableAssertions.iCheckRows({ "Final State": "Yes" }, 3)
-
-                filterBarActions.iChangeFilterField({ property: "finalState" }, "", true)
+                filterBarActions.iChangeFilterField({ property: "isFinalStatus" }, "", true)
                     .and.iExecuteSearch()
             });
 

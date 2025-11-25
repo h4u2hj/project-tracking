@@ -1,5 +1,5 @@
 {
-  "welcomeFile": "/cp.portal",
+  "welcomeFile": "manageprojects",
   "authenticationMethod": "route",
   "routes": [
     {

@@ -1,0 +1,14 @@
+specVersion: "2.5"
+metadata:
+  name: managetype
+type: application
+server:
+  customMiddleware:
+    - name: sap-fe-mockserver
+      beforeMiddleware: csp
+      configuration:
+        services:
+          - urlPath: '/odata/v4/StatusService'
+            metadataPath: '../../srv/src/main/resources/edmx/odata/v4/szakdolgozat.srv.service.StatusService.xml'
+            mockdataPath: './webapp/localService/data'
+            generateMockData: false
