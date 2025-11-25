@@ -10,105 +10,105 @@ sap.ui.define([
             QUnit.module("Basic operations test");
 
             opaTest("Start application", function (Given, When, Then) {
-                Given.iResetMockData({ ServiceUri: "/odata/v4/DocStatusService" });
+                Given.iResetMockData({ ServiceUri: "/odata/v4/TypeService" });
                 Given.iResetTestData();
                 Given.iStartMyApp();
 
-                Then.onTheDocTypeList.iSeeThisPage();
+                Then.onTheTypeList.iSeeThisPage();
 
             });
 
             opaTest("#1: ListReport: Check List Report Page loads and has rows", function (Given, When, Then) {
-                Then.onTheDocTypeList.onTable().iCheckRows();
-                When.onTheDocTypeList.onFilterBar().iExecuteSearch();
+                Then.onTheTypeList.onTable().iCheckRows();
+                When.onTheTypeList.onFilterBar().iExecuteSearch();
             });
 
-            opaTest("#2: ListReport: Should be able to delete and create: Delete shouldn't be enabled, create should", function (Given, When, Then) {
-                Then.onTheDocTypeList.onTable().iCheckCreate({ visible: true });
-                Then.onTheDocTypeList.onTable().iCheckDelete({ enabled: false });
-                Then.onTheDocTypeList.onTable().iCheckAction("Edit", { visible: false });
+            opaTest("#2: ListReport: Check actions: Delete shouldn't be enabled, create should", function (Given, When, Then) {
+                Then.onTheTypeList.onTable().iCheckCreate({ visible: true });
+                Then.onTheTypeList.onTable().iCheckDelete({ enabled: false });
+                Then.onTheTypeList.onTable().iCheckAction("Edit", { visible: false });
             });
 
             opaTest("#3: ListReport: Create new type", function (Given, When, Then) {
-                When.onTheDocTypeList.onTable().iExecuteCreate();
-                Then.onTheDocTypeObjectPage.iSeeThisPage();
+                When.onTheTypeList.onTable().iExecuteCreate();
+                Then.onTheTypeObjectPage.iSeeThisPage();
 
-                When.onTheDocTypeObjectPage.iEnterTextByLabel("Name", "TestType")
+                When.onTheTypeObjectPage.iEnterTextByProperty("name", "TestType")
 
-
-                When.onTheDocTypeObjectPage.iPressButtonWithText("Create")
-                Then.iSeeMessageToast("Document type created.");
+                When.onTheTypeObjectPage.iPressButtonWithText("Create")
+                Then.iSeeMessageToast("Project type created.");
                 When.waitFor({
                     success: function () {
-                        sap.ui.test.Opa5.getWindow().history.go(-1);
+                        sap.ui.test.Opa5.getWindow().history.back();
                     }
                 });
-                Then.onTheDocTypeList.iSeeThisPage();
+                Then.onTheTypeList.iSeeThisPage();
+
+                Then.onTheTypeList.onTable().iCheckRows({}, 5);
 
             });
 
             opaTest("#4: ListReport: Should be able to select and delete", function (Given, When, Then) {
-                When.onTheDocTypeList.onTable().iSelectRows(0);
-                Then.onTheDocTypeList.onTable().iCheckDelete({ enabled: true, visible: true });
-                When.onTheDocTypeList.onTable().iSelectRows(0);
+                When.onTheTypeList.onTable().iSelectRows(1);
+                Then.onTheTypeList.onTable().iCheckDelete({ enabled: true, visible: true });
+                When.onTheTypeList.onTable().iSelectRows(1);
             });
 
             opaTest("#5 : Should be able to delete", function (Given, When, Then) {
-                When.onTheDocTypeList.onTable().iSelectRows(0);
-                When.onTheDocTypeList.onTable().iExecuteDelete();
-                When.onTheDocTypeList.onDialog().iConfirm();
-                Then.iSeeMessageToast("Document type was deleted.");
+                When.onTheTypeList.onTable().iSelectRows(2);
+                When.onTheTypeList.onTable().iExecuteDelete();
+                When.onTheTypeList.onDialog().iConfirm();
+                Then.iSeeMessageToast("Project type was deleted.");
             });
 
             opaTest("#6 : Should be able to delete multiple at the same time", function (Given, When, Then) {
-                When.onTheDocTypeList.onTable().iSelectRows(0);
-                When.onTheDocTypeList.onTable().iSelectRows(1);
-                Then.onTheDocTypeList.onTable().iCheckDelete({ enabled: true, visible: true });
-                When.onTheDocTypeList.onTable().iExecuteDelete();
-                When.onTheDocTypeList.onDialog().iConfirm();
-                Then.iSeeMessageToast("Document types were deleted.");
+                When.onTheTypeList.onTable().iSelectRows(0);
+                When.onTheTypeList.onTable().iSelectRows(1);
+                Then.onTheTypeList.onTable().iCheckDelete({ enabled: true, visible: true });
+                When.onTheTypeList.onTable().iExecuteDelete();
+                When.onTheTypeList.onDialog().iConfirm();
+                Then.iSeeMessageToast("Project types were deleted.");
             });
 
             opaTest("#7: Object Page: Check Object Page loads", function (Given, When, Then) {
-                When.onTheDocTypeList.onTable().iPressRow(1);
-                Then.onTheDocTypeObjectPage.iSeeThisPage();
+                When.onTheTypeList.onTable().iPressRow(0);
+                Then.onTheTypeObjectPage.iSeeThisPage();
 
                 When.waitFor({
                     success: function () {
-                        sap.ui.test.Opa5.getWindow().history.go(-1);
+                        sap.ui.test.Opa5.getWindow().history.back();
                     }
                 });
-                Then.onTheDocTypeList.iSeeThisPage();
+                Then.onTheTypeList.iSeeThisPage();
             });
 
             opaTest("#8: Object Page: Delete type", function (Given, When, Then) {
-                When.onTheDocTypeList.onTable().iPressRow(1);
-                Then.onTheDocTypeObjectPage.iSeeThisPage();
-                When.onTheDocTypeObjectPage.onHeader().iExecuteDelete();
-                When.onTheDocTypeList.onDialog().iConfirm();
-                Then.iSeeMessageToast("Document type was deleted.");
+                When.onTheTypeList.onTable().iPressRow(0);
+                Then.onTheTypeObjectPage.iSeeThisPage();
+                When.onTheTypeObjectPage.onHeader().iExecuteDelete();
+                When.onTheTypeList.onDialog().iConfirm();
+                Then.iSeeMessageToast("Project type was deleted.");
             });
 
             opaTest("#9: Edit status test", function (Given, When, Then) {
-                When.onTheDocTypeList.onTable().iPressRow(1);
-                Then.onTheDocTypeObjectPage.iSeeThisPage();
-                When.onTheDocTypeObjectPage.onHeader().iExecuteAction("Edit")
-                When.onTheDocTypeObjectPage.iEnterTextByLabel("Name", "TestName")
-                When.onTheDocTypeObjectPage.iPressButtonWithText("Save")
+                When.onTheTypeList.onTable().iPressRow(0);
+                Then.onTheTypeObjectPage.iSeeThisPage();
+                When.onTheTypeObjectPage.onHeader().iExecuteAction("Edit")
+                When.onTheTypeObjectPage.iEnterTextByProperty("name", "TestName12")
+                When.onTheTypeObjectPage.iPressButtonWithText("Save")
 
-                Then.iSeeMessageToast("Document type saved.");
+                Then.iSeeMessageToast("Project type saved.");
 
                 When.waitFor({
                     success: function () {
-                        sap.ui.test.Opa5.getWindow().history.go(-1);
+                        sap.ui.test.Opa5.getWindow().history.back();
                     }
                 });
 
-                Then.onTheDocTypeList.onTable().iCheckRows({ "Name": "TestName" }, 1);
+                Then.onTheTypeList.onTable().iCheckRows({ "Type Name": "TestName12" }, 1);
             })
 
             opaTest("Teardown", function (Given, When, Then) {
-                // Cleanup
                 Given.iTearDownMyApp();
             });
         }

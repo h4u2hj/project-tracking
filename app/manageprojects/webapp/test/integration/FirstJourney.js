@@ -23,7 +23,15 @@ sap.ui.define([
                 Then.onTheProjectsList.onTable().iCheckRows();
             });
 
-            opaTest("#2: ListReport: Check actions: Delete shouldn't be enabled, create should", function (Given, When, Then) {
+            opaTest("#2: ListReport: Contact popup opens", function (Given, When, Then) {
+                Then.onTheProjectsList.onTable().iCheckRows();
+
+                When.onTheProjectsList.iPressManagerContactLink("firstName2 lastName2 (I123)");
+                Then.onTheProjectsList.iSeeContactPopoverEmail("email.1@example.net");
+                When.onTheProjectsList.iCloseContactPopover();
+            });
+
+            opaTest("#3: ListReport: Check actions: Delete shouldn't be enabled, create should", function (Given, When, Then) {
                 Then.onTheProjectsList.onTable().iCheckCreate({ visible: true });
                 Then.onTheProjectsList.onTable().iCheckCreate({ enabled: true });
                 Then.onTheProjectsList.onTable().iCheckDelete({ visible: false });
@@ -31,13 +39,13 @@ sap.ui.define([
                 Then.onTheProjectsList.onTable().iCheckAction("Change Status", { visible: true, enabled: false });
             });
 
-            opaTest("#3: ListReport: Should be able to select and change status", function (Given, When, Then) {
+            opaTest("#4: ListReport: Should be able to select and change status", function (Given, When, Then) {
                 When.onTheProjectsList.onTable().iSelectRows(0);
                 Then.onTheProjectsList.onTable().iCheckAction("Change Status", { visible: true, enabled: true });
                 When.onTheProjectsList.onTable().iSelectRows(0);
             });
 
-            opaTest("#4: ListReport: Create new project", function (Given, When, Then) {
+            opaTest("#5: ListReport: Create new project", function (Given, When, Then) {
                 When.onTheProjectsList.onTable().iExecuteCreate();
                 Then.onTheProjectsObjectPage.iSeeThisPage();
 
@@ -51,7 +59,7 @@ sap.ui.define([
                 Then.iSeeMessageToast("Project created.");
                 When.waitFor({
                     success: function () {
-                        sap.ui.test.Opa5.getWindow().history.go(-1);
+                        sap.ui.test.Opa5.getWindow().history.back();
                     }
                 });
                 Then.onTheProjectsList.iSeeThisPage();
@@ -61,19 +69,19 @@ sap.ui.define([
                 Then.onTheProjectsList.onTable().iCheckRows({ "Description": "newdesc" }, 1);
             });
 
-            opaTest("#5: Object Page: Check Object Page loads", function (Given, When, Then) {
+            opaTest("#6: Object Page: Check Object Page loads", function (Given, When, Then) {
                 When.onTheProjectsList.onTable().iPressRow(1);
                 Then.onTheProjectsObjectPage.iSeeThisPage();
 
                 When.waitFor({
                     success: function () {
-                        sap.ui.test.Opa5.getWindow().history.go(-1);
+                        sap.ui.test.Opa5.getWindow().history.back();
                     }
                 });
                 Then.onTheProjectsList.iSeeThisPage();
             });
 
-            opaTest("#6: Object Page: Check Object Page actions", function (Given, When, Then) {
+            opaTest("#7: Object Page: Check Object Page actions", function (Given, When, Then) {
                 When.onTheProjectsList.onTable().iPressRow(1);
                 Then.onTheProjectsObjectPage.iSeeThisPage();
                 Then.onTheProjectsObjectPage.onHeader().iCheckDelete({ visible: false });
@@ -90,7 +98,7 @@ sap.ui.define([
                 Then.onTheProjectsList.iSeeThisPage();
             });
 
-            opaTest("#7: Edit project test", function (Given, When, Then) {
+            opaTest("#8: Edit project test", function (Given, When, Then) {
                 When.onTheProjectsList.onTable().iPressRow(1);
                 Then.onTheProjectsObjectPage.iSeeThisPage();
                 When.onTheProjectsObjectPage.onHeader().iExecuteAction("Edit")

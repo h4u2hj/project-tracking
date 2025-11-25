@@ -7,23 +7,24 @@ sap.ui.define([
 
     var Journey = {
         run: function () {
-            QUnit.module("Basic operations test");
+            QUnit.module("Filter fields tests");
 
             opaTest("#0: Start the application - Filter bar tests ", function (Given, When, Then) {
-                Given.iResetMockData({ ServiceUri: "/odata/v4/DocTypeService" })
+                Given.iResetMockData({ ServiceUri: "/odata/v4/TypeService" })
                     .and.iResetTestData()
                     .and.iStartMyApp();
-                Then.onTheDocTypeList.iSeeThisPage();
+
+                Then.onTheTypeList.iSeeThisPage();
             });
 
             opaTest("#1: ListReport: Check List Report Page loads and has rows", function (Given, When, Then) {
-                Then.onTheDocTypeList.onTable().iCheckRows();
-                When.onTheDocTypeList.onFilterBar().iExecuteSearch();
+                Then.onTheTypeList.onTable().iCheckRows();
+                When.onTheTypeList.onFilterBar().iExecuteSearch();
             });
 
             opaTest("#2: ListReport: Check filters default state", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocTypeList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocTypeList.onFilterBar()
+                var filterBarActions = When.onTheTypeList.onFilterBar()
+                var filterBarAssertions = Then.onTheTypeList.onFilterBar()
 
                 filterBarActions.iOpenFilterAdaptation()
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "modifiedBy" }, { selected: false })
@@ -34,24 +35,24 @@ sap.ui.define([
             })
 
             opaTest("#3: Check modifiedBy filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocTypeList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocTypeList.onFilterBar()
+                var filterBarActions = When.onTheTypeList.onFilterBar()
+                var filterBarAssertions = Then.onTheTypeList.onFilterBar()
 
-                var tableActions = When.onTheDocTypeList.onTable()
-                var tableAssertions = Then.onTheDocTypeList.onTable()
+                var tableActions = When.onTheTypeList.onTable()
+                var tableAssertions = Then.onTheTypeList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "modifiedBy" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "modifiedBy" }, { selected: true })
 
-                filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "I345678@sap.com")
+                filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "email.2@example.net")
                     .and.iExecuteSearch()
-                filterBarAssertions.iCheckFilterField({ property: "modifiedBy" }, "I345678@sap.com")
+                filterBarAssertions.iCheckFilterField({ property: "modifiedBy" }, "email.2@example.net")
 
-                tableActions.iAddAdaptationColumn("Last Changed By")
-                tableAssertions.iCheckRows({ "Last Changed By": "Recep2 NIst2 (I345678)" }, 3)
+                tableActions.iAddAdaptationColumn("Modified By")
+                tableAssertions.iCheckRows({ "Modified By": "email.2@example.net" }, 2)
 
-                tableActions.iRemoveAdaptationColumn("Last Changed By")
+                tableActions.iRemoveAdaptationColumn("Modified By")
                 filterBarActions.iChangeFilterField({ property: "modifiedBy" }, "", true)
                     .and.iExecuteSearch()
                 filterBarActions.iRemoveAdaptationFilterField({ property: "modifiedBy" })
@@ -59,11 +60,11 @@ sap.ui.define([
             })
 
             opaTest("#4: Check modifiedAt filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocTypeList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocTypeList.onFilterBar()
+                var filterBarActions = When.onTheTypeList.onFilterBar()
+                var filterBarAssertions = Then.onTheTypeList.onFilterBar()
 
-                var tableActions = When.onTheDocTypeList.onTable()
-                var tableAssertions = Then.onTheDocTypeList.onTable()
+                var tableActions = When.onTheTypeList.onTable()
+                var tableAssertions = Then.onTheTypeList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "modifiedAt" })
@@ -73,7 +74,7 @@ sap.ui.define([
                     .and.iExecuteSearch()
 
                 tableActions.iAddAdaptationColumn("modifiedAt")
-                tableAssertions.iCheckRows({}, 2)
+                tableAssertions.iCheckRows({}, 3)
 
                 tableActions.iRemoveAdaptationColumn("modifiedAt")
                 filterBarActions.iChangeFilterField({ property: "modifiedAt" }, "", true)
@@ -83,22 +84,22 @@ sap.ui.define([
             })
 
             opaTest("#5: Check createdBy filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocTypeList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocTypeList.onFilterBar()
+                var filterBarActions = When.onTheTypeList.onFilterBar()
+                var filterBarAssertions = Then.onTheTypeList.onFilterBar()
 
-                var tableActions = When.onTheDocTypeList.onTable()
-                var tableAssertions = Then.onTheDocTypeList.onTable()
+                var tableActions = When.onTheTypeList.onTable()
+                var tableAssertions = Then.onTheTypeList.onTable()
 
 
                 filterBarActions.iAddAdaptationFilterField({ property: "createdBy" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "createdBy" }, { selected: true })
 
-                filterBarActions.iChangeFilterField({ property: "createdBy" }, "four.five@sap.com")
+                filterBarActions.iChangeFilterField({ property: "createdBy" }, "email.2@example.net")
                     .and.iExecuteSearch()
-                filterBarAssertions.iCheckFilterField({ property: "createdBy" }, "four.five@sap.com")
+                filterBarAssertions.iCheckFilterField({ property: "createdBy" }, "email.2@example.net")
 
                 tableActions.iAddAdaptationColumn("Created By")
-                tableAssertions.iCheckRows({ "Created By": "Recep Nist1 (C456789)" }, 4)
+                tableAssertions.iCheckRows({ "Created By": "email.2@example.net" }, 2)
 
                 tableActions.iRemoveAdaptationColumn("Created By")
                 filterBarActions.iChangeFilterField({ property: "createdBy" }, "", true)
@@ -108,11 +109,11 @@ sap.ui.define([
             })
 
             opaTest("#6: Check createdAt filter", function (Given, When, Then) {
-                var filterBarActions = When.onTheDocTypeList.onFilterBar()
-                var filterBarAssertions = Then.onTheDocTypeList.onFilterBar()
+                var filterBarActions = When.onTheTypeList.onFilterBar()
+                var filterBarAssertions = Then.onTheTypeList.onFilterBar()
 
-                var tableActions = When.onTheDocTypeList.onTable()
-                var tableAssertions = Then.onTheDocTypeList.onTable()
+                var tableActions = When.onTheTypeList.onTable()
+                var tableAssertions = Then.onTheTypeList.onTable()
 
                 filterBarActions.iAddAdaptationFilterField({ property: "createdAt" })
                 filterBarAssertions.iCheckAdaptationFilterField({ property: "createdAt" }, { selected: true })
@@ -122,7 +123,7 @@ sap.ui.define([
                 filterBarActions.iChangeFilterField({ property: "createdAt" }, "From Jan 1, 2022")
                     .and.iExecuteSearch()
 
-                tableAssertions.iCheckRows({}, 2)
+                tableAssertions.iCheckRows({}, 1)
 
                 tableActions.iRemoveAdaptationColumn("createdAt")
 

@@ -183,3 +183,16 @@ annotate service.Status with @(
         UI.HiddenFilter: true
     );
 }
+
+annotate service.Status with @(
+                               //Enable calender on date filters
+                             Capabilities.FilterRestrictions: {FilterExpressionRestrictions: [
+    {
+        Property          : 'createdAt',
+        AllowedExpressions: 'SingleRange'
+    },
+    {
+        Property          : 'modifiedAt',
+        AllowedExpressions: 'SingleRange'
+    }
+]});

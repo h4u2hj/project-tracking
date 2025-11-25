@@ -161,3 +161,16 @@ annotate service.Type with @(
         UI.HiddenFilter: true
     );
 }
+
+annotate service.Type with @(
+                             //Enable calender on date filters
+                           Capabilities.FilterRestrictions: {FilterExpressionRestrictions: [
+    {
+        Property          : 'createdAt',
+        AllowedExpressions: 'SingleRange'
+    },
+    {
+        Property          : 'modifiedAt',
+        AllowedExpressions: 'SingleRange'
+    }
+]});

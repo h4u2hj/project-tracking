@@ -160,7 +160,7 @@ sap.ui.define([
                     .and.iExecuteSearch()
 
                 filterBarAssertions.iCheckFilterField({ property: "type_ID" }, "TypeName")
-                tableAssertions.iCheckRows({ "Type": "TypeName" }, 2)
+                tableAssertions.iCheckRows({ "Type": "TypeName" }, 1)
 
                 filterBarActions.iChangeFilterField({ property: "type_ID" }, "", true)
                     .and.iExecuteSearch()
