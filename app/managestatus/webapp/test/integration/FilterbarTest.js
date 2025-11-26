@@ -1,13 +1,11 @@
 sap.ui.define([
-    "sap/ui/test/opaQunit",
-    "sap/ui/test/Opa5",
-    "./pages/JourneyRunner"
-], function (opaTest, Opa5, runner) {
+    "sap/ui/test/opaQunit"
+], function (opaTest) {
     "use strict";
 
     var Journey = {
         run: function () {
-           QUnit.module("Filter fields tests");
+            QUnit.module("Filter fields tests");
 
             opaTest("#0: Start the application - Filter bar tests ", function (Given, When, Then) {
                 Given.iResetMockData({ ServiceUri: "/odata/v4/StatusService" })
@@ -15,7 +13,7 @@ sap.ui.define([
                     .and.iStartMyApp();
                 Then.onTheStatusList.iSeeThisPage();
             });
-            
+
             opaTest("#1: ListReport: Check List Report Page loads and has rows", function (Given, When, Then) {
                 Then.onTheStatusList.onTable().iCheckRows();
                 When.onTheStatusList.onFilterBar().iExecuteSearch();

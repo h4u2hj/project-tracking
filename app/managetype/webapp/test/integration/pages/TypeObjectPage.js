@@ -6,7 +6,7 @@ sap.ui.define([
 ], function (ObjectPage, EnterText, Press, Opa5) {
     'use strict';
 
-var isEditable = function (oControl) {
+    var isEditable = function (oControl) {
         return oControl.isA && (oControl.isA("sap.m.Input") || oControl.isA("sap.ui.mdc.Field"));
     };
 

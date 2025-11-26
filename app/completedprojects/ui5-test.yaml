@@ -8,7 +8,7 @@ server:
       beforeMiddleware: csp
       configuration:
         services:
-          - urlPath: '/odata/v4/ProjectService'
-            metadataPath: '../../srv/src/main/resources/edmx/odata/v4/szakdolgozat.srv.service.ProjectService.xml'
+          - urlPath: '/odata/v4/CompletedProjectService'
+            metadataPath: '../../srv/src/main/resources/edmx/odata/v4/szakdolgozat.srv.service.CompletedProjectService.xml'
             mockdataPath: './webapp/localService/data'
             generateMockData: false

@@ -18,8 +18,8 @@ sap.ui.define([
             });
             // @ts-ignore
             opaTest("#1: ListReport: Check List Report Page loads and has rows", function (Given, When, Then) {
-                Then.onTheProjectsList.onTable().iCheckRows();
                 When.onTheProjectsList.onFilterBar().iExecuteSearch();
+                Then.onTheProjectsList.onTable().iCheckRows();
             });
 
             opaTest("#2: ListReport: Check filters default state", function (Given, When, Then) {

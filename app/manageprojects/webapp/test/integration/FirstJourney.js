@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/test/opaQunit",
-    "sap/ui/test/Opa5",
-    "./pages/JourneyRunner"
-], function (opaTest, Opa5, runner) {
+    "sap/ui/test/Opa5"
+], function (opaTest, Opa5) {
     "use strict";
 
     var Journey = {
@@ -119,8 +118,8 @@ sap.ui.define([
             })
 
             opaTest("Teardown", function (Given, When, Then) {
-                Opa5.assert.ok(true, "App teared down");
                 Given.iTearDownMyApp();
+                Opa5.assert.ok(true, "App teared down");
             });
         }
     }

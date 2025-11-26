@@ -1,8 +1,6 @@
 sap.ui.define([
-    "sap/ui/test/opaQunit",
-    "sap/ui/test/Opa5",
-    "./pages/JourneyRunner"
-], function (opaTest, Opa5, runner) {
+    "sap/ui/test/opaQunit"
+], function (opaTest) {
     "use strict";
 
     var Journey = {
