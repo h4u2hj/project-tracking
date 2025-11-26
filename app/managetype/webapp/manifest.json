@@ -150,7 +150,7 @@
                       "availability": "Hidden"
                     },
                     "InProgressProjButton": {
-                      "header": "In-progress projects",
+                      "header": "In-progress Projects",
                       "width": "auto",
                       "position": {
                         "anchor": "DataField::name",

@@ -171,8 +171,7 @@ annotate service.Projects with @(
         $Type       : 'UI.DataFieldForAction',
         Action      : 'szakdolgozat.srv.service.ProjectService.changeStatus',
         Label       : 'Change Status',
-        Criticality : #Neutral,
-        ![UI.Hidden]: {$edmJson: {$Not: {$Path: 'IsActiveEntity'}}}
+        Criticality : #Neutral
     }]
 );
 
