@@ -30,6 +30,9 @@ class StatusServiceTest {
     @Qualifier(StatusService_.CDS_NAME)
     private StatusService statusService;
 
+    /**
+     * Confirms an authorized user can fetch a status by its identifier.
+     */
     @Test
     @WithMockUser(username = "admin", authorities = { "Administrator", "ProjectManager" })
     void testSelectStatusById() {
@@ -43,6 +46,9 @@ class StatusServiceTest {
         assertEquals("In development", status.getName());
     }
 
+    /**
+     * Verifies unauthorized users are blocked from reading statuses.
+     */
     @Test
     @WithMockUser(username = "viewer")
     void testSelectStatusByIdUnauthorized() {

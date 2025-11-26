@@ -30,6 +30,9 @@ class TypeServiceTest {
     @Qualifier(TypeService_.CDS_NAME)
     TypeService typeService;
 
+    /**
+     * Ensures authorized users can read a type by ID.
+     */
     @Test
     @WithMockUser(username = "admin", authorities = { "Administrator", "ProjectManager" })
     void typeCanBeReadByAuthorizedUser() {
@@ -42,6 +45,9 @@ class TypeServiceTest {
         assertEquals("Application/software", type.getName());
     }
 
+    /**
+     * Rejects type reads for users without the required roles.
+     */
     @Test
     @WithMockUser(username = "viewer")
     void typeReadRejectedForUnauthorizedUser() {

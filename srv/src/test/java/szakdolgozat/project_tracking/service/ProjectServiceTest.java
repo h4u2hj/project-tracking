@@ -30,6 +30,9 @@ class ProjectServiceTest {
     @Qualifier(ProjectService_.CDS_NAME)
     ProjectService projectService;
 
+    /**
+     * Ensures an authorized user can retrieve a project by ID.
+     */
     @Test
     @WithMockUser(username = "admin", authorities = { "ProjectManager" })
     void projectCanBeReadByAuthorizedUser() {
@@ -42,6 +45,9 @@ class ProjectServiceTest {
         assertEquals("New Website", project.getName());
     }
 
+    /**
+     * Verifies project reads are rejected for unauthorized users.
+     */
     @Test
     @WithMockUser(username = "viewer")
     void projectReadRejectedForUnauthorizedUser() {

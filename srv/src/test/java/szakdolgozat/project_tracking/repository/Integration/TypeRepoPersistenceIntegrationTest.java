@@ -18,6 +18,9 @@ public class TypeRepoPersistenceIntegrationTest {
     @Autowired
     TypeRepository typeRepository;
 
+    /**
+     * Verifies the repository fetches the expected type from the persistence layer.
+     */
     @Test
     public void testGetTypeFromDB() {
         Result result = typeRepository.getTypeById(ACTUAL_TYPE_ID);

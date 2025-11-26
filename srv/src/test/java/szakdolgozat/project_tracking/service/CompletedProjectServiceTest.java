@@ -30,6 +30,9 @@ class CompletedProjectServiceTest {
     @Qualifier(CompletedProjectService_.CDS_NAME)
     CompletedProjectService completedProjectService;
     
+    /**
+     * Confirms authorized users can read completed projects by ID.
+     */
     @Test
     @WithMockUser(username = "admin", authorities = { "ProjectManager" })
     void completedProjectCanBeReadByAuthorizedUser() {
@@ -43,6 +46,9 @@ class CompletedProjectServiceTest {
         assertEquals("New Reception", project.getName());
     }
 
+    /**
+     * Verifies unauthorized users cannot read completed projects.
+     */
     @Test
     @WithMockUser(username = "viewer")
     void completedProjectReadRejectedForUnauthorizedUser() {
