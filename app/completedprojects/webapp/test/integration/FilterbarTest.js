@@ -194,7 +194,25 @@ sap.ui.define([
                     .and.iExecuteSearch()
             });
 
-            opaTest("#11: Check completed on filter", function (Given, When, Then) {
+            opaTest("#11: Check last status change on filter", function (Given, When, Then) {
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var tableAssertions = Then.onTheProjectsList.onTable()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
+
+                filterBarActions.iAddAdaptationFilterField({ property: "lastStatusChangeAt" })
+                filterBarAssertions.iCheckAdaptationFilterField({ property: "lastStatusChangeAt" }, { selected: true })
+                filterBarActions.iChangeFilterField({ property: "lastStatusChangeAt" }, "From Jan 1, 2023")
+                    .and.iExecuteSearch()
+
+                tableAssertions.iCheckRows({}, 1)
+
+                filterBarActions.iChangeFilterField({ property: "lastStatusChangeAt" }, "", true)
+                    .and.iExecuteSearch()
+                filterBarActions.iRemoveAdaptationFilterField({ property: "lastStatusChangeAt" })
+                filterBarAssertions.iCheckAdaptationFilterField({ property: "lastStatusChangeAt" }, { selected: false })
+            });
+
+            opaTest("#12: Check completed on filter", function (Given, When, Then) {
                 var filterBarActions = When.onTheProjectsList.onFilterBar()
 
                 var tableAssertions = Then.onTheProjectsList.onTable()

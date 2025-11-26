@@ -338,7 +338,7 @@ annotate service.Projects with @(
     );
     lastStatusChangeAt      @(
         UI.Hidden      : false,
-        UI.HiddenFilter: true,
+        UI.HiddenFilter: false,
     );
     statusFieldAvailability @(UI.Hidden: true);
     completedAt             @(
@@ -420,6 +420,10 @@ annotate service.Projects with @(
     },
     {
         Property          : 'completedAt',
+        AllowedExpressions: 'SingleRange'
+    },
+    {
+        Property          : 'lastStatusChangeAt',
         AllowedExpressions: 'SingleRange'
     }
 ]});

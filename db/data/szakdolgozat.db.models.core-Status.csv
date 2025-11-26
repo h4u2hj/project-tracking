@@ -1,7 +1,8 @@
 ID,name,isFinalStatus,createdAt,createdBy,modifiedAt,modifiedBy
-22078407-1be7-4b5b-a133-c9acdd47a355,Unfinished status,false,2000-08-24T23:00:00.000Z,createdBy.d57t3@example.net,2012-05-24T23:00:00.000Z,modifiedBy.d57t3@example.org
-65891038-ebb5-4ac4-a16f-22967f58a6ba,Non-final status,false,2022-06-08T23:00:00.000Z,createdBy.3x86n@example.com,2017-08-27T23:00:00.000Z,modifiedBy.3x86n@example.com
-6589104e-0e6e-4a1d-bfbb-e497f71eaefb,Finished,true,2001-03-24T23:00:00.000Z,createdBy.3x86o@example.net,2015-04-23T23:00:00.000Z,modifiedBy.3x86o@example.com
-6589105b-24a9-4ecc-99bd-2b5866669f47,Started,false,2014-04-02T23:00:00.000Z,createdBy.3x86p@example.net,2009-12-16T23:00:00.000Z,modifiedBy.3x86p@example.com
-65891067-3056-4cd3-9bc2-cce7a2547eda,Shipped,true,2007-08-05T23:00:00.000Z,createdBy.3x86q@example.com,2011-02-04T23:00:00.000Z,modifiedBy.3x86q@example.org
-65891071-3d68-42ff-981b-988f6a2bc33b,In development,false,2004-10-25T23:00:00.000Z,createdBy.3x86r@example.net,2007-01-23T23:00:00.000Z,modifiedBy.3x86r@example.org
+65891038-ebb5-4ac4-a16f-22967f58a6ba,In progress,false,2022-06-08T23:00:00.000Z,johnsmith@work.com,2017-08-27T23:00:00.000Z,admin@work.com
+6589104e-0e6e-4a1d-bfbb-e497f71eaefb,Finished,true,2001-03-24T23:00:00.000Z,michman@work.com,2015-04-23T23:00:00.000Z,bigboss@work.com
+6589105b-24a9-4ecc-99bd-2b5866669f47,Started,false,2014-04-02T23:00:00.000Z,facility@work.com,2009-12-16T23:00:00.000Z,reception@work.com
+65891067-3056-4cd3-9bc2-cce7a2547eda,Shipped,true,2007-08-05T23:00:00.000Z,projectlead@work.com,2011-02-04T23:00:00.000Z,qa@work.com
+65891071-3d68-42ff-981b-988f6a2bc33b,In development,false,2004-10-25T23:00:00.000Z,bigboss@work.com,2007-01-23T23:00:00.000Z,facility@work.com
+c6c91c2b-8a69-4fb5-a2e7-e4d9d35c6dfe,Planning,false,2019-05-10T23:00:00.000Z,reception@work.com,2020-02-18T23:00:00.000Z,projectlead@work.com
+f3b51d24-3d9a-48a9-9c14-9feea6151438,Maintenance,true,2021-09-14T23:00:00.000Z,qa@work.com,2022-04-12T23:00:00.000Z,johnsmith@work.com

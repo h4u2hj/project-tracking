@@ -184,7 +184,6 @@ sap.ui.define([
 
             opaTest("#10: Check started on filter", function (Given, When, Then) {
                 var filterBarActions = When.onTheProjectsList.onFilterBar()
-                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
 
                 var tableAssertions = Then.onTheProjectsList.onTable()
 
@@ -196,6 +195,24 @@ sap.ui.define([
 
                 filterBarActions.iChangeFilterField({ property: "startDate" }, "", true)
                     .and.iExecuteSearch()
+            });
+
+            opaTest("#11: Check last status change on filter", function (Given, When, Then) {
+                var filterBarActions = When.onTheProjectsList.onFilterBar()
+                var tableAssertions = Then.onTheProjectsList.onTable()
+                var filterBarAssertions = Then.onTheProjectsList.onFilterBar()
+
+                filterBarActions.iAddAdaptationFilterField({ property: "lastStatusChangeAt" })
+                filterBarAssertions.iCheckAdaptationFilterField({ property: "lastStatusChangeAt" }, { selected: true })
+                filterBarActions.iChangeFilterField({ property: "lastStatusChangeAt" }, "From Jan 1, 2020")
+                    .and.iExecuteSearch()
+
+                tableAssertions.iCheckRows({}, 1)
+
+                filterBarActions.iChangeFilterField({ property: "lastStatusChangeAt" }, "", true)
+                    .and.iExecuteSearch()
+                filterBarActions.iRemoveAdaptationFilterField({ property: "lastStatusChangeAt" })
+                filterBarAssertions.iCheckAdaptationFilterField({ property: "lastStatusChangeAt" }, { selected: false })
             });
 
             opaTest("#999: Kill the application", function (Given, When, Then) {

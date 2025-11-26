@@ -5,3 +5,6 @@ ID,email,firstName,lastName,phone,companyID,orgunit
 17718525-b46d-406f-9402-cdcc08f7adb2,bigboss@work.com,Boss,Big,+3612312758,I111222,COO
 17718526-f06d-49ab-a0a7-0f2103e02813,facility@work.com,Facility,Manager,+36317452758,I121212,Fac Team
 17718527-6940-4f29-91c4-7b0eddf04790,reception@work.com,Reception,Leader,+3612345678,I987654,Rec Team
+1f8c9f6b-6ad8-4c57-9973-8ecf4f580672,projectlead@work.com,Project,Lead,+36301112222,I777888,Data Office
+9d9b0a1f-71cb-463e-9f79-e9087e06d9c9,qa@work.com,Quality,Analyst,+36304445555,I999000,QA
+228061af-924a-4756-b4e7-368e7adca333,garyjohnson@work.com,Gary,Johnson,+36304474556,I125477,Dev Team
